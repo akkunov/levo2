@@ -22,7 +22,8 @@ body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased
 }
 

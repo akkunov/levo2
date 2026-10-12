@@ -1,9 +1,151 @@
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, Check, ShieldCheck, Truck } from 'lucide-react';
 import { formatPrice, products } from '@/lib/data';
 import { AddToCart, Breadcrumbs, ProductGrid } from '@/components/storefront';
-export function generateStaticParams() { return products.map(p=>({slug:p.slug})); }
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const p=products.find(x=>x.slug===slug);return {title:p?.name??'Товар LEVO',description:p?.description};}
-export default async function ProductPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const product=products.find(p=>p.slug===slug);if(!product)notFound();const related=products.filter(p=>p.category===product.category&&p.slug!==product.slug).slice(0,3);return <div className="page-shell product-page"><Breadcrumbs items={[{label:'Каталог',href:'/catalogs'},{label:product.category,href:`/catalogs/${product.category==='Встраиваемая техника'?'built-in-appliances':product.category==='Холодильники'?'refrigerators':product.category==='Стиральные машины'?'washing-machines':product.category==='Кондиционеры'?'air-conditioners':product.category==='Морозильники'?'freezers':'dishwashers' }},{label:product.name}]}/><div className="product-detail"><div className="product-detail-image"><img src={product.image} alt={product.name}/><span className="image-index">LEVO / {product.id}</span></div><div className="product-detail-info"><span className="eyebrow">{product.category.toUpperCase()}</span><h1>{product.name}</h1><p className="product-description">{product.description}</p><div className="detail-price">{formatPrice(product.price)} {product.oldPrice&&<del>{formatPrice(product.oldPrice)}</del>}</div><p className="tax-note">Цена указана в сомах. Наличие и условия покупки уточняйте у консультанта.</p><AddToCart product={product}/><div className="detail-perks"><div><Truck/><span><strong>Доставка</strong><small>Уточняется при оформлении</small></span></div><div><ShieldCheck/><span><strong>Гарантия</strong><small>Условия уточняйте у консультанта</small></span></div></div><div className="specs"><h3>Основные характеристики</h3>{product.specs.map(s=><div className="spec-row" key={s}><span>{s}</span><Check size={16}/></div>)}</div><Link href="/contacts" className="text-link">Задать вопрос о товаре <ArrowRight size={17}/></Link></div></div>{related.length>0&&<section className="related-products"><div className="section-heading-row"><h2>Вам также может понравиться</h2><Link href="/catalogs" className="text-link">Весь каталог <ArrowRight size={17}/></Link></div><ProductGrid items={related}/></section>}</div>;}
+
+type PageProps = {
+    params: Promise<{ slug: string }>;
+};
+
+export function generateStaticParams() {
+    return products.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+                                           params,
+                                       }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const product = products.find((p) => p.slug === slug);
+
+    return {
+        title: product?.name ?? 'Товар LEVO',
+        description: product?.description,
+    };
+}
+
+export default async function ProductPage({ params }: PageProps) {
+    const { slug } = await params;
+    const product = products.find((p) => p.slug === slug);
+
+    if (!product) {
+        notFound();
+    }
+
+    const categorySlugs: Record<string, string> = {
+        'Встраиваемая техника': 'built-in-appliances',
+        Холодильники: 'refrigerators',
+        'Стиральные машины': 'washing-machines',
+        Кондиционеры: 'air-conditioners',
+        Морозильники: 'freezers',
+        'Посудомоечные машины': 'dishwashers',
+    };
+
+    const categorySlug =
+        categorySlugs[product.category] ?? 'built-in-appliances';
+
+    const related = products
+        .filter(
+            (p) =>
+                p.category === product.category &&
+                p.slug !== product.slug,
+        )
+        .slice(0, 3);
+
+    return (
+        <div className="page-shell product-page">
+            <Breadcrumbs
+                items={[
+                    { label: 'Каталог', href: '/catalogs' },
+                    {
+                        label: product.category,
+                        href: `/catalogs/${categorySlug}`,
+                    },
+                    { label: product.name },
+                ]}
+            />
+
+            <div className="product-detail">
+                <div className="product-detail-image">
+                    <img src={product.image} alt={product.name} />
+                    <span className="image-index">LEVO / {product.id}</span>
+                </div>
+
+                <div className="product-detail-info">
+          <span className="eyebrow">
+            {product.category.toUpperCase()}
+          </span>
+
+                    <h1>{product.name}</h1>
+
+                    <p className="product-description">
+                        {product.description}
+                    </p>
+
+                    <div className="detail-price">
+                        {formatPrice(product.price)}{' '}
+                        {product.oldPrice != null && (
+                            <del>{formatPrice(product.oldPrice)}</del>
+                        )}
+                    </div>
+
+                    <p className="tax-note">
+                        Цена указана в сомах. Наличие и условия покупки
+                        уточняйте у консультанта.
+                    </p>
+
+                    <AddToCart product={product} />
+
+                    <div className="detail-perks">
+                        <div>
+                            <Truck />
+                            <span>
+                <strong>Доставка</strong>
+                <small>Уточняется при оформлении</small>
+              </span>
+                        </div>
+
+                        <div>
+                            <ShieldCheck />
+                            <span>
+                <strong>Гарантия</strong>
+                <small>Условия уточняйте у консультанта</small>
+              </span>
+                        </div>
+                    </div>
+
+                    <div className="specs">
+                        <h3>Основные характеристики</h3>
+
+                        {product.specs.map((spec) => (
+                            <div className="spec-row" key={spec}>
+                                <span>{spec}</span>
+                                <Check size={16} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <Link href="/contacts" className="text-link">
+                        Задать вопрос о товаре <ArrowRight size={17} />
+                    </Link>
+                </div>
+            </div>
+
+            {related.length > 0 && (
+                <section className="related-products">
+                    <div className="section-heading-row">
+                        <h2>Вам также может понравиться</h2>
+
+                        <Link href="/catalogs" className="text-link">
+                            Весь каталог <ArrowRight size={17} />
+                        </Link>
+                    </div>
+
+                    <ProductGrid items={related} />
+                </section>
+            )}
+        </div>
+    );
+}
