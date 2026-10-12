@@ -108,7 +108,7 @@ export const products: Product[] = [
         category: 'Кондиционеры',
         price: 35900,
         description: 'Комфортная температура и спокойная работа для спальни или гостиной.',
-        image: img('photo-1631545806609-7f7e6b8c4b2a', 1000),
+        image: img('a-person-holding-a-remote-control-in-front-of-a-wall-mounted-air-conditioner-3iLFQj2bXq0', 1000),
         specs: ['Мощность 12 000 BTU', 'Инвертор', 'Режим сна']
     },
     {

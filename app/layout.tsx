@@ -1,6 +1,8 @@
 import type {Metadata} from 'next';
 import './globals.css';
-import {Footer, Header} from '@/components/storefront';
+import {Header} from "@/components/Header";
+import {Footer} from "@/components/Footer";
+
 
 export const metadata: Metadata = {
     title: {default: 'LEVO — техника для жизни', template: '%s | LEVO KG'},

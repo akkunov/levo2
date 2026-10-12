@@ -51,15 +51,98 @@ img {
 }
 
 .site-header {
-    height: 78px;
-    padding: 0 56px;
-    display: grid;
-    grid-template-columns:180px 1fr 180px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    display: flex;
     align-items: center;
-    position: relative;
-    z-index: 20;
-    background: rgb(255, 255, 255);
-    border-bottom: 1px solid rgba(25, 26, 24, .08)
+    justify-content: space-between;
+
+    padding: 14px 5vw;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    box-shadow: none;
+
+    transition:
+            background-color 450ms ease-in-out,
+            border-color 450ms ease-in-out,
+            box-shadow 450ms ease-in-out,
+            padding 450ms ease-in-out,
+            color 350ms ease-in-out;
+
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+}
+
+/* Белый фон при прокрутке */
+.site-header.is-scrolled {
+    padding-top: 20px;
+
+    background-color: rgba(255, 255, 255, 0.96);
+    border-bottom-color: rgba(0, 0, 0, 0.07);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.045);
+
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+.site-header.is-scrolled{
+    color: var(--ink);
+}
+
+.site-header {
+    color: white;
+}
+
+/* Фон при наведении, даже в самом верху */
+.site-header:hover {
+    background-color: rgba(255, 255, 255, 0.96);
+    border-bottom-color: rgba(0, 0, 0, 0.07);
+
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    color: var(--ink);
+}
+.header.home-header .logo-dark {
+    color: #fff;
+    transition: color 450ms ease-in-out;
+}
+.header.home-header.is-scrolled .logo-dark,
+.header.home-header:hover .logo-dark {
+    color: #17191c;
+}
+.header:not(.home-header) .logo-dark {
+     color: #17191c;
+ }
+
+
+/* Плавные цвета элементов */
+.site-header .wordmark,
+.site-header .main-nav a,
+.site-header .icon-button {
+    transition:
+            color 350ms ease-in-out,
+            opacity 350ms ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        padding: 14px 5vw;
+    }
+
+    .site-header.is-scrolled {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .site-header * {
+        transition-duration: 0.01ms !important;
+    }
 }
 
 .wordmark {
@@ -165,6 +248,28 @@ img {
     height: min(760px, calc(100svh - 78px));
     min-height: 610px
 }
+.hero-home {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Исходное положение изображения */
+.hero-home .hero-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transform: translateY(0) scale(1.02);
+
+    transition:
+            transform 700ms ease-in-out;
+}
+
+/* Небольшое смещение фото при прокрутке */
+.site-header.is-scrolled ~ main .hero-home .hero-image {
+    transform: translateY(14px) scale(1.05);
+}
 
 .hero-image, .editorial-banner > img {
     position: absolute;
@@ -186,7 +291,7 @@ img {
     position: absolute;
     left: 56px;
     right: 56px;
-    top: 35px;
+    top: 130px;
     display: flex;
     justify-content: space-between;
     font-size: 9px;
@@ -197,7 +302,7 @@ img {
 .hero-copy {
     position: absolute;
     left: max(56px, calc((100% - 1328px) / 2));
-    top: 50%;
+    top: 30%;
     transform: translateY(-42%);
     max-width: 740px;
     animation: copyReveal .9s .15s both
