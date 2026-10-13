@@ -1,7 +1,6 @@
 'use client'
 
 import {useState, useEffect} from "react";
-import {ArrowRight, Search, ShoppingBag} from "lucide-react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 
@@ -16,7 +15,6 @@ export function Header() {
     const pathname = usePathname();
     const isHomePage = pathname === '/';
     const [menuOpen, setMenuOpen] = useState(false);
-    const [searchOpen, setSearchOpen] = useState(false);
     const [cartCount] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -65,14 +63,14 @@ export function Header() {
             >
                 <path
                     className="menu-line menu-line-top"
-                    d="M1 9H23"
+                    d="M3 9H21"
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                 />
                 <path
                     className="menu-line menu-line-bottom"
-                    d="M1 15H23"
+                    d="M3 15H21"
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
@@ -105,15 +103,33 @@ export function Header() {
             ))}
         </nav>
         <div className="header-actions">
-            <button className="icon-button" aria-label="Поиск" onClick={() => setSearchOpen(!searchOpen)}><Search/>
-            </button>
             <Link className="icon-button bag-link" href="/catalogs"
-                  aria-label="Корзина"><ShoppingBag/><span>{cartCount}</span></Link></div>
-        {searchOpen &&
-            <form className="search-panel" action="/catalogs"><input name="q" placeholder="Найти технику LEVO"
-                                                                     autoFocus/>
-                <button aria-label="Искать"><ArrowRight/></button>
-            </form>}
+                  aria-label="Корзина">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    {/* Корзина */}
+                    <path
+                        d="M6.94 12H25.06L23.32 25.2H8.68L6.94 12Z"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinejoin="round"
+                    />
 
+                    {/* Ручка корзины */}
+                    <path
+                        d="M11 12V10C11 7.24 13.24 5 16 5C18.76 5 21 7.24 21 10V12"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                    />
+                </svg>
+                <span>{cartCount}</span></Link>
+        </div>
     </header>;
 }

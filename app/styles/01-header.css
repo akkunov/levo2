@@ -77,6 +77,10 @@
 .site-header:active .icon-button {
     color: #17191c;
 }
+.site-header:hover .icon-button .bag-link svg,
+.site-header.is-scrolled .icon-button .bag-link svg {
+    color: #17191c;
+}
 
 .site-header:hover .main-nav a {
     color: #17191c;
@@ -103,7 +107,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .icon-button {
@@ -117,16 +121,16 @@
 }
 
 .icon-button svg {
-    width: 19px;
-    height: 19px;
+    width: 35px;
+    height: 35px;
     stroke-width: 1.5;
 }
 
 .bag-link span {
-    font-size: 9px;
+    font-size: 11px;
     position: absolute;
-    right: -4px;
-    top: -5px;
+    right: 1px;
+    top: 1px;
 }
 
 .mobile-menu {
@@ -185,6 +189,11 @@ body.menu-is-open {
 }
 
 @media (max-width: 768px) {
+    .icon-button svg {
+        width: 25px;
+        height: 25px;
+        stroke-width: 1;
+    }
     .site-header {
         padding: 14px 5vw;
     }

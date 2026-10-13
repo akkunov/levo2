@@ -178,6 +178,11 @@ img {
     .site-footer {
         padding-inline: 28px;
     }
+    .section-wrap, .page-shell {
+        width: 90vw;
+        max-width: 1440px;
+        margin: 0 20px;
+    }
 }
 
 @media (max-width: 700px) {
