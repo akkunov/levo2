@@ -1,7 +1,7 @@
 'use client'
 
 import {useState, useEffect} from "react";
-import {ArrowRight, Menu, Search, ShoppingBag, X} from "lucide-react";
+import {ArrowRight, Search, ShoppingBag, X} from "lucide-react";
 import Link from "next/link";
 
 export function Header() {
@@ -22,10 +22,49 @@ export function Header() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    useEffect(() => {
+        document.body.classList.toggle('menu-is-open', menuOpen);
+
+        return () => {
+            document.body.classList.remove('menu-is-open');
+        };
+    }, [menuOpen]);
+
 
     return <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
-        <button className="icon-button mobile-menu" aria-label="Открыть меню"
-                onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
+        <button
+            className={`icon-button mobile-menu ${menuOpen ? 'is-open' : ''}`}
+            type="button"
+            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+            aria-expanded={menuOpen}
+            aria-controls="main-navigation"
+            onClick={() => setMenuOpen((prev) => !prev)}
+        >
+            <svg
+                className="menu-toggle-icon"
+                width="35"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+            >
+                <path
+                    className="menu-line menu-line-top"
+                    d="M1 9H23"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                />
+                <path
+                    className="menu-line menu-line-bottom"
+                    d="M1 15H23"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                />
+            </svg>
+            Меню
+        </button>
 
         <Link href="/" className="header-logo" aria-label="LEVO — главная">
               <span className="logo-layer logo-dark">
@@ -39,9 +78,32 @@ export function Header() {
                 </svg>
               </span>
         </Link>
-        <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`}>
-            <Link href="/catalogs">Каталог</Link><Link href="/catalogs/built-in-appliances">Встраиваемая
-            техника</Link><Link href="/catalogs/refrigerators">Холодильники</Link><Link href="/contacts">Контакты</Link>
+        <nav
+            id="main-navigation"
+            className={`main-nav ${menuOpen ? 'is-open' : ''}`}
+            aria-hidden={!menuOpen}
+        >
+            <Link href="/catalogs" onClick={() => setMenuOpen(false)}>
+                Каталог
+            </Link>
+
+            <Link
+                href="/catalogs/built-in-appliances"
+                onClick={() => setMenuOpen(false)}
+            >
+                Встраиваемая техника
+            </Link>
+
+            <Link
+                href="/catalogs/refrigerators"
+                onClick={() => setMenuOpen(false)}
+            >
+                Холодильники
+            </Link>
+
+            <Link href="/contacts" onClick={() => setMenuOpen(false)}>
+                Контакты
+            </Link>
         </nav>
         <div className="header-actions">
             <button className="icon-button" aria-label="Поиск" onClick={() => setSearchOpen(!searchOpen)}><Search/>
@@ -53,5 +115,6 @@ export function Header() {
                                                                      autoFocus/>
                 <button aria-label="Искать"><ArrowRight/></button>
             </form>}
+
     </header>;
 }
