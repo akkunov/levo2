@@ -126,10 +126,28 @@ img {
             color 350ms ease-in-out,
             opacity 350ms ease-in-out;
 }
+.site-header .icon-button {
+    color: #fff;
+}
+
+.site-header:hover .icon-button,
+.site-header.is-scrolled .icon-button,
+.site-header:focus-within .icon-button,
+.site-header:active .icon-button {
+    color: #17191c;
+}
+
+.site-header:hover .main-nav a{
+    color: #17191c;
+}
 
 @media (max-width: 768px) {
     .site-header {
         padding: 14px 5vw;
+    }
+    .logo-layer svg{
+        width: 165px;
+        height: 45px;
     }
 
     .site-header.is-scrolled {
@@ -302,7 +320,7 @@ img {
 .hero-copy {
     position: absolute;
     left: max(56px, calc((100% - 1328px) / 2));
-    top: 30%;
+    top: 25%;
     transform: translateY(-42%);
     max-width: 740px;
     animation: copyReveal .9s .15s both
@@ -1281,6 +1299,7 @@ img {
     }
 
     .hero-copy, .editorial-content {
+        top: 45%;
         left: 35px
     }
 
@@ -1393,17 +1412,17 @@ img {
     }
 
     .hero-kicker {
-        top: 23px;
+        top: 75px;
         left: 18px;
         right: 18px;
-        font-size: 7px;
+        font-size: 9px;
         letter-spacing: 1px
     }
 
     .hero-copy {
         left: 20px;
         right: 20px;
-        top: 49%;
+        top: 35%;
         transform: translateY(-35%)
     }
 
