@@ -1,16 +1,31 @@
 'use client'
 
 import {useState, useEffect} from "react";
-import {ArrowRight, Search, ShoppingBag, X} from "lucide-react";
+import {ArrowRight, Search, ShoppingBag} from "lucide-react";
 import Link from "next/link";
+import {usePathname} from "next/navigation";
+
+const NAV_ITEMS = [
+    { href: "/catalogs", label: "Каталог" },
+    { href: "/catalogs/built-in-appliances", label: "Встраиваемая техника" },
+    { href: "/catalogs/refrigerators", label: "Холодильники" },
+    { href: "/contacts", label: "Контакты" },
+] as const;
 
 export function Header() {
+    const pathname = usePathname();
+    const isHomePage = pathname === '/';
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [cartCount] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
+        if (!isHomePage) {
+            setIsScrolled(false);
+            return;
+        }
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
@@ -21,7 +36,8 @@ export function Header() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [isHomePage]);
+
     useEffect(() => {
         document.body.classList.toggle('menu-is-open', menuOpen);
 
@@ -30,8 +46,7 @@ export function Header() {
         };
     }, [menuOpen]);
 
-
-    return <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
+    return <header className={`site-header ${isHomePage ? '' : 'site-header-static'} ${isScrolled ? 'is-scrolled' : ''}`}>
         <button
             className={`icon-button mobile-menu ${menuOpen ? 'is-open' : ''}`}
             type="button"
@@ -83,27 +98,11 @@ export function Header() {
             className={`main-nav ${menuOpen ? 'is-open' : ''}`}
             aria-hidden={!menuOpen}
         >
-            <Link href="/catalogs" onClick={() => setMenuOpen(false)}>
-                Каталог
-            </Link>
-
-            <Link
-                href="/catalogs/built-in-appliances"
-                onClick={() => setMenuOpen(false)}
-            >
-                Встраиваемая техника
-            </Link>
-
-            <Link
-                href="/catalogs/refrigerators"
-                onClick={() => setMenuOpen(false)}
-            >
-                Холодильники
-            </Link>
-
-            <Link href="/contacts" onClick={() => setMenuOpen(false)}>
-                Контакты
-            </Link>
+            {NAV_ITEMS.map(({href, label}) => (
+                <Link key={href} href={href} onClick={() => setMenuOpen(false)}>
+                    {label}
+                </Link>
+            ))}
         </nav>
         <div className="header-actions">
             <button className="icon-button" aria-label="Поиск" onClick={() => setSearchOpen(!searchOpen)}><Search/>

@@ -1,0 +1,298 @@
+.product-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr);
+    gap: clamp(35px, 6vw, 90px);
+    align-items: start;
+}
+
+.product-detail-image {
+    position: relative;
+    background: #e9e8e2;
+    min-height: 560px;
+    aspect-ratio: 1 / 1.08;
+}
+
+.product-detail-image img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+}
+
+.image-index {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #70726a;
+}
+
+.product-detail-info {
+    padding-top: 18px;
+}
+
+.product-detail-info h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(36px, 4vw, 55px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -2.8px;
+    margin: 20px 0;
+}
+
+.product-description {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 430px;
+}
+
+.detail-price {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.tax-note {
+    font-size: 10px;
+    line-height: 1.7;
+    color: #81837b;
+    margin: 12px 0 25px;
+}
+
+.add-cart {
+    width: 100%;
+    border: 0;
+}
+
+.add-cart.is-added {
+    background: #59664f;
+}
+
+.detail-perks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 23px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.detail-perks > div {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.detail-perks svg {
+    width: 18px;
+    stroke-width: 1.3;
+}
+
+.detail-perks span {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.detail-perks strong {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.detail-perks small {
+    font-size: 9px;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.specs {
+    padding: 26px 0;
+}
+
+.specs h3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 13px;
+}
+
+.spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 11px;
+    color: #575950;
+}
+
+.spec-row svg {
+    color: #7b8573;
+}
+
+.related-products {
+    padding-top: 95px;
+}
+
+.related-products .section-heading-row h2 {
+    font-size: clamp(28px, 4vw, 42px);
+}
+
+.contacts-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: stretch;
+}
+
+.contacts-main {
+    padding: 18px 0;
+}
+
+.contact-line {
+    border-bottom: 1px solid var(--line);
+    padding: 26px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-line > span {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 13px;
+    row-gap: 8px;
+}
+
+.contact-line svg {
+    width: 18px;
+    height: 18px;
+    grid-row: span 2;
+    stroke-width: 1.3;
+}
+
+.contact-line small {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.contact-line strong {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.contact-note {
+    font-size: 10px;
+    color: #81837b;
+    line-height: 1.8;
+    margin-top: 25px;
+}
+
+.contacts-image {
+    position: relative;
+    min-height: 480px;
+    background: #343831;
+    color: white;
+    overflow: hidden;
+}
+
+.contacts-image img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+}
+
+.contacts-image:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #11150fbb, transparent 85%);
+}
+
+.contacts-image > div {
+    position: absolute;
+    z-index: 1;
+    left: 28px;
+    bottom: 30px;
+}
+
+.contacts-image h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1.03;
+    margin: 20px 0;
+}
+
+@media (max-width: 1000px) {
+    .product-detail {
+        gap: 35px;
+    }
+
+    .product-detail-image {
+        min-height: 450px;
+    }
+
+    .contacts-layout {
+        gap: 35px;
+    }
+}
+
+@media (max-width: 700px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .product-detail-image {
+        min-height: 0;
+        aspect-ratio: .95;
+    }
+
+    .product-detail-info {
+        padding-top: 0;
+    }
+
+    .product-detail-info h1 {
+        font-size: 42px;
+    }
+
+    .product-description {
+        font-size: 12px;
+    }
+
+    .related-products {
+        padding-top: 65px;
+    }
+
+    .related-products .section-heading-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .related-products .section-heading-row h2 {
+        font-size: 32px;
+    }
+
+    .contacts-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .contacts-image {
+        min-height: 390px;
+    }
+
+    .contacts-image h2 {
+        font-size: 40px;
+    }
+}
+

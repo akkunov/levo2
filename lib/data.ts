@@ -56,6 +56,23 @@ export const categories: Category[] = [
         count: 14
     }
 ];
+export const categorySlugByName = Object.fromEntries(
+    categories.map((category) => [category.name, category.slug]),
+) as Record<string, string>;
+
+export const featuredCategorySlugs = ['built-in-appliances', 'refrigerators'] as const;
+
+// Keep the data model centralized for future app-level usage without creating unused exports.
+
+export const featuredCategoryLinks = featuredCategorySlugs.map((slug) => {
+    const category = categories.find((item) => item.slug === slug);
+
+    return {
+        href: `/catalogs/${slug}`,
+        label: category?.name ?? slug,
+    };
+});
+
 export const products: Product[] = [
     {
         id: 'LV-OV-01',

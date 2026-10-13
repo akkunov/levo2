@@ -1,9 +1,8 @@
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, Check, ShieldCheck, Truck } from 'lucide-react';
-import { formatPrice, products } from '@/lib/data';
+import { categorySlugByName, formatPrice, products } from '@/lib/data';
 import { AddToCart, Breadcrumbs, ProductGrid } from '@/components/storefront';
 
 type PageProps = {
@@ -34,17 +33,7 @@ export default async function ProductPage({ params }: PageProps) {
         notFound();
     }
 
-    const categorySlugs: Record<string, string> = {
-        'Встраиваемая техника': 'built-in-appliances',
-        Холодильники: 'refrigerators',
-        'Стиральные машины': 'washing-machines',
-        Кондиционеры: 'air-conditioners',
-        Морозильники: 'freezers',
-        'Посудомоечные машины': 'dishwashers',
-    };
-
-    const categorySlug =
-        categorySlugs[product.category] ?? 'built-in-appliances';
+    const categorySlug = categorySlugByName[product.category] ?? 'built-in-appliances';
 
     const related = products
         .filter(
