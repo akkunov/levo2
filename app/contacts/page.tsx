@@ -15,8 +15,8 @@ export default function ContactsPage() {
                 href="mailto:hello@levo.kg"><span><Mail/><small>Электронная почта</small><strong>hello@levo.kg</strong></span><ArrowDownRight/></a>
                 <div className="contact-line"><span><MapPin/><small>Шоурум / магазин</small><strong>Уточните актуальный адрес</strong></span><ArrowDownRight/>
                 </div>
-                <p className="contact-note">Перед публикацией замените демонстрационные контактные данные на актуальные
-                    данные LEVO KG.</p></div>
+                <p className="contact-note">
+                    Актуальные данные LEVO KG.</p></div>
             <div className="contacts-image"><img
                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85"
                 alt="Интерьер современного дома"/>

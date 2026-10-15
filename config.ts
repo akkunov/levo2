@@ -1,0 +1,1 @@
+export const YMAP_MAP_KEY =    process.env.YNDEX_MAP_KEY

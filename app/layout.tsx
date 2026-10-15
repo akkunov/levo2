@@ -3,6 +3,7 @@ import './globals.css';
 import {Header} from '@/components/Header';
 import {Footer} from '@/components/Footer';
 import {siteConfig} from '@/lib/site';
+import {Providers} from "@/app/providers";
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteConfig.url),
@@ -46,9 +47,11 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
     return (
         <html lang="ru">
             <body>
+            <Providers>
                 <Header />
                 <main>{children}</main>
                 <Footer />
+            </Providers>
             </body>
         </html>
     );

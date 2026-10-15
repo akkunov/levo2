@@ -1,140 +1,261 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, Check, ShieldCheck, Truck } from 'lucide-react';
-import { categorySlugByName, formatPrice, products } from '@/lib/data';
-import { AddToCart, Breadcrumbs, ProductGrid } from '@/components/storefront';
+import { ArrowUpRight, Check, ShieldCheck, Truck } from 'lucide-react';
+
+import {
+    fetchProductBySlug,
+    fetchCatalogProducts,
+} from '@/lib/api/products';
+import type { StoreProduct } from '@/lib/api/products';
+
+import {
+    AddToCart,
+    Breadcrumbs, ProductGallery,
+    ProductGrid,
+} from '@/components/storefront';
+
+import './product-premium.css';
 
 type PageProps = {
     params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-    return products.map((p) => ({ slug: p.slug }));
+function formatPrice(price: number | null): string {
+    if (price == null) return 'Цена уточняется';
+
+    return new Intl.NumberFormat('ru-KG', {
+        style: 'currency',
+        currency: 'KGS',
+        maximumFractionDigits: 0,
+    }).format(price);
 }
 
 export async function generateMetadata({
                                            params,
                                        }: PageProps): Promise<Metadata> {
     const { slug } = await params;
-    const product = products.find((p) => p.slug === slug);
+    const product = await fetchProductBySlug(slug);
+
+    if (!product) {
+        return { title: 'Товар не найден — LEVO' };
+    }
 
     return {
-        title: product?.name ?? 'Товар LEVO',
-        description: product?.description,
+        title: `${product.title} — LEVO`,
+        description:
+            product.description ?? `Познакомьтесь с ${product.title} в LEVO.`,
     };
 }
 
 export default async function ProductPage({ params }: PageProps) {
     const { slug } = await params;
-    const product = products.find((p) => p.slug === slug);
+    const product = await fetchProductBySlug(slug);
 
     if (!product) {
         notFound();
     }
 
-    const categorySlug = categorySlugByName[product.category] ?? 'built-in-appliances';
+    const categoryName = product.catalog?.name ?? 'Бытовая техника';
+    const categorySlug = product.catalog?.slug ?? 'built-in-appliances';
 
-    const related = products
-        .filter(
-            (p) =>
-                p.category === product.category &&
-                p.slug !== product.slug,
-        )
-        .slice(0, 3);
+    const images = [
+        product.image,
+        ...(product.images ?? []).map((image) => image.url),
+    ].filter((image): image is string => Boolean(image));
+
+    const uniqueImages = [...new Set(images)];
+
+    const storeProduct: StoreProduct = {
+        id: product.id,
+        name: product.title,
+        slug: product.slug,
+        category: categoryName,
+        image: uniqueImages[0] ?? '/images/product-placeholder.png',
+        price: Number(product.price ?? 0),
+        oldPrice:
+            product.oldPrice != null ? Number(product.oldPrice) : null,
+        tag: product.tag,
+        description: product.description,
+        specs: product.specs ?? [],
+    };
+
+    let related: StoreProduct[] = [];
+
+    if (product.catalog?.slug) {
+        try {
+            const response = await fetchCatalogProducts(
+                product.catalog.slug,
+                1,
+                8,
+            );
+
+            related = response.items
+                .filter((item) => item.id !== product.id)
+                .slice(0, 4);
+        } catch {
+            related = [];
+        }
+    }
 
     return (
-        <div className="page-shell product-page">
+        <main className="page-shell premium-product-page">
             <Breadcrumbs
                 items={[
                     { label: 'Каталог', href: '/catalogs' },
                     {
-                        label: product.category,
+                        label: categoryName,
                         href: `/catalogs/${categorySlug}`,
                     },
-                    { label: product.name },
+                    { label: product.title },
                 ]}
             />
 
-            <div className="product-detail">
-                <div className="product-detail-image">
-                    <img src={product.image} alt={product.name} />
-                    <span className="image-index">LEVO / {product.id}</span>
-                </div>
+            <section className="premium-product">
+                <ProductGallery
+                    images={
+                        uniqueImages.length > 0
+                            ? uniqueImages
+                            : ['/images/product-placeholder.png']
+                    }
+                    name={product.title}
+                />
 
-                <div className="product-detail-info">
-          <span className="eyebrow">
-            {product.category.toUpperCase()}
+                <div className="premium-product-info">
+                    <div className="premium-product-overline">
+                        <span>LEVO COLLECTION</span>
+                        {product.sku && <span>АРТ. {product.sku}</span>}
+                    </div>
+
+                    <span className="premium-product-category">
+            {categoryName}
           </span>
 
-                    <h1>{product.name}</h1>
+                    <h1>{product.title}</h1>
 
-                    <p className="product-description">
-                        {product.description}
-                    </p>
+                    {product.subtitle && (
+                        <p className="premium-product-subtitle">
+                            {product.subtitle}
+                        </p>
+                    )}
 
-                    <div className="detail-price">
-                        {formatPrice(product.price)}{' '}
+                    {product.description && (
+                        <p className="premium-product-description">
+                            {product.description}
+                        </p>
+                    )}
+
+                    <div className="premium-product-price">
+                        <strong>{formatPrice(product.price)}</strong>
+
                         {product.oldPrice != null && (
                             <del>{formatPrice(product.oldPrice)}</del>
                         )}
                     </div>
 
-                    <p className="tax-note">
-                        Цена указана в сомах. Наличие и условия покупки
-                        уточняйте у консультанта.
+                    <p className="premium-product-price-note">
+                        Цена указана в кыргызских сомах.
                     </p>
 
-                    <AddToCart product={product} />
+                    <div className="premium-product-actions">
+                        <AddToCart product={storeProduct} />
+                    </div>
 
-                    <div className="detail-perks">
+                    <div className="premium-product-benefits">
                         <div>
-                            <Truck />
+                            <Truck size={21} strokeWidth={1.5} />
                             <span>
                 <strong>Доставка</strong>
-                <small>Уточняется при оформлении</small>
+                <small>Условия уточняются при заказе</small>
               </span>
+                            <ArrowUpRight size={16} />
                         </div>
 
                         <div>
-                            <ShieldCheck />
+                            <ShieldCheck size={21} strokeWidth={1.5} />
                             <span>
                 <strong>Гарантия</strong>
-                <small>Условия уточняйте у консультанта</small>
+                <small>
+                  {product.warranty || 'Уточняйте у консультанта'}
+                </small>
               </span>
+                            <ArrowUpRight size={16} />
                         </div>
                     </div>
 
-                    <div className="specs">
-                        <h3>Основные характеристики</h3>
-
-                        {product.specs.map((spec) => (
-                            <div className="spec-row" key={spec}>
-                                <span>{spec}</span>
-                                <Check size={16} />
-                            </div>
-                        ))}
+                    <div className="premium-product-meta">
+                        <span>Модель</span>
+                        <span>{product.sku || product.slug || `LV-${product.id}`}</span>
                     </div>
 
-                    <Link href="/contacts" className="text-link">
-                        Задать вопрос о товаре <ArrowRight size={17} />
-                    </Link>
+                    <div className="premium-product-meta">
+                        <span>Категория</span>
+                        <Link href={`/catalogs/${categorySlug}`}>
+                            {categoryName}
+                        </Link>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <section className="premium-specifications">
+                <div className="premium-section-intro">
+                    <span className="eyebrow">DETAILS / 01</span>
+                    <h2>
+                        Продумано
+                        <br />
+                        <em>до мелочей.</em>
+                    </h2>
+                </div>
+
+                <div className="premium-specifications-content">
+                    <div className="premium-specifications-heading">
+                        <h3>Характеристики</h3>
+                        <span>{product.specs.length} параметров</span>
+                    </div>
+
+                    {product.specs.length > 0 ? (
+                        product.specs.map((spec, index) => (
+                            <div className="premium-spec-row" key={`${spec}-${index}`}>
+                                <span>{spec}</span>
+                                <Check size={17} strokeWidth={1.5} />
+                            </div>
+                        ))
+                    ) : (
+                        <p className="premium-empty-specs">
+                            Характеристики уточняются. Свяжитесь с нами, чтобы узнать
+                            подробности о модели.
+                        </p>
+                    )}
+
+                    {product.description && (
+                        <div className="premium-long-description">
+                            <h3>О товаре</h3>
+                            <p>{product.description}</p>
+                        </div>
+                    )}
+                </div>
+            </section>
 
             {related.length > 0 && (
-                <section className="related-products">
-                    <div className="section-heading-row">
-                        <h2>Вам также может понравиться</h2>
+                <section className="premium-related">
+                    <div className="premium-related-heading">
+                        <div>
+                            <span className="eyebrow">DISCOVER MORE</span>
+                            <h2>
+                                Продолжите
+                                <br />
+                                <em>знакомство.</em>
+                            </h2>
+                        </div>
 
-                        <Link href="/catalogs" className="text-link">
-                            Весь каталог <ArrowRight size={17} />
+                        <Link href={`/catalogs/${categorySlug}`} className="text-link">
+                            Вся коллекция <ArrowUpRight size={18} />
                         </Link>
                     </div>
 
                     <ProductGrid items={related} />
                 </section>
             )}
-        </div>
+        </main>
     );
 }

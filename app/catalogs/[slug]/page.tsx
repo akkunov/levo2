@@ -1,7 +1,53 @@
+
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { categories, products } from '@/lib/data';
-import { Breadcrumbs, ProductGrid } from '@/components/storefront';
-export function generateStaticParams() { return categories.map((c) => ({ slug: c.slug })); }
-export async function generateMetadata({ params }: { params: Promise<{slug:string}> }): Promise<Metadata> { const {slug}=await params; const category=categories.find(c=>c.slug===slug); return { title: category?.name ?? 'Категория LEVO', description: category?.description }; }
-export default async function CategoryPage({ params }: { params: Promise<{slug:string}> }) { const {slug}=await params; const category=categories.find(c=>c.slug===slug); if(!category) notFound(); const items=products.filter(p=>p.category===category.name); return <div className="page-shell"><Breadcrumbs items={[{label:'Каталог',href:'/catalogs'},{label:category.name}]}/><section className="category-hero"><img src={category.image} alt=""/><div className="category-hero-shade"/><div className="category-hero-copy"><span className="eyebrow light">LEVO / COLLECTION</span><h1>{category.name}<br/><em>по-новому.</em></h1><p>{category.description}</p><span className="category-count">{category.count} моделей в категории</span></div></section><div className="category-toolbar"><span>Подборка LEVO</span><span>{items.length} демонстрационных товаров</span></div>{items.length ? <ProductGrid items={items}/> : <div className="empty-category"><h2>Коллекция скоро появится.</h2><p>Свяжитесь с нами — поможем уточнить наличие нужной модели.</p></div>}</div>; }
+import CategoryPageClient from './CategoryPageClient';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+interface CatalogMetadata {
+    name: string;
+    description?: string | null;
+}
+
+async function getCategory(
+    slug: string,
+): Promise<CatalogMetadata | null> {
+    if (!API_URL) return null;
+
+    try {
+        const response = await fetch(
+            `${API_URL}/catalogs/${encodeURIComponent(slug)}`,
+            { next: { revalidate: 300 } },
+        );
+
+        if (!response.ok) return null;
+
+        return response.json();
+    } catch {
+        return null;
+    }
+}
+
+export async function generateMetadata({
+                                           params,
+                                       }: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const category = await getCategory(slug);
+
+    return {
+        title: category?.name ?? 'Категория LEVO',
+        description: category?.description ?? undefined,
+    };
+}
+
+export default async function CategoryPage({
+                                               params,
+                                           }: {
+    params: Promise<{ slug: string }>;
+}) {
+    const { slug } = await params;
+
+    return <CategoryPageClient slug={slug} />;
+}
