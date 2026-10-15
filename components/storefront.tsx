@@ -1,111 +1,141 @@
 'use client';
 import Link from 'next/link';
 import {useState} from 'react';
-import {ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Sparkles} from 'lucide-react';
+import {
+    ArrowDown,
+    ArrowDownRight,
+    ArrowRight,
+    ArrowUpRight,
+    Check, ChevronDown,
+    ChevronLeft,
+    ChevronRight,
+    Sparkles
+} from 'lucide-react';
 import { useCatalogs } from '@/hooks/use-catalogs';
 import Image from "next/image";
 import {StoreProduct} from "@/lib/api/products";
 import { useFeaturedProducts } from '@/hooks/use-featured-products';
 import {useNewArrivals} from "@/hooks/use-new-arrivals";
+import { formatPrice } from '@/lib/format';
 
 
 
-function formatPrice(price: number) {
-    return new Intl.NumberFormat('ru-KG', {
-        style: 'currency',
-        currency: 'KGS',
-        maximumFractionDigits: 0,
-    }).format(price);
-}
 type ProductGalleryProps = {
     images: string[];
     name: string;
 };
 
-export function ProductGallery({
-                                           images,
-                                           name,
-                                       }: ProductGalleryProps) {
-    const gallery = images.filter(Boolean);
-    const [activeIndex, setActiveIndex] = useState(0);
+type ProductHeroProps = {
+    product: StoreProduct;
+    image: string;
+    categorySlug: string;
+};
 
-    if (gallery.length === 0) {
-        return (
-            <div className="premium-gallery premium-gallery--empty">
-                <span>LEVO</span>
-                <p>Изображение скоро появится</p>
-            </div>
-        );
-    }
 
-    const previous = () => {
-        setActiveIndex((current) =>
-            current === 0 ? gallery.length - 1 : current - 1,
-        );
-    };
-
-    const next = () => {
-        setActiveIndex((current) =>
-            current === gallery.length - 1 ? 0 : current + 1,
-        );
-    };
-
+export function ProductHero({
+                                        product,
+                                        image,
+                                        categorySlug,
+                                    }: ProductHeroProps) {
     return (
-        <div className="premium-gallery">
-            <div className="premium-gallery-main">
-                <img
-                    key={gallery[activeIndex]}
-                    src={gallery[activeIndex]}
-                    alt={`${name} — изображение ${activeIndex + 1}`}
-                />
+        <section className="product-hero">
+            <Image
+                className="product-hero-image"
+                src={image}
+                alt={product.name}
+                fetchPriority="high"
+                fill
+            />
 
-                <span className="premium-gallery-counter">
-          {String(activeIndex + 1).padStart(2, '0')} /{' '}
-                    {String(gallery.length).padStart(2, '0')}
+            <div className="product-hero-overlay" />
+
+            <div className="product-hero-top">
+                <span>LEVO / OBJECTS FOR LIVING</span>
+                <span>{product.category}</span>
+            </div>
+
+            <div className="product-hero-content">
+        <span className="product-hero-eyebrow">
+          DISCOVER THE COLLECTION
         </span>
 
-                {gallery.length > 1 && (
-                    <div className="premium-gallery-controls">
-                        <button
-                            type="button"
-                            onClick={previous}
-                            aria-label="Предыдущее изображение"
-                        >
-                            <ChevronLeft size={20} />
-                        </button>
+                <h1>{product.name}</h1>
 
-                        <button
-                            type="button"
-                            onClick={next}
-                            aria-label="Следующее изображение"
-                        >
-                            <ChevronRight size={20} />
-                        </button>
-                    </div>
-                )}
-
-                <span className="premium-gallery-brand">LEVO / OBJECTS FOR LIVING</span>
+                <div className="product-hero-actions">
+                    <Link
+                        href={`/catalogs/${categorySlug}`}
+                        className="product-hero-link"
+                    >
+                        Коллекция <ArrowUpRight size={17} />
+                    </Link>
+                </div>
             </div>
 
-            {gallery.length > 1 && (
-                <div className="premium-gallery-thumbnails">
-                    {gallery.map((image, index) => (
+            <a className="product-hero-scroll" href="#product-details">
+                <span>Исследовать продукт</span>
+                <ArrowDown size={16} />
+            </a>
+
+            <span className="product-hero-index">
+        LEVO — {String(product.id).padStart(3, '0')}
+      </span>
+        </section>
+    );
+}
+
+type ProductSpecificationsProps = {
+    specs: string[];
+};
+
+export function ProductSpecifications({
+                                                  specs,
+                                              }: ProductSpecificationsProps) {
+    const [expanded, setExpanded] = useState(false);
+
+    const visibleSpecs = expanded ? specs : specs.slice(0, 6);
+    const hasMore = specs.length > 6;
+
+    return (
+        <div className="premium-specifications-content">
+            <div className="premium-specifications-heading">
+                <h3>Характеристики</h3>
+                <span>{specs.length} параметров</span>
+            </div>
+
+            {specs.length > 0 ? (
+                <>
+                    <div className="premium-spec-list">
+                        {visibleSpecs.map((spec, index) => (
+                            <div
+                                className="premium-spec-row"
+                                key={`${spec}-${index}`}
+                            >
+                                <span>{spec}</span>
+                                <Check size={17} strokeWidth={1.5} />
+                            </div>
+                        ))}
+                    </div>
+
+                    {hasMore && (
                         <button
-                            key={`${image}-${index}`}
                             type="button"
-                            className={
-                                activeIndex === index
-                                    ? 'premium-thumbnail is-active'
-                                    : 'premium-thumbnail'
-                            }
-                            onClick={() => setActiveIndex(index)}
-                            aria-label={`Показать изображение ${index + 1}`}
-                            aria-pressed={activeIndex === index}
+                            className="premium-spec-toggle"
+                            onClick={() => setExpanded((current) => !current)}
+                            aria-expanded={expanded}
                         >
-                            <img src={image} alt="" />
+                            {expanded ? 'Скрыть' : 'Посмотреть все характеристики'}
+                            <ChevronDown
+                                size={17}
+                                className={expanded ? 'is-rotated' : ''}
+                            />
                         </button>
-                    ))}
-                </div>
+                    )}
+                </>
+            ) : (
+                <p className="premium-empty-specs">
+                    Характеристики уточняются. Свяжитесь с нами, чтобы узнать
+                    подробности о модели.
+                </p>
             )}
         </div>
     );
@@ -120,7 +150,7 @@ export function ProductCard({product, index = 0,}: { product: StoreProduct; inde
                 style={{ animationDelay: `${index * 70}ms` }}
             >
                 <div className="product-image">
-                    <img src={product.image} alt={product.name} />
+                    <Image src={product.image} alt={product.name} fill />
 
                     {product.tag && (
                         <span className="product-tag">{product.tag}</span>
@@ -310,14 +340,12 @@ export function CategoryTiles() {
                         <em>вашего пространства.</em>
                     </h2>
                 </div>
-
                 <p>
                     Продуманные решения для кухни,
                     <br className="desktop-break" />
                     дома и повседневной жизни.
                 </p>
             </div>
-
             <div className="category-grid category-grid--editorial">
                 {parentCategories.map((category, index) => (
                     <Link
@@ -343,9 +371,7 @@ export function CategoryTiles() {
                                 style={{ objectFit: 'cover' }}
                             />
                         </div>
-
                         <div className="category-card-overlay" />
-
                         <div className="category-card-top">
               <span className="category-card-index">
                 COLLECTION / {String(index + 1).padStart(2, '0')}
@@ -355,7 +381,6 @@ export function CategoryTiles() {
                 {category.count} моделей
               </span>
                         </div>
-
                         <div className="category-card-bottom">
                             <div className="category-card-copy">
                                 <h3>{category.name}</h3>

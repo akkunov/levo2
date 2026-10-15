@@ -1,6 +1,8 @@
 import {CatalogProduct} from "@/types";
+import { apiFetch } from './client';
+import { fetchCatalogProducts as fetchCatalogProductsBySlug } from './catalogs';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export { fetchCatalogProductsBySlug as fetchCatalogProducts };
 
 export interface ApiProduct {
     id: number;
@@ -42,20 +44,6 @@ interface ProductsResponse {
     limit: number;
 }
 
-async function request<T>(path: string): Promise<T> {
-    if (!API_URL) {
-        throw new Error('Не задан NEXT_PUBLIC_API_URL');
-    }
-
-    const response = await fetch(`${API_URL}${path}`);
-
-    if (!response.ok) {
-        throw new Error(`Ошибка API: ${response.status}`);
-    }
-
-    return response.json() as Promise<T>;
-}
-
 function mapProduct(product: ApiProduct): StoreProduct {
     return {
         id: product.id,
@@ -74,54 +62,23 @@ function mapProduct(product: ApiProduct): StoreProduct {
         specs: product.specs ?? [],
     };
 }
-export function mapCatalogProduct(
-    product: CatalogProduct,
-): StoreProduct {
-    return {
-        id: product.id,
-        name: product.title,
-        slug: product.slug,
-        category: product.catalog?.name ?? 'Бытовая техника',
-        image:
-            product.image ??
-            product.images?.[0]?.url ??
-            '/images/product-placeholder.png',
-        price: Number(product.price ?? 0),
-        oldPrice:
-            product.oldPrice != null ? Number(product.oldPrice) : null,
-        tag: product.tag,
-        description: product.description,
-        specs: product.specs ?? [],
-    };
-}
-export async function fetchFeaturedProducts(): Promise<StoreProduct[]> {
-    const response = await request<ProductsResponse>(
-        '/products/featured',
-    );
 
+export const mapCatalogProduct = mapProduct;
+
+async function fetchProductsList(path: string): Promise<StoreProduct[]> {
+    const response = await apiFetch<ProductsResponse>(path);
     return response.items.map(mapProduct);
 }
 
-export async function fetchCatalogProducts(
-    slug: string,
-    page = 1,
-    limit = 12,
-) {
-    const response = await request<ProductsResponse>(
-        `/catalogs/${encodeURIComponent(slug)}/products?page=${page}&limit=${limit}`,
-    );
-
-    return {
-        ...response,
-        items: response.items.map(mapProduct),
-    };
+export async function fetchFeaturedProducts(): Promise<StoreProduct[]> {
+    return fetchProductsList('/products/featured');
 }
 
 export async function fetchProductBySlug(
     slug: string,
 ): Promise<CatalogProduct | null> {
     try {
-        return await request<CatalogProduct>(
+        return await apiFetch<CatalogProduct>(
             `/products/${encodeURIComponent(slug)}`,
         );
     } catch {
@@ -130,9 +87,5 @@ export async function fetchProductBySlug(
 }
 
 export async function fetchNewArrivals(): Promise<StoreProduct[]> {
-    const response = await request<ProductsResponse>(
-        '/products?page=1&limit=4&sort=newest',
-    );
-
-    return response.items.map(mapProduct);
+    return fetchProductsList('/products?page=1&limit=4&sort=newest');
 }

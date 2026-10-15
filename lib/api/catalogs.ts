@@ -1,21 +1,6 @@
 import type {Catalog, CatalogWithCount} from '@/types/catalog';
 import type { CatalogProductsResponse } from '@/types/product';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-async function apiFetch<T>(path: string): Promise<T> {
-    if (!API_URL) {
-        throw new Error('NEXT_PUBLIC_API_URL не задан');
-    }
-
-    const response = await fetch(`${API_URL}${path}`);
-
-    if (!response.ok) {
-        throw new Error(`Ошибка API: ${response.status}`);
-    }
-
-    return response.json() as Promise<T>;
-}
+import { apiFetch } from './client';
 
 export function fetchCatalogs() {
     return apiFetch<CatalogWithCount[]>('/catalogs');

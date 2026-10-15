@@ -6,8 +6,6 @@ import {usePathname} from "next/navigation";
 
 const NAV_ITEMS = [
     { href: "/catalogs", label: "Каталог" },
-    { href: "/catalogs/built-in-appliances", label: "Встраиваемая техника" },
-    { href: "/catalogs/refrigerators", label: "Холодильники" },
     { href: "/contacts", label: "Контакты" },
 ] as const;
 
@@ -17,6 +15,10 @@ export function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [cartCount] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [pathname]);
 
     useEffect(() => {
         if (!isHomePage) {
@@ -113,15 +115,12 @@ export function Header() {
                     fill="none"
                     aria-hidden="true"
                 >
-                    {/* Корзина */}
                     <path
                         d="M6.94 12H25.06L23.32 25.2H8.68L6.94 12Z"
                         stroke="currentColor"
                         strokeWidth="1.6"
                         strokeLinejoin="round"
                     />
-
-                    {/* Ручка корзины */}
                     <path
                         d="M11 12V10C11 7.24 13.24 5 16 5C18.76 5 21 7.24 21 10V12"
                         stroke="currentColor"

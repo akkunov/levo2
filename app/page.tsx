@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import {ArrowDown, ArrowRight, MoveUpRight} from 'lucide-react';
 import {CategoryTiles, EditorialBanner, ProductGrid} from '@/components/storefront';
+import Image from "next/image";
 
 export default function HomePage() {
     return <>
         <section className="hero hero-home">
-          <img className="hero-image"
+          <Image className="hero-image"
                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
-               alt="Светлая современная кухня с лаконичной техникой"/>
+               alt="Светлая современная кухня с лаконичной техникой"
+                 fill
+                 sizes="(max-width: 768px) 100vw, 50vw"/>
             <div className="hero-gradient"/>
             <div className="hero-kicker"><span>LEVO / HOME COLLECTION</span><span>DESIGNED FOR LIVING</span></div>
             <div className="hero-copy"><p className="eyebrow light">ТЕХНИКА ДЛЯ СОВРЕМЕННОГО ПРОСТРАНСТВА</p><h1>Больше,
