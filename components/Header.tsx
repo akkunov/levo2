@@ -105,30 +105,14 @@ export function Header() {
             ))}
         </nav>
         <div className="header-actions">
-            <Link className="icon-button bag-link" href="/catalogs"
-                  aria-label="Корзина">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="50"
-                    height="50"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    aria-hidden="true"
-                >
-                    <path
-                        d="M6.94 12H25.06L23.32 25.2H8.68L6.94 12Z"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                        strokeLinejoin="round"
-                    />
-                    <path
-                        d="M11 12V10C11 7.24 13.24 5 16 5C18.76 5 21 7.24 21 10V12"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                        strokeLinecap="round"
-                    />
-                </svg>
-                <span>{cartCount}</span></Link>
+            <Link
+                className="icon-button bag-link"
+                href="/catalogs"
+                aria-label="Корзина"
+            >
+                <span className="bag-icon" aria-hidden="true" />
+                <span className="bag-count">{cartCount}</span>
+            </Link>
         </div>
     </header>;
 }

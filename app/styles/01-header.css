@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 5vw;
+    padding: 2px 3vw;
     background-color: transparent;
     border-bottom: 1px solid transparent;
     box-shadow: none;
@@ -77,8 +77,25 @@
 .site-header:active .icon-button {
     color: #17191c;
 }
-.site-header:hover .icon-button .bag-link svg,
-.site-header.is-scrolled .icon-button .bag-link svg {
+.bag-icon {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-color: currentColor;
+
+    -webkit-mask: url("../../public/shop.svg") center / contain no-repeat;
+    mask: url("../../public/shop.svg") center / contain no-repeat;
+}
+
+.site-header .bag-link {
+    color: #fff;
+}
+
+.site-header:hover .bag-link,
+.site-header.is-scrolled .bag-link,
+.site-header:focus-within .bag-link,
+.site-header:active .bag-link,
+.site-header-static .bag-link {
     color: #17191c;
 }
 
@@ -126,7 +143,7 @@
     stroke-width: 1.5;
 }
 
-.bag-link span {
+.bag-count {
     font-size: 11px;
     position: absolute;
     right: 1px;
