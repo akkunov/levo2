@@ -8,20 +8,18 @@ export interface ApiProduct {
     id: number;
     title: string;
     slug: string | null;
+    sku?: string | null;
     price: number | string | null;
     oldPrice: number | string | null;
     image: string | null;
     tag: string | null;
+    subtitle?: string | null;
+    warranty?: string | null;
     description: string | null;
     specs: string[];
-    catalog?: {
-        name: string;
-        slug: string;
-    } | null;
-    images?: {
-        url: string;
-        alt?: string | null;
-    }[];
+    catalogId?: number | null;
+    catalog?: { name: string; slug: string } | null;
+    images?: { url: string; alt?: string | null }[];
 }
 
 export interface StoreProduct {

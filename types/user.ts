@@ -44,3 +44,13 @@ export interface UserFormData {
   role: UserRole;
   isActive: boolean;
 }
+export interface LoginDto {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  accessToken: string;
+  tokenType: 'Bearer';
+  user: User;
+}

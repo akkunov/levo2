@@ -1,0 +1,810 @@
+
+/* ==========================================================================
+   LEVO — Product Image Editor
+   Чистый CSS, drag-and-drop, адаптивность, reduced motion
+   ========================================================================== */
+
+.product-form-page {
+    --pf-radius: 8px;
+    --pf-radius-lg: 12px;
+    --pf-ring: 0 0 0 3px rgb(37 99 235 / 14%);
+    --pf-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    color: var(--pf-text, #171a21);
+    font-size: 13px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Контейнер и заголовки
+   ========================================================================== */
+
+.product-image-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+    min-width: 0;
+}
+
+.product-image-editor .pf-editor-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.product-image-editor .pf-editor-heading h2 {
+    margin: 3px 0 7px;
+    color: var(--pf-text, #171a21);
+    font-size: 21px;
+    font-weight: 650;
+    line-height: 1.25;
+    letter-spacing: -0.045em;
+}
+
+.product-image-editor .pf-editor-eyebrow {
+    display: inline-block;
+    color: var(--pf-muted, #7b8190);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+}
+
+.product-image-editor .pf-editor-total {
+    flex: 0 0 auto;
+    padding: 6px 10px;
+    color: #424958;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.product-image-editor .pf-editor-intro {
+    margin: 0;
+    color: var(--pf-muted, #6b7280);
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+.product-image-editor .pf-editor-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--pf-border, #e5e7eb);
+}
+
+.product-image-editor .pf-section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    margin: 0 0 8px;
+    color: var(--pf-muted, #6b7280);
+    font-size: 11.5px;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.product-image-editor .pf-editor-block > .pf-section-title {
+    margin-bottom: 0;
+}
+
+.product-image-editor .pf-gallery-count {
+    color: var(--pf-accent, #2563eb);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.product-image-editor .pf-gallery-description {
+    margin: 5px 0 0;
+    color: var(--pf-muted, #727987);
+    font-size: 11.5px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Статусы и сообщения
+   ========================================================================== */
+
+.product-image-editor .pf-editor-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: var(--pf-radius);
+    font-size: 12.5px;
+    font-weight: 500;
+}
+
+.product-image-editor .pf-editor-status > span {
+    display: grid;
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    place-items: center;
+    background: rgb(255 255 255 / 65%);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.product-image-editor .pf-editor-status--error {
+    color: #991b1b;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.product-image-editor .pf-editor-status--success {
+    color: #166534;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+/* ==========================================================================
+   Обложка
+   ========================================================================== */
+
+.product-image-editor .pf-cover {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px;
+    background: var(--pf-surface-muted, #fafbfc);
+    border: 1px solid var(--pf-border, #e5e7eb);
+    border-radius: 11px;
+}
+
+.product-image-editor .pf-cover-preview {
+    display: grid;
+    flex: 0 0 124px;
+    width: 124px;
+    height: 124px;
+    place-items: center;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 9px;
+}
+
+.product-image-editor .pf-cover-thumb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-image-editor .pf-cover-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.product-image-editor .pf-cover-label {
+    color: var(--pf-label, #222936);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.product-image-editor .pf-cover-description {
+    margin: 0;
+    color: var(--pf-muted, #727987);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.product-image-editor .pf-cover-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 3px;
+}
+
+.product-image-editor .pf-cover-empty {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    color: var(--pf-muted, #6b7280);
+    background: var(--pf-surface-muted, #fafbfc);
+    border: 1px dashed var(--pf-border-strong, #d1d5db);
+    border-radius: 11px;
+    font-size: 12.5px;
+}
+
+.product-image-editor .pf-cover-empty-icon {
+    display: grid;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    color: #687386;
+    background: #fff;
+    border: 1px solid #e7eaf0;
+    border-radius: 10px;
+}
+
+.product-image-editor .pf-cover-empty-copy {
+    display: flex;
+    flex: 1 1 160px;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.product-image-editor .pf-cover-empty-copy strong {
+    color: #262c37;
+    font-size: 12.5px;
+    font-weight: 650;
+}
+
+.product-image-editor .pf-cover-empty-copy span {
+    color: var(--pf-muted, #747b89);
+    font-size: 11.5px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   Галерея и сетка
+   ========================================================================== */
+
+.product-image-editor .pf-gallery-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.product-image-editor .pf-gallery-head .pf-section-title {
+    margin: 0;
+}
+
+.product-image-editor .pf-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 13px;
+    min-width: 0;
+}
+
+/* ==========================================================================
+   Карточка фотографии
+   ========================================================================== */
+
+.product-image-editor .pf-image-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+    padding: 7px;
+    background: var(--pf-surface, #fff);
+    border: 1px solid var(--pf-border, #e5e7eb);
+    border-radius: 11px;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    transition:
+            border-color 160ms ease,
+            box-shadow 160ms ease,
+            opacity 160ms ease,
+            transform 160ms ease,
+            background-color 160ms ease;
+}
+
+.product-image-editor .pf-image-card:hover {
+    border-color: #cfd5dd;
+    box-shadow: 0 8px 18px -14px rgb(16 24 40 / 55%);
+}
+
+.product-image-editor .pf-image-card:active {
+    cursor: grabbing;
+}
+
+.product-image-editor .pf-image-card:focus-within {
+    outline: 2px solid rgb(38 54 76 / 40%);
+    outline-offset: 2px;
+}
+
+/* Карточка, которую сейчас перетаскивают */
+
+.product-image-editor .pf-image-card.is-dragging {
+    opacity: 0.38;
+    transform: scale(0.97);
+    border-color: #7b8798;
+    border-style: dashed;
+    box-shadow: none;
+}
+
+/* Карточка, на которую перетаскивают изображение */
+
+.product-image-editor .pf-image-card.is-drop-target {
+    z-index: 2;
+    background: #f2f5f9;
+    border-color: #26364c;
+    box-shadow:
+            0 0 0 2px rgb(38 54 76 / 12%),
+            0 8px 20px rgb(16 24 40 / 8%);
+    transform: translateY(-2px);
+}
+
+/* Блокируем повторные действия на время запроса */
+
+.product-image-editor[aria-busy="true"] .pf-image-card {
+    pointer-events: none;
+    cursor: wait;
+}
+
+/* ==========================================================================
+   Изображение и маркеры
+   ========================================================================== */
+
+.product-image-editor .pf-image-card-media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: #f7f8fa;
+    border-radius: 7px;
+    isolation: isolate;
+}
+
+.product-image-editor .pf-image-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    transition: transform 220ms ease;
+}
+
+.product-image-editor .pf-image-card:hover .pf-image-card-media img {
+    transform: scale(1.035);
+}
+
+.product-image-editor .pf-image-order {
+    position: absolute;
+    z-index: 1;
+    top: 7px;
+    right: 7px;
+    display: grid;
+    min-width: 25px;
+    height: 22px;
+    padding: 0 5px;
+    place-items: center;
+    color: #414958;
+    background: rgb(255 255 255 / 94%);
+    border: 1px solid rgb(226 229 235 / 95%);
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+}
+
+.product-image-editor .pf-image-badge {
+    position: absolute;
+    z-index: 2;
+    top: 7px;
+    left: 7px;
+    padding: 3px 7px;
+    color: #fff;
+    background: #182233;
+    border: 0;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 650;
+    line-height: 1.5;
+    pointer-events: none;
+}
+
+/* Маркер перетаскивания */
+
+.product-image-editor .pf-image-drag-hint {
+    position: absolute;
+    z-index: 2;
+    top: 7px;
+    left: 7px;
+    display: grid;
+    width: 25px;
+    height: 25px;
+    place-items: center;
+    color: #4d5869;
+    background: rgb(255 255 255 / 94%);
+    border: 1px solid #e7eaf0;
+    border-radius: 6px;
+    font-size: 17px;
+    line-height: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+}
+
+.product-image-editor .pf-image-badge ~ .pf-image-drag-hint {
+    top: 34px;
+}
+
+.product-image-editor .pf-image-card:hover .pf-image-drag-hint,
+.product-image-editor .pf-image-card:focus-within .pf-image-drag-hint {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Панель действий поверх фотографии
+   ========================================================================== */
+
+.product-image-editor .pf-image-actions {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 20px 5px 5px;
+    background: linear-gradient(
+            180deg,
+            transparent,
+            rgb(17 24 39 / 68%)
+    );
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+            opacity 140ms ease,
+            transform 140ms ease;
+}
+
+.product-image-editor .pf-image-card:hover .pf-image-actions,
+.product-image-editor .pf-image-card:focus-within .pf-image-actions {
+    opacity: 1;
+    transform: none;
+}
+
+.product-image-editor .pf-icon-btn {
+    display: grid;
+    flex: 0 0 auto;
+    width: 29px;
+    height: 29px;
+    padding: 0;
+    place-items: center;
+    color: #111827;
+    background: rgb(255 255 255 / 96%);
+    border: 0;
+    border-radius: 7px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 18%);
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+            background-color 140ms ease,
+            color 140ms ease,
+            transform 80ms ease;
+}
+
+.product-image-editor .pf-icon-btn:hover:not(:disabled) {
+    color: var(--pf-accent, #2563eb);
+    background: #fff;
+}
+
+.product-image-editor .pf-icon-btn:active:not(:disabled) {
+    transform: scale(0.94);
+}
+
+.product-image-editor .pf-icon-btn:focus-visible {
+    outline: 2px solid #526987;
+    outline-offset: 2px;
+}
+
+.product-image-editor .pf-icon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.product-image-editor .pf-icon-btn--danger:hover:not(:disabled) {
+    color: #dc2626;
+}
+
+/* ==========================================================================
+   Подпись фотографии
+   ========================================================================== */
+
+.product-image-editor .pf-image-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 32px;
+    padding: 7px 3px 1px;
+}
+
+.product-image-editor .pf-image-caption {
+    overflow: hidden;
+    min-width: 0;
+    color: var(--pf-muted, #6b7280);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.product-image-editor .pf-image-grip {
+    flex: 0 0 auto;
+    color: #a0a6b1;
+    font-size: 17px;
+    line-height: 1;
+    cursor: grab;
+}
+
+/* ==========================================================================
+   Пустое состояние
+   ========================================================================== */
+
+.product-image-editor .pf-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    padding: 30px 18px;
+    color: var(--pf-muted, #747b89);
+    background: var(--pf-surface-muted, #fafbfc);
+    border: 1px dashed var(--pf-border-strong, #d1d5db);
+    border-radius: 11px;
+    text-align: center;
+}
+
+.product-image-editor .pf-empty-icon {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 2px;
+    place-items: center;
+    color: #858e9d;
+    background: #fff;
+    border: 1px solid #e6e9ee;
+    border-radius: 12px;
+}
+
+.product-image-editor .pf-empty strong {
+    color: #303745;
+    font-size: 12.5px;
+    font-weight: 650;
+}
+
+.product-image-editor .pf-empty > span {
+    max-width: 300px;
+    font-size: 11.5px;
+    line-height: 1.6;
+}
+
+.product-image-editor .pf-empty .admin-button {
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   Индикатор загрузки
+   ========================================================================== */
+
+.product-image-editor .pf-editor-busy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--pf-muted, #6b7280);
+    font-size: 12px;
+}
+
+.product-image-editor .pf-editor-busy::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--pf-border-strong, #d1d5db);
+    border-top-color: var(--pf-accent, #2563eb);
+    border-radius: 50%;
+    animation: pf-editor-spin 700ms linear infinite;
+}
+
+@keyframes pf-editor-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================================================
+   Кнопки
+   ========================================================================== */
+
+.product-image-editor .admin-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 0 13px;
+    color: var(--pf-label, #4b5563);
+    background: var(--pf-surface, #fff);
+    border: 1px solid var(--pf-border-strong, #d1d5db);
+    border-radius: 8px;
+    box-shadow: var(--pf-shadow);
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+            background-color 140ms ease,
+            border-color 140ms ease,
+            color 140ms ease,
+            box-shadow 140ms ease;
+}
+
+.product-image-editor .admin-button:hover:not(:disabled) {
+    color: var(--pf-text, #111827);
+    background: var(--pf-surface-muted, #f9fafb);
+    border-color: #b9c0ca;
+}
+
+.product-image-editor .admin-button:focus-visible {
+    outline: none;
+    box-shadow: var(--pf-ring);
+}
+
+.product-image-editor .admin-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.product-image-editor .admin-button-primary {
+    color: #fff;
+    background: #182233;
+    border-color: #182233;
+}
+
+.product-image-editor .admin-button-primary:hover:not(:disabled) {
+    color: #fff;
+    background: #29374b;
+    border-color: #29374b;
+}
+
+.product-image-editor .admin-button-danger {
+    color: #b42318;
+    background: #fff;
+    border-color: #fecdca;
+}
+
+.product-image-editor .admin-button-danger:hover:not(:disabled) {
+    color: #912018;
+    background: #fef2f2;
+    border-color: #f97066;
+}
+
+/* ==========================================================================
+   Скрытые input
+   ========================================================================== */
+
+.product-image-editor .pf-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ==========================================================================
+   Сенсорные устройства
+   ========================================================================== */
+
+@media (hover: none) {
+    .product-image-editor .pf-image-actions,
+    .product-image-editor .pf-image-drag-hint {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ==========================================================================
+   Адаптивность
+   ========================================================================== */
+
+@media (max-width: 640px) {
+    .product-image-editor .pf-editor-heading h2 {
+        font-size: 19px;
+    }
+
+    .product-image-editor .pf-gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .product-image-editor .pf-cover {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .product-image-editor .pf-cover-preview {
+        flex-basis: 88px;
+        width: 88px;
+        height: 88px;
+    }
+
+    .product-image-editor .pf-cover-body {
+        flex: 1 1 150px;
+    }
+
+    .product-image-editor .pf-cover-empty {
+        align-items: flex-start;
+    }
+
+    .product-image-editor .pf-gallery-head {
+        align-items: flex-start;
+    }
+
+    .product-image-editor .pf-gallery-head > .admin-button {
+        width: 100%;
+    }
+
+    .product-image-editor .pf-image-card-footer {
+        min-height: 29px;
+    }
+}
+
+@media (max-width: 380px) {
+    .product-image-editor .pf-gallery-grid {
+        gap: 7px;
+    }
+
+    .product-image-editor .pf-image-card {
+        padding: 5px;
+    }
+
+    .product-image-editor .pf-icon-btn {
+        width: 26px;
+        height: 26px;
+    }
+
+    .product-image-editor .pf-cover-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .product-image-editor .pf-cover-actions .admin-button {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   Уважение системной настройки уменьшения анимации
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .product-image-editor *,
+    .product-image-editor *::before,
+    .product-image-editor *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

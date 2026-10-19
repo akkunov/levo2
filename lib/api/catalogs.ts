@@ -28,3 +28,33 @@ export function fetchCatalogProducts(
         `/catalogs/${encodeURIComponent(slug)}/products?${params}`,
     );
 }
+
+export interface CreateCatalogDto {
+    name: string;
+    slug: string;
+    description?: string;
+    image?: string;
+    parentId?: number | null;
+}
+
+export type UpdateCatalogDto = Partial<CreateCatalogDto>;
+
+export function createCatalog(dto: CreateCatalogDto) {
+    return apiFetch<Catalog>('/catalogs/admin', {
+        method: 'POST',
+        body: JSON.stringify(dto),
+    });
+}
+
+export function updateCatalog(id: number, dto: UpdateCatalogDto) {
+    return apiFetch<Catalog>(`/catalogs/admin/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(dto),
+    });
+}
+
+export function deleteCatalog(id: number) {
+    return apiFetch<void>(`/catalogs/admin/${id}`, {
+        method: 'DELETE',
+    });
+}
