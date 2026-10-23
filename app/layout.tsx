@@ -4,6 +4,8 @@ import {Header} from '@/components/Header';
 import {Footer} from '@/components/Footer';
 import {siteConfig} from '@/lib/site';
 import {Providers} from "@/app/providers";
+import { ThemeProvider } from '@/components/theme/theme-provider';
+import { PageViewTracker } from '@/components/analytics/page-view-tracker';
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteConfig.url),
@@ -44,9 +46,12 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         <html lang="ru">
             <body>
             <Providers>
+              <ThemeProvider>
+                <PageViewTracker />
                 <Header />
                 <main>{children}</main>
                 <Footer />
+              </ThemeProvider>
             </Providers>
             </body>
         </html>
