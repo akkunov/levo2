@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
     Search,
     Plus,
@@ -141,11 +142,13 @@ export default function AdminProductsPage() {
                                         <div className="admin-product-cell">
                                             <div className="admin-product-image">
                                                 {product.image ? (
-                                                    // Обычный img позволяет отображать URL из R2
-                                                    // без настройки remotePatterns в next.config.js.
-                                                    <img
+                                                    <Image
                                                         src={product.image}
                                                         alt={product.title}
+                                                        width={320}
+                                                        height={240}
+                                                        unoptimized
+                                                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                                     />
                                                 ) : (
                                                     <Package size={22} />
