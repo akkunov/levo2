@@ -87,7 +87,7 @@ type ProductCardProps = {
 
 export function ProductCard({ product }: ProductCardProps) {
 
-  const mainImage = product.images?.[0] || product.image;
+  const mainImage = product.images?.[0].url || product.image;
 
   const posterImage = product.image || mainImage;
 
