@@ -7,8 +7,8 @@ type ProductHeroProps = {
     categoryName: string;
     subtitle?: string | null;
     image: string;
-    price: number | string | null;
-    oldPrice?: number | string | null;
+    price: number | null;
+    oldPrice?: number | null;
 };
 
 export default function ProductHero({
