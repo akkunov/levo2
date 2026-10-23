@@ -165,9 +165,8 @@ export function ProductCard({
                         }
 
                         fill
-
+                        unoptimized
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
-
                         className="product-image-main"
 
                     />
@@ -183,11 +182,9 @@ export function ProductCard({
                         alt=""
 
                         aria-hidden="true"
-
                         fill
-
+                        unoptimized
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
-
                         className="product-image-poster"
 
                     />
