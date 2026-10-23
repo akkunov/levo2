@@ -99,50 +99,14 @@ export default async function ProductPage({ params }: PageProps) {
 
     return (
         <main className="premium-product-page">
-            <section className="product-hero" aria-labelledby="product-hero-title">
-                <Image
-                    className="product-hero-image"
-                    src={heroImage}
-                    alt={product.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    fetchPriority="high"
-                    aria-hidden="true"
-                />
-                <div className="product-hero-shade" aria-hidden="true" />
-                <div className="product-hero-content">
-                    <div className="product-hero-kicker">
-                        <span className="product-hero-kicker-line" />
-                        <span>{categoryName}</span>
-                    </div>
-                    <h1 id="product-hero-title">{product.title}</h1>
-                    {product.subtitle && (
-                        <p className="product-hero-subtitle">{product.subtitle}</p>
-                    )}
-                </div>
-
-                <div className="product-hero-bottom">
-                    <a className="product-hero-scroll" href="#product-details">
-                        <span className="product-hero-scroll-label">ЛИСТАЙТЕ, ЧТОБЫ УЗНАТЬ БОЛЬШЕ</span>
-                        <span className="product-hero-scroll-line" aria-hidden="true" />
-                    </a>
-
-                    <div className="product-hero-purchase">
-                        <div className="product-hero-price-block">
-                            <div className="product-hero-price-line">
-                                <strong>{formatPrice(product.price)}</strong>
-                                {product.oldPrice != null && <del>{formatPrice(product.oldPrice)}</del>}
-                            </div>
-                            <span className="product-hero-price-note">Цена в кыргызских сомах</span>
-                        </div>
-                        <div className="product-hero-actions">
-                            <a className="product-hero-details-link" href="#product-details" aria-label="Перейти к выбору товара">
-                                Выбрать товар <ArrowUpRight size={16} strokeWidth={1.6} />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <ProductHero
+                title={product.title}
+                categoryName={categoryName}
+                subtitle={product.subtitle}
+                image={heroImage}
+                price={product.price}
+                oldPrice={product.oldPrice}
+            />
 
             <div className="page-shell premium-product-content" id="product-details">
                 <Breadcrumbs
