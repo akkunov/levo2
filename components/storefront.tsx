@@ -147,7 +147,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
 }
 
-export function CatalogProductSections() 
+export function CatalogProductSections() {
     const {
         data: newArrivals = [],
         isPending: newPending,
