@@ -354,7 +354,9 @@
 }
 
 /* Дополнительный постер */
-
+.proudct-image-poster{
+    object-fit:cover
+}
 .product-image .product-image-poster {
     opacity: 0;
     transform: scale(1.025);
@@ -365,16 +367,7 @@
    ПК: НАВЕДЕНИЕ МЫШЬЮ
 ======================================== */
 /* На мобильном активный постер показываем целиком */
-@media (max-width: 700px) {
-    .product-card.is-poster-visible .product-image {
-        aspect-ratio: 16 / 9;
-    }
 
-    .product-card.is-poster-visible .product-image-poster {
-        object-fit: contain;
-        object-position: center;
-    }
-}
 @media (hover: hover) and (pointer: fine) {
     .product-card:hover .product-image-main {
         opacity: 0;
