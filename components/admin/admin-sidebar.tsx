@@ -6,6 +6,8 @@ import {
     LayoutDashboard,
     Package,
     FolderTree,
+    BarChart3,
+    Users,
     ExternalLink,
     LogOut,
 } from 'lucide-react';
@@ -26,6 +28,16 @@ const NAV_ITEMS = [
         label: 'Категории',
         href: '/admin/catalogs',
         icon: FolderTree,
+    },
+    {
+        label: 'Статистика',
+        href: '/admin/analytics',
+        icon: BarChart3,
+    },
+    {
+        label: 'Менеджеры',
+        href: '/admin/managers',
+        icon: Users,
     },
 ];
 
