@@ -33,20 +33,20 @@
     --space-6: 24px;
     --space-8: 32px;
     --accent: #c9d4c2;
-    --page: min(1440px, calc(100% - 112px));
-    --pf-text: #111827;
-    --pf-muted: #6b7280;
-    --pf-label: #4b5563;
-    --pf-border: #e5e7eb;
-    --pf-border-strong: #d1d5db;
-    --pf-surface: #ffffff;
-    --pf-surface-muted: #f9fafb;
-    --pf-accent: #2563eb;
-    --pf-accent-hover: #1d4ed8;
-    --pf-accent-soft: #eff6ff;
-    --pf-danger: #dc2626;
-    --pf-danger-soft: #fef2f2;
-    --pf-danger-border: #fecaca;
+    --page: min(var(--content-max), calc(100% - var(--gutter-desktop) - var(--gutter-desktop)));
+    --pf-text: var(--ink);
+    --pf-muted: var(--muted);
+    --pf-label: var(--muted);
+    --pf-border: var(--line);
+    --pf-border-strong: var(--line-strong);
+    --pf-surface: var(--surface);
+    --pf-surface-muted: var(--surface-muted);
+    --pf-accent: var(--accent-strong);
+    --pf-accent-hover: var(--accent-strong);
+    --pf-accent-soft: var(--surface-muted);
+    --pf-danger: var(--danger);
+    --pf-danger-soft: color-mix(in srgb, var(--danger) 12%, var(--surface));
+    --pf-danger-border: color-mix(in srgb, var(--danger) 32%, var(--line));
 }
 
 * {
