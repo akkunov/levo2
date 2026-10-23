@@ -85,68 +85,189 @@ type ProductCardProps = {
     index?: number;
 };
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({
 
-  const mainImage = product.images?.[0].url || product.image;
+    product,
 
-  const posterImage = product.image || mainImage;
+    index = 0,
 
-  if (!mainImage) {
+}: ProductCardProps) {
 
-    return null;
+    const [showPoster, setShowPoster] = useState(false);
 
-  }
+    // Основное изображение товара
 
-  return (
+    const mainImage = product.images?.[0]?.url || product.image;
 
-    <article className="product-card">
+    // Постер
 
-      <div className="product-card__media">
+    const posterImage = product.image;
 
-        <Image
+    const hasPoster =
 
-          src={mainImage}
+        Boolean(mainImage) &&
 
-          alt={product.name}
+        Boolean(posterImage) &&
 
-          fill
+        mainImage !== posterImage;
 
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+    // Переключаем изображение при первом касании
 
-          className="product-card__image product-card__image--main"
+    const handleTouchStart = () => {
 
-        />
+        if (hasPoster) {
 
-        {posterImage && posterImage !== mainImage && (
+            setShowPoster(true);
 
-          <Image
+        }
 
-            src={posterImage}
+    };
 
-            alt=""
+    const content = (
 
-            aria-hidden="true"
+        <article
 
-            fill
+            className={`product-card${
 
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                showPoster ? ' is-poster-visible' : ''
 
-            className="product-card__image product-card__image--poster"
+            }`}
 
-          />
+            style={{
 
-        )}
+                animationDelay: `${index * 70}ms`,
 
-      </div>
+            }}
 
-      <h3>{product.name}</h3>
+        >
 
-    </article>
+            <div className="product-image">
 
-  );
+                {mainImage && (
+
+                    <Image
+
+                        src={mainImage}
+
+                        alt={
+
+                            product.images?.[0]?.alt ||
+
+                            product.name
+
+                        }
+
+                        fill
+
+                        sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
+
+                        className="product-image-main"
+
+                    />
+
+                )}
+
+                {hasPoster && (
+
+                    <Image
+
+                        src={posterImage}
+
+                        alt=""
+
+                        aria-hidden="true"
+
+                        fill
+
+                        sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
+
+                        className="product-image-poster"
+
+                    />
+
+                )}
+
+                {product.tag && (
+
+                    <span className="product-tag">
+
+                        {product.tag}
+
+                    </span>
+
+                )}
+
+                <span className="product-arrow">
+
+                    <ArrowDownRight size={18} />
+
+                </span>
+
+            </div>
+
+            <div className="product-meta">
+
+                <span>{product.category}</span>
+
+                <span>{product.id}</span>
+
+            </div>
+
+            <span className="product-title">
+
+                {product.name}
+
+            </span>
+
+            <div className="price-line">
+
+                <strong>{formatPrice(product.price)}</strong>
+
+                {product.oldPrice != null && (
+
+                    <del>{formatPrice(product.oldPrice)}</del>
+
+                )}
+
+            </div>
+
+        </article>
+
+    );
+
+    if (!product.slug) {
+
+        return (
+
+            <div onTouchStart={handleTouchStart}>
+
+                {content}
+
+            </div>
+
+        );
+
+    }
+
+    return (
+
+        <Link
+
+            href={`/products/${product.slug}`}
+
+            className="product-card-link"
+
+            onTouchStart={handleTouchStart}
+
+        >
+
+            {content}
+
+        </Link>
+
+    );
 
 }
-
 export function CatalogProductSections() {
     const {
         data: newArrivals = [],
