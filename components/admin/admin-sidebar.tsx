@@ -64,7 +64,7 @@ export function AdminSidebar() {
             <div className="admin-nav-label">УПРАВЛЕНИЕ</div>
 
             <nav className="admin-nav">
-                {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+                {NAV_ITEMS.filter(({ href }) => user?.role === 'ADMIN' || href === '/admin/products').map(({ label, href, icon: Icon }) => {
                     const active =
                         href === '/admin'
                             ? pathname === href
