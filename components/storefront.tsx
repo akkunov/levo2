@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {useState} from 'react';
+import { useCart } from '@/components/cart/cart-context';
 import {
     ArrowDown,
     ArrowDownRight,
@@ -442,10 +443,23 @@ export default function NewArrivals() {
 }
 
 export function AddToCart({product}: { product: StoreProduct }) {
+    const { addItem } = useCart();
     const [added, setAdded] = useState(false);
+
+    const handleAdd = () => {
+        addItem(product);
+        setAdded(true);
+        window.setTimeout(() => setAdded(false), 1600);
+    };
+
     return (
-        <button className={`button button-dark add-cart ${added ? 'is-added' : ''}`} onClick={() => setAdded(true)}>
-            {added ? <><Check size={17} /> Добавлено в список</> : <>Добавить в корзину <ArrowRight size={17} /></>}
+        <button
+            type="button"
+            className={`button button-dark add-cart ${added ? 'is-added' : ''}`}
+            onClick={handleAdd}
+            aria-live="polite"
+        >
+            {added ? <><Check size={17} /> Добавлено в корзину</> : <>Добавить в корзину <ArrowRight size={17} /></>}
         </button>
     );
 }
