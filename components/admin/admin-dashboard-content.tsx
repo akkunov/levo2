@@ -12,6 +12,7 @@ import {
 
 import { fetchAdminProducts } from '@/lib/api/admin-products';
 import { useCatalogs } from '@/hooks/use-catalogs';
+import { AdminPageHeader } from '@/components/ui/admin-page-header';
 
 export default function AdminDashboardContent() {
     const productsQuery = useQuery({
@@ -32,23 +33,12 @@ export default function AdminDashboardContent() {
 
     return (
         <div className="admin-dashboard">
-            <div className="admin-page-heading">
-                <div>
-                    <span className="admin-eyebrow">LEVO / DASHBOARD</span>
-                    <h1>Обзор</h1>
-                    <p>
-                        Управление каталогом и товарами интернет-магазина.
-                    </p>
-                </div>
-
-                <Link
-                    href="/admin/products/new"
-                    className="admin-primary-button"
-                >
-                    <Plus size={18} />
-                    Добавить товар
-                </Link>
-            </div>
+            <AdminPageHeader
+                eyebrow="LEVO / DASHBOARD"
+                title="Обзор"
+                description="Управление каталогом и товарами интернет-магазина."
+                actions={<Link href="/admin/products/new" className="admin-primary-button"><Plus size={18} />Добавить товар</Link>}
+            />
 
             <section className="admin-stats">
                 <article className="admin-stat-card">
