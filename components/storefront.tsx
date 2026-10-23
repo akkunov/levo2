@@ -2,13 +2,10 @@
 import Link from 'next/link';
 import {useState} from 'react';
 import {
-    ArrowDown,
     ArrowDownRight,
     ArrowRight,
     ArrowUpRight,
     Check, ChevronDown,
-    ChevronLeft,
-    ChevronRight,
     Sparkles
 } from 'lucide-react';
 import { useCatalogs } from '@/hooks/use-catalogs';
@@ -18,70 +15,6 @@ import { useFeaturedProducts } from '@/hooks/use-featured-products';
 import {useNewArrivals} from "@/hooks/use-new-arrivals";
 import { formatPrice } from '@/lib/format';
 
-
-
-type ProductGalleryProps = {
-    images: string[];
-    name: string;
-};
-
-type ProductHeroProps = {
-    product: StoreProduct;
-    image: string;
-    categorySlug: string;
-};
-
-
-export function ProductHero({
-                                        product,
-                                        image,
-                                        categorySlug,
-                                    }: ProductHeroProps) {
-    return (
-        <section className="product-hero">
-            <Image
-                className="product-hero-image"
-                src={image}
-                alt={product.name}
-                fetchPriority="high"
-                fill
-            />
-
-            <div className="product-hero-overlay" />
-
-            <div className="product-hero-top">
-                <span>LEVO / OBJECTS FOR LIVING</span>
-                <span>{product.category}</span>
-            </div>
-
-            <div className="product-hero-content">
-        <span className="product-hero-eyebrow">
-          DISCOVER THE COLLECTION
-        </span>
-
-                <h1>{product.name}</h1>
-
-                <div className="product-hero-actions">
-                    <Link
-                        href={`/catalogs/${categorySlug}`}
-                        className="product-hero-link"
-                    >
-                        Коллекция <ArrowUpRight size={17} />
-                    </Link>
-                </div>
-            </div>
-
-            <a className="product-hero-scroll" href="#product-details">
-                <span>Исследовать продукт</span>
-                <ArrowDown size={16} />
-            </a>
-
-            <span className="product-hero-index">
-        LEVO — {String(product.id).padStart(3, '0')}
-      </span>
-        </section>
-    );
-}
 
 type ProductSpecificationsProps = {
     specs: string[];

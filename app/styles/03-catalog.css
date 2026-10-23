@@ -92,6 +92,7 @@
     background: #3c403b;
     color: white;
     margin-bottom: 32px;
+    z-index: -2;
 }
 
 .category-hero > img {
