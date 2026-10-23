@@ -6,6 +6,8 @@ import {
     LayoutDashboard,
     Package,
     FolderTree,
+    BarChart3,
+    Users,
     ExternalLink,
     LogOut,
 } from 'lucide-react';
@@ -26,6 +28,16 @@ const NAV_ITEMS = [
         label: 'Категории',
         href: '/admin/catalogs',
         icon: FolderTree,
+    },
+    {
+        label: 'Статистика',
+        href: '/admin/analytics',
+        icon: BarChart3,
+    },
+    {
+        label: 'Менеджеры',
+        href: '/admin/managers',
+        icon: Users,
     },
 ];
 
@@ -52,7 +64,7 @@ export function AdminSidebar() {
             <div className="admin-nav-label">УПРАВЛЕНИЕ</div>
 
             <nav className="admin-nav">
-                {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+                {NAV_ITEMS.filter(({ href }) => user?.role === 'ADMIN' || href === '/admin/products').map(({ label, href, icon: Icon }) => {
                     const active =
                         href === '/admin'
                             ? pathname === href

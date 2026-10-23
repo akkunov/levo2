@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import {useCatalogs} from "@/hooks/use-catalogs";
 
 const COMPANY_LINKS = [
     { label: 'О компании', href: '/about' },
@@ -16,8 +13,22 @@ const CONTACT_LINKS = [
     { label: 'Gmail', href: 'https://www.instagram.com/' },
 ];
 
-export function Footer() {
-    const { data: catalogs = [], isLoading } = useCatalogs();
+type FooterCatalog = { id: number; slug: string; name: string };
+
+async function getFooterCatalogs(): Promise<FooterCatalog[]> {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '');
+    if (!baseUrl) return [];
+    try {
+        const response = await fetch(`${baseUrl}/catalogs`, { next: { revalidate: 300 } });
+        if (!response.ok) return [];
+        return await response.json() as FooterCatalog[];
+    } catch {
+        return [];
+    }
+}
+
+export async function Footer() {
+    const catalogs = await getFooterCatalogs();
 
     return (
         <footer className="footer">
@@ -42,23 +53,15 @@ export function Footer() {
                             <span aria-hidden="true">↗</span>
                         </Link>
 
-                        {isLoading ? (
-                            <span className="footer-muted">
-                                Загрузка каталога...
-                            </span>
-                        ) : (
-                            catalogs.map((catalog) => (
-                                <Link
-                                    key={catalog.id}
-                                    href={`/catalogs/${encodeURIComponent(
-                                        catalog.slug,
-                                    )}`}
-                                    className="footer-link"
-                                >
-                                    {catalog.name}
-                                </Link>
-                            ))
-                        )}
+                        {catalogs.map((catalog) => (
+                            <Link
+                                key={catalog.id}
+                                href={`/catalogs/${encodeURIComponent(catalog.slug)}`}
+                                className="footer-link"
+                            >
+                                {catalog.name}
+                            </Link>
+                        ))}
                     </div>
                 </section>
 
