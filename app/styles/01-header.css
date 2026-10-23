@@ -88,7 +88,7 @@
 }
 
 .site-header .bag-link {
-    color: var(--ink);
+    color: inherit;
 }
 
 .site-header:hover .bag-link,
