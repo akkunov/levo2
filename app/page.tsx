@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         title: siteConfig.defaultTitle,
         description: siteConfig.description,
         url: '/',
-        images: [{ url: '/uploads/banner.jpeg', alt: 'LEVO — техника для современного дома' }],
+        images: [{ url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90', alt: 'LEVO — техника для современного дома' }],
     },
 };
 
