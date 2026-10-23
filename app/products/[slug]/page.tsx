@@ -34,12 +34,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { slug } = await params;
     const product = await fetchProductBySlug(slug);
 
-    if (!product) return { title: 'Товар не найден — LEVO' };
+    if (!product) {
+        return { title: 'Товар не найден', robots: { index: false, follow: false } };
+    }
+
+    const description = product.description?.trim() ||
+        `Характеристики, фотографии и цена ${product.title} в каталоге LEVO Кыргызстан.`;
+    const canonical = `/products/${encodeURIComponent(slug)}`;
 
     return {
-        title: `${product.title} — LEVO`,
-        description:
-            product.description ?? `Познакомьтесь с ${product.title} в LEVO.`,
+        title: product.title,
+        description,
+        alternates: { canonical },
+        openGraph: {
+            type: 'website',
+            title: product.title,
+            description,
+            url: canonical,
+            images: product.image ? [{ url: product.image, alt: product.title }] : undefined,
+        },
     };
 }
 
