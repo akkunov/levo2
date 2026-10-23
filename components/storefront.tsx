@@ -81,16 +81,26 @@ export function ProductSpecifications({
 // import { formatPrice } from '@/lib/format-price';
 
 interface ProductCardProps {
+
     product: StoreProduct;
+
     index?: number;
-    onActivate?: (id: number) => void;
+
+    activePosterId: number | null;
+
+    onActivate: (id: number) => void;
+
 }
 
 export function ProductCard({
 
     product,
+
     index = 0,
-    onActivate?: (id: number) => void;
+
+    activePosterId,
+
+    onActivate,
 
 }: ProductCardProps) {
 
