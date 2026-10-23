@@ -58,6 +58,7 @@ export default function PremiumProductGallery({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 55vw, 640px"
                     priority={activeIndex === 0}
                     draggable={false}
+                    unoptimized
                     style={{ objectFit: 'contain' }}
                 />
 
@@ -97,7 +98,14 @@ export default function PremiumProductGallery({
                             aria-label={`Показать фото ${index + 1}`}
                             aria-pressed={index === activeIndex}
                         >
-                            <Image src={image} alt="" fill sizes="96px" loading="lazy" style={{ objectFit: "contain" }} />
+                            <Image 
+                                src={image} 
+                                alt="" fill 
+                                sizes="96px" 
+                                loading="lazy" 
+                                style={{ objectFit: "contain" }}
+                                unoptimized
+                                />
                         </button>
                     ))}
                 </div>
