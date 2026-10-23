@@ -319,11 +319,10 @@
 .product-image .product-image-poster {
     opacity: 0;
     transform: scale(1.025);
-    pointer-events: none;
 }
 
 /* ПК и устройства с мышью */
-@media (hover: hover) and (pointer: fine) {
+
     .product-card:hover .product-image-main {
         opacity: 0;
         transform: scale(1.025);
@@ -333,7 +332,7 @@
         opacity: 1;
         transform: scale(1);
     }
-}
+
 
 /* Мобильное переключение по нажатию */
 .product-card.is-poster-visible .product-image-main {
