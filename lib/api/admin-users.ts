@@ -18,11 +18,11 @@ export type CreateManagerDto = {
 
 /**
  * These calls require matching protected endpoints in the NestJS API:
- * GET /users/admin and POST /users/admin. The server must hash passwords,
+ * GET /admin/users and POST /admin/users. The server must hash passwords,
  * enforce ADMIN-only access, validate inputs, and never return password hashes.
  */
 export function fetchManagers() {
-  return apiFetch<Manager[]>('/admin/users');
+  return apiFetch<Manager[]>('/admin/users').then((users) => users.filter((user) => user.role === 'MANAGER'));
 }
 
 export function createManager(dto: CreateManagerDto) {
