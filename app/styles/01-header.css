@@ -19,7 +19,7 @@
 
 .site-header.is-scrolled {
     padding-top: 20px;
-    background-color: rgba(255, 255, 255, 0.96);
+    background-color: var(--surface);
     border-bottom-color: rgba(0, 0, 0, 0.07);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.045);
     color: var(--ink);
@@ -28,7 +28,7 @@
 }
 
 .site-header:hover {
-    background-color: rgba(255, 255, 255, 0.96);
+    background-color: var(--surface);;
     border-bottom-color: rgba(0, 0, 0, 0.07);
     color: var(--ink);
     -webkit-backdrop-filter: blur(14px);

@@ -15,8 +15,8 @@ export function ThemeToggle() {
       aria-label={`Включить ${nextTheme === 'dark' ? 'тёмную' : 'светлую'} тему`}
       title={`Переключить на ${nextTheme === 'dark' ? 'тёмную' : 'светлую'} тему`}
     >
-      {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
-      <span>{theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}</span>
+      {theme === 'dark' ? <Sun size={25} aria-hidden="true" /> : <Moon size={25} aria-hidden="true" />}
     </button>
   );
 }
+
