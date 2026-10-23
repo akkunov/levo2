@@ -14,6 +14,7 @@ export default function AdminLayout({
     const pathname = usePathname();
     const router = useRouter();
     const isLoginPage = pathname === '/admin/login';
+    const isManagerProductRoute = pathname === '/admin/products' || pathname.startsWith('/admin/products/');
 
     const {
         user,
@@ -29,17 +30,19 @@ export default function AdminLayout({
             return;
         }
 
-        if (
-            !isLoading &&
-            isAuthenticated &&
-            user?.role !== 'ADMIN'
-        ) {
+        if (!isLoading && isAuthenticated && user?.role === 'MANAGER' && !isManagerProductRoute) {
+            router.replace('/admin/products');
+            return;
+        }
+
+        if (!isLoading && isAuthenticated && user?.role !== 'ADMIN' && user?.role !== 'MANAGER') {
             router.replace('/');
         }
     }, [
         isLoginPage,
         isLoading,
         isAuthenticated,
+        isManagerProductRoute,
         user,
         router,
     ]);
@@ -51,7 +54,8 @@ export default function AdminLayout({
     if (
         isLoading ||
         !isAuthenticated ||
-        user?.role !== 'ADMIN'
+        !user ||
+        (user.role !== 'ADMIN' && !(user.role === 'MANAGER' && isManagerProductRoute))
     ) {
         return (
             <div className="admin-loading">
