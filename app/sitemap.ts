@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { categories, products } from '@/lib/data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const staticRoutes = [
@@ -13,20 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route === '' ? 1 : 0.8,
     }));
 
-    const categoryRoutes = categories.map((category) => ({
-        url: `https://levo.kg/catalogs/${category.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.7,
-    }));
-
-    const productRoutes = products.map((product) => ({
-        url: `https://levo.kg/products/${product.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-    }));
-
-    return [...staticRoutes, ...categoryRoutes, ...productRoutes];
+    return [...staticRoutes];
 }
 
