@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Breadcrumbs, ProductGrid } from '@/components/storefront';
 import { useCatalogProducts } from '@/hooks/use-catalog-products';
 import {useCatalog} from "@/hooks/use-catalogs";
@@ -45,7 +46,7 @@ export default function CategoryPageClient({
             />
 
             <section className="category-hero">
-                {category.image && <img src={category.image} alt={category.name} />}
+                {category.image && <Image src={category.image} alt={category.name} fill sizes="(max-width: 768px) 100vw, 100vw" style={{ objectFit: "cover" }} />}
                 <div className="category-hero-shade" />
                 <div className="category-hero-copy">
                     <span className="eyebrow light">LEVO / COLLECTION</span>
@@ -71,7 +72,7 @@ export default function CategoryPageClient({
                                 key={child.id}
                                 href={`/catalogs/${child.slug}`}
                             >
-                                {child.image && <img src={child.image} alt={child.name} />}
+                                {child.image && <Image src={child.image} alt={child.name} fill sizes="(max-width: 768px) 50vw, 240px" style={{ objectFit: "cover" }} />}
                                 <span className="tile-shade" />
                                 <span className="tile-copy">
                   <strong>{child.name}</strong>
