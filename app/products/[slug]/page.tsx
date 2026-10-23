@@ -20,9 +20,9 @@ import {
     ProductSpecifications,
 } from '@/components/storefront';
 import PremiumProductGallery from './PremiumProductGallery';
+import ProductHero from './ProductHero';
 
 import './product-premium.css';
-import Image from "next/image";
 import { formatPrice } from '@/lib/format';
 
 type PageProps = {
