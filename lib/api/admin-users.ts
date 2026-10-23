@@ -2,7 +2,7 @@ import { apiFetch } from '@/lib/api/client';
 
 export type Manager = {
   id: number | string;
-  name: string;
+  name: string | null;
   email: string;
   role: 'MANAGER' | 'ADMIN';
   isActive?: boolean;
@@ -22,7 +22,7 @@ export type CreateManagerDto = {
  * enforce ADMIN-only access, validate inputs, and never return password hashes.
  */
 export function fetchManagers() {
-  return apiFetch<Manager[]>('/users/admin');
+  return apiFetch<Manager[]>('/admin/users');
 }
 
 export function createManager(dto: CreateManagerDto) {
