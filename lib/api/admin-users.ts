@@ -26,7 +26,7 @@ export function fetchManagers() {
 }
 
 export function createManager(dto: CreateManagerDto) {
-  return apiFetch<Manager>('/users/admin', {
+  return apiFetch<Manager>('/admin/users', {
     method: 'POST',
     body: JSON.stringify(dto),
   });
