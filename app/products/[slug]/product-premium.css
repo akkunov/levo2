@@ -15,6 +15,7 @@
 @keyframes levo-product-arrive {
     from { opacity: 0; transform: translateY(12px) scale(.985); }
     to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
 /* Page container and breadcrumbs */
 .premium-product-content { padding-top: 24px; }
