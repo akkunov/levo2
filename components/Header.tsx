@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useCatalogs} from "@/hooks/use-catalogs";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const NAV_ITEMS = [
     { href: "/catalogs", label: "Каталог" },
@@ -121,6 +122,7 @@ export function Header() {
             ))}
         </nav>
         <div className="header-actions">
+            <ThemeToggle />
             <Link
                 className="icon-button bag-link"
                 href="/catalogs"
