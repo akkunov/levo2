@@ -28,9 +28,6 @@ export const metadata: Metadata = {
         title: siteConfig.defaultTitle,
         description: siteConfig.description,
     },
-    alternates: {
-        canonical: '/',
-    },
     icons: {
         icon: '/logo.svg',
     },
