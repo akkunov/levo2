@@ -56,9 +56,11 @@ function readCart(): CartItem[] {
 
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
+    const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
         setItems(readCart());
+        setHydrated(true);
 
         const handleStorage = (event: StorageEvent) => {
             if (event.key === STORAGE_KEY || event.key === null) {
@@ -71,12 +73,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }, []);
 
     useEffect(() => {
+        if (!hydrated) return;
         try {
             window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
         } catch {
             // The cart remains usable for this tab if storage is unavailable.
         }
-    }, [items]);
+    }, [items, hydrated]);
 
     const addToCart = useCallback((product: StoreProduct) => {
         setItems((current) => {
