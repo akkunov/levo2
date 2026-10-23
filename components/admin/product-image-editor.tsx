@@ -529,6 +529,9 @@ export default function ProductImageEditor({
                                                 image.alt ??
                                                 `Фотография товара ${index + 1}`
                                             }
+                                            width={320}
+                                            height={240}
+                                            unoptimized
                                             draggable={false}
                                             loading="lazy"
                                         />
