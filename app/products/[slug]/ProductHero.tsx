@@ -24,9 +24,9 @@ export default function ProductHero({
                 <Image
                     className="product-hero-image"
                     src={image}
-                    alt={title}
+                    alt=""
                     fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="100vw"
                     fetchPriority="high"
                     aria-hidden="true"
                 />
@@ -52,7 +52,7 @@ export default function ProductHero({
                         <div className="product-hero-price-block">
                             <div className="product-hero-price-line">
                                 <strong>{formatPrice(price)}</strong>
-                                {product.oldPrice != null && <del>{formatPrice(oldPrice)}</del>}
+                                {oldPrice != null && <del>{formatPrice(oldPrice)}</del>}
                             </div>
                             <span className="product-hero-price-note">Цена в кыргызских сомах</span>
                         </div>
