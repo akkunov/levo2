@@ -139,7 +139,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       </div>
 
-      <h3>{product.title}</h3>
+      <h3>{product.name}</h3>
 
     </article>
 
