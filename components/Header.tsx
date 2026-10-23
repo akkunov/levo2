@@ -3,10 +3,12 @@
 import {useState, useEffect} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
+import {useCatalogs} from "@/hooks/use-catalogs";
 
 const NAV_ITEMS = [
     { href: "/catalogs", label: "Каталог" },
     { href: "/contacts", label: "Контакты" },
+    { href: "/services", label: "Сервисные центры" },
 ] as const;
 
 export function Header() {
@@ -15,6 +17,7 @@ export function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [cartCount] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
+    const { data: catalogs = [] } = useCatalogs();
 
     useEffect(() => {
         setMenuOpen(false);
@@ -98,6 +101,19 @@ export function Header() {
             className={`main-nav ${menuOpen ? 'is-open' : ''}`}
             aria-hidden={!menuOpen}
         >
+            <div className="mobile-catalog">
+                {catalogs.map((catalog) => (
+                    <Link
+                        key={catalog.id}
+                        href={`/catalogs/${catalog.slug}`}
+                        className="mobile-catalog-link"
+                        tabIndex={menuOpen ? 0 : -1}
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        {catalog.name}
+                    </Link>
+                ))}
+            </div>
             {NAV_ITEMS.map(({href, label}) => (
                 <Link key={href} href={href} onClick={() => setMenuOpen(false)}>
                     {label}

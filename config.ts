@@ -1,1 +1,2 @@
-export const YMAP_MAP_KEY =    process.env.YNDEX_MAP_KEY
+export const YMAP_MAP_KEY =
+    process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY ?? '';
