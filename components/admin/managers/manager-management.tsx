@@ -76,13 +76,13 @@ export default function ManagerManagement() {
           <p>Список загружается с защищённого API.</p>
         </div>
         {managersQuery.isPending ? <p>Загрузка списка…</p> :
-          managersQuery.isError ? <p className="admin-error">Не удалось загрузить менеджеров. Проверьте, что backend реализует GET /users/admin и доступ разрешён администратору. ({managersQuery.error instanceof Error ? managersQuery.error.message : 'Ошибка API'})</p> :
+          managersQuery.isError ? <p className="admin-error">Не удалось загрузить менеджеров. Проверьте, что backend реализует GET /admin/users и доступ разрешён администратору. ({managersQuery.error instanceof Error ? managersQuery.error.message : 'Ошибка API'})</p> :
           managersQuery.data.length === 0 ? <p>Учётных записей пока нет.</p> :
           <div className="admin-table-wrapper">
             <table className="admin-table">
               <thead><tr><th>Имя</th><th>Email</th><th>Роль</th><th>Статус</th></tr></thead>
               <tbody>{managersQuery.data.map(manager => <tr key={manager.id}>
-                <td>{manager.name}</td><td>{manager.email}</td><td>{manager.role}</td>
+                <td>{manager.name ?? '—'}</td><td>{manager.email}</td><td>{manager.role}</td>
                 <td>{manager.isActive === false ? 'Отключён' : 'Активен'}</td>
               </tr>)}</tbody>
             </table>
