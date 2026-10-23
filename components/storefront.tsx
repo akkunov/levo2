@@ -107,7 +107,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
           src={mainImage}
 
-          alt={product.title}
+          alt={product.name}
 
           fill
 
