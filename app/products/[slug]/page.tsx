@@ -69,20 +69,9 @@ export default async function ProductPage({ params }: PageProps) {
         ...(product.images ?? []).map((image) => image.url),
     ].filter((image): image is string => Boolean(image));
     const uniqueImages = [...new Set(images)];
-    const heroImage = product.image ?? '/images/product-placeholder.png';
+    const heroImage = product.image ?? product.images?.[0]?.url ?? '/images/product-placeholder.png';
 
-    const storeProduct: StoreProduct = {
-        id: product.id,
-        name: product.title,
-        slug: product.slug,
-        category: categoryName,
-        image: heroImage,
-        price: Number(product.price ?? 0),
-        oldPrice: product.oldPrice != null ? Number(product.oldPrice) : null,
-        tag: product.tag,
-        description: product.description,
-        specs: product.specs ?? [],
-    };
+    const storeProduct = mapCatalogProduct(product);
 
     let related: StoreProduct[] = [];
     if (product.catalog?.slug) {
