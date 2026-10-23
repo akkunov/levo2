@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: PageProps) {
     }
 
     return (
-        <main className="premium-product-page">
+        <div className="premium-product-page">
             <ProductHero
                 title={product.title}
                 categoryName={categoryName}
@@ -203,6 +203,6 @@ export default async function ProductPage({ params }: PageProps) {
                     </section>
                 )}
             </div>
-        </main>
+        </div>
     );
 }
