@@ -64,9 +64,7 @@ export default async function ProductPage({ params }: PageProps) {
 
     const categoryName = product.catalog?.name ?? 'Бытовая техника';
     const categorySlug = product.catalog?.slug ?? 'built-in-appliances';
-    const images = [
-        product.image,
-        ...(product.images ?? []).map((image) => image.url),
+    const images = [...(product.images ?? []).map((image) => image.url),
     ].filter((image): image is string => Boolean(image));
     const uniqueImages = [...new Set(images)];
     const heroImage = product.image ?? product.images?.[0]?.url ?? '/images/product-placeholder.png';
