@@ -5,7 +5,6 @@ export type PageViewEvent = {
   title: string;
   referrer?: string;
   sessionId: string;
-  occurredAt: string;
 };
 
 function getSessionId(): string {
@@ -30,9 +29,8 @@ export async function trackPageView(path: string, title: string): Promise<void> 
   const event: PageViewEvent = {
     path,
     title,
-    referrer: document.referrer || undefined,
+    referrer: (() => { try { return document.referrer ? new URL(document.referrer).origin : undefined; } catch { return undefined; } })(),
     sessionId: getSessionId(),
-    occurredAt: new Date().toISOString(),
   };
 
   try {
