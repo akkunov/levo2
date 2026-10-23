@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import type { TouchEvent } from 'react';
 import { ArrowLeft, ArrowRight, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 import type { StoreProduct } from '@/lib/api/products';
 import { AddToCart } from '@/components/storefront';
 
@@ -49,12 +50,15 @@ export default function PremiumProductGallery({
                 aria-roledescription="карусель изображений товара"
                 aria-label={`Фотографии товара ${name}`}
             >
-                <img
+                <Image
                     key={slides[activeIndex]}
                     src={slides[activeIndex]}
                     alt={`${name} — фото ${activeIndex + 1}`}
-                    fetchPriority={activeIndex === 0 ? 'high' : 'auto'}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 55vw, 640px"
+                    priority={activeIndex === 0}
                     draggable={false}
+                    style={{ objectFit: 'contain' }}
                 />
 
                 <span className="premium-gallery-counter">
@@ -93,7 +97,7 @@ export default function PremiumProductGallery({
                             aria-label={`Показать фото ${index + 1}`}
                             aria-pressed={index === activeIndex}
                         >
-                            <img src={image} alt="" loading="lazy" />
+                            <Image src={image} alt="" fill sizes="96px" loading="lazy" style={{ objectFit: "contain" }} />
                         </button>
                     ))}
                 </div>

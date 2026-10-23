@@ -28,9 +28,6 @@ export const metadata: Metadata = {
         title: siteConfig.defaultTitle,
         description: siteConfig.description,
     },
-    alternates: {
-        canonical: '/',
-    },
     icons: {
         icon: '/logo.svg',
     },
@@ -39,7 +36,6 @@ export const metadata: Metadata = {
 export const viewport = {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
     themeColor: '#ffffff',
 };
 

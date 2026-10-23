@@ -8,7 +8,17 @@ import {
     CategoryTiles,
 } from '@/components/storefront';
 
-export const metadata: Metadata = {title: 'Каталог бытовой техники'};
+export const metadata: Metadata = {
+    title: 'Каталог бытовой техники',
+    description: 'Выберите бытовую технику LEVO в Кыргызстане: модели для кухни и дома, характеристики и актуальные цены в сомах.',
+    alternates: { canonical: '/catalogs' },
+    openGraph: {
+        type: 'website',
+        title: 'Каталог бытовой техники',
+        description: 'Техника для кухни и дома в каталоге LEVO Кыргызстан.',
+        url: '/catalogs',
+    },
+};
 export default function CatalogPage() {
     return <div className="page-shell">
         <Breadcrumbs items={[{label: 'Каталог'}]}/>

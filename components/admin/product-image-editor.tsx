@@ -4,6 +4,7 @@
 import { useRef, useState } from 'react';
 import type { ChangeEvent, DragEvent } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
 
 import { fetchAdminProductById } from '@/lib/api/admin-products';
 import {
@@ -325,10 +326,13 @@ export default function ProductImageEditor({
                 {product.image ? (
                     <div className="pf-cover">
                         <div className="pf-cover-preview">
-                            <img
+                            <Image
                                 src={product.image}
                                 alt="Обложка товара"
                                 className="pf-cover-thumb"
+                                width={320}
+                                height={240}
+                                unoptimized
                             />
                         </div>
 
@@ -519,12 +523,15 @@ export default function ProductImageEditor({
                                     aria-label={`Фото ${index + 1}`}
                                 >
                                     <div className="pf-image-card-media">
-                                        <img
+                                        <Image
                                             src={image.url}
                                             alt={
                                                 image.alt ??
                                                 `Фотография товара ${index + 1}`
                                             }
+                                            width={320}
+                                            height={240}
+                                            unoptimized
                                             draggable={false}
                                             loading="lazy"
                                         />

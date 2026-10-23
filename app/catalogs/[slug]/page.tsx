@@ -36,9 +36,20 @@ export async function generateMetadata({
     const { slug } = await params;
     const category = await getCategory(slug);
 
+    const title = category?.name ?? 'Категория бытовой техники';
+    const description = category?.description?.trim() ||
+        `Выберите бытовую технику ${title.toLocaleLowerCase('ru-RU')} в каталоге LEVO Кыргызстан.`;
+
     return {
-        title: category?.name ?? 'Категория LEVO',
-        description: category?.description ?? undefined,
+        title,
+        description,
+        alternates: { canonical: `/catalogs/${encodeURIComponent(slug)}` },
+        openGraph: {
+            type: 'website',
+            title,
+            description,
+            url: `/catalogs/${encodeURIComponent(slug)}`,
+        },
     };
 }
 

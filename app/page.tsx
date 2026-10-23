@@ -1,7 +1,22 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import {ArrowDown, ArrowRight, MoveUpRight} from 'lucide-react';
 import {CategoryTiles, EditorialBanner, ProductGrid} from '@/components/storefront';
-import Image from "next/image";
+import Image from 'next/image';
+import { siteConfig } from '@/lib/site';
+
+export const metadata: Metadata = {
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
+    alternates: { canonical: '/' },
+    openGraph: {
+        type: 'website',
+        title: siteConfig.defaultTitle,
+        description: siteConfig.description,
+        url: '/',
+        images: [{ url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90', alt: 'LEVO — техника для современного дома' }],
+    },
+};
 
 export default function HomePage() {
     return <>
@@ -10,7 +25,7 @@ export default function HomePage() {
                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
                alt="Светлая современная кухня с лаконичной техникой"
                  fill
-                 sizes="(max-width: 768px) 100vw, 50vw"/>
+                 sizes="100vw"/>
             <div className="hero-gradient"/>
             <div className="hero-kicker"><span>LEVO / HOME COLLECTION</span><span>DESIGNED FOR LIVING</span></div>
             <div className="hero-copy"><p className="eyebrow light">ТЕХНИКА ДЛЯ СОВРЕМЕННОГО ПРОСТРАНСТВА</p><h1>Больше,

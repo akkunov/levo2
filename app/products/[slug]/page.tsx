@@ -20,9 +20,9 @@ import {
     ProductSpecifications,
 } from '@/components/storefront';
 import PremiumProductGallery from './PremiumProductGallery';
+import ProductHero from './ProductHero';
 
 import './product-premium.css';
-import Image from "next/image";
 import { formatPrice } from '@/lib/format';
 
 type PageProps = {
@@ -34,12 +34,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { slug } = await params;
     const product = await fetchProductBySlug(slug);
 
-    if (!product) return { title: 'Товар не найден — LEVO' };
+    if (!product) {
+        return { title: 'Товар не найден', robots: { index: false, follow: false } };
+    }
+
+    const description = product.description?.trim() ||
+        `Характеристики, фотографии и цена ${product.title} в каталоге LEVO Кыргызстан.`;
+    const canonical = `/products/${encodeURIComponent(slug)}`;
 
     return {
-        title: `${product.title} — LEVO`,
-        description:
-            product.description ?? `Познакомьтесь с ${product.title} в LEVO.`,
+        title: product.title,
+        description,
+        alternates: { canonical },
+        openGraph: {
+            type: 'website',
+            title: product.title,
+            description,
+            url: canonical,
+            images: product.image ? [{ url: product.image, alt: product.title }] : undefined,
+        },
     };
 }
 
@@ -56,20 +69,9 @@ export default async function ProductPage({ params }: PageProps) {
         ...(product.images ?? []).map((image) => image.url),
     ].filter((image): image is string => Boolean(image));
     const uniqueImages = [...new Set(images)];
-    const heroImage = product.image ?? '/images/product-placeholder.png';
+    const heroImage = product.image ?? product.images?.[0]?.url ?? '/images/product-placeholder.png';
 
-    const storeProduct: StoreProduct = {
-        id: product.id,
-        name: product.title,
-        slug: product.slug,
-        category: categoryName,
-        image: heroImage,
-        price: Number(product.price ?? 0),
-        oldPrice: product.oldPrice != null ? Number(product.oldPrice) : null,
-        tag: product.tag,
-        description: product.description,
-        specs: product.specs ?? [],
-    };
+    const storeProduct = mapCatalogProduct(product);
 
     let related: StoreProduct[] = [];
     if (product.catalog?.slug) {
@@ -85,51 +87,15 @@ export default async function ProductPage({ params }: PageProps) {
     }
 
     return (
-        <main className="premium-product-page">
-            <section className="product-hero" aria-labelledby="product-hero-title">
-                <Image
-                    className="product-hero-image"
-                    src={heroImage}
-                    alt={product.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    fetchPriority="high"
-                    aria-hidden="true"
-                />
-                <div className="product-hero-shade" aria-hidden="true" />
-                <div className="product-hero-content">
-                    <div className="product-hero-kicker">
-                        <span className="product-hero-kicker-line" />
-                        <span>{categoryName}</span>
-                    </div>
-                    <h1 id="product-hero-title">{product.title}</h1>
-                    {product.subtitle && (
-                        <p className="product-hero-subtitle">{product.subtitle}</p>
-                    )}
-                </div>
-
-                <div className="product-hero-bottom">
-                    <a className="product-hero-scroll" href="#product-details">
-                        <span className="product-hero-scroll-label">ЛИСТАЙТЕ, ЧТОБЫ УЗНАТЬ БОЛЬШЕ</span>
-                        <span className="product-hero-scroll-line" aria-hidden="true" />
-                    </a>
-
-                    <div className="product-hero-purchase">
-                        <div className="product-hero-price-block">
-                            <div className="product-hero-price-line">
-                                <strong>{formatPrice(product.price)}</strong>
-                                {product.oldPrice != null && <del>{formatPrice(product.oldPrice)}</del>}
-                            </div>
-                            <span className="product-hero-price-note">Цена в кыргызских сомах</span>
-                        </div>
-                        <div className="product-hero-actions">
-                            <a className="product-hero-details-link" href="#product-details" aria-label="Перейти к выбору товара">
-                                Выбрать товар <ArrowUpRight size={16} strokeWidth={1.6} />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div className="premium-product-page">
+            <ProductHero
+                title={product.title}
+                categoryName={categoryName}
+                subtitle={product.subtitle}
+                image={heroImage}
+                price={product.price}
+                oldPrice={product.oldPrice}
+            />
 
             <div className="page-shell premium-product-content" id="product-details">
                 <Breadcrumbs
@@ -226,6 +192,6 @@ export default async function ProductPage({ params }: PageProps) {
                     </section>
                 )}
             </div>
-        </main>
+        </div>
     );
 }
