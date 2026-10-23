@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import {ArrowDownRight, Mail, MapPin, Phone} from 'lucide-react';
 import {Breadcrumbs} from '@/components/storefront';
 
@@ -17,9 +18,13 @@ export default function ContactsPage() {
                 </div>
                 <p className="contact-note">
                     Актуальные данные LEVO KG.</p></div>
-            <div className="contacts-image"><img
+            <div className="contacts-image"><Image
                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85"
-                alt="Интерьер современного дома"/>
+                alt="Интерьер современного дома"
+                width={1200}
+                height={900}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div><span className="eyebrow light">LEVO KG</span><h2>Ваш дом.<br/>Ваш ритм.</h2><Link href="/catalogs"
                                                                                                         className="text-link light-link">Перейти
                     в каталог <ArrowDownRight size={17}/></Link></div>
