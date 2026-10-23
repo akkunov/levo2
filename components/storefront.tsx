@@ -75,42 +75,71 @@ export function ProductSpecifications({
     );
 }
 
+// Оставь импорт StoreProduct и formatPrice из своих файлов проекта.
+// Например:
+// import type { StoreProduct } from '@/types/product';
+// import { formatPrice } from '@/lib/format-price';
+
+type ProductCardProps = {
+    product: StoreProduct;
+    index?: number;
+};
 
 export function ProductCard({
                                 product,
                                 index = 0,
-                            }: {
-    product: StoreProduct;
-    index?: number;
-}) {
+                            }: ProductCardProps) {
+    const [showPoster, setShowPoster] = useState(false);
+
     const mainImage =
         product.images?.[0]?.url || product.image;
-    console.log(mainImage);
 
     const posterImage = product.image;
 
+    const hasPoster =
+        Boolean(posterImage) &&
+        posterImage !== mainImage;
+
+    const handleClick = (
+        event: React.MouseEvent<HTMLAnchorElement>
+    ) => {
+        // На устройствах с мышью переход работает сразу.
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            return;
+        }
+
+        // Первое нажатие на мобильном — показать постер.
+        if (hasPoster && !showPoster) {
+            event.preventDefault();
+            setShowPoster(true);
+        }
+        // Второе нажатие — обычный переход по ссылке.
+    };
+
     const content = (
         <article
-            className="product-card"
+            className={`product-card${showPoster ? ' is-poster-visible' : ''}`}
             style={{ animationDelay: `${index * 70}ms` }}
         >
             <div className="product-image">
-                {/* Основное фото товара */}
+                {/* Основное фото */}
                 <Image
                     src={mainImage}
                     alt={product.images?.[0]?.alt || product.name}
                     fill
+                    unoptimized
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="product-image-main"
                 />
 
-                {/* Постер при наведении */}
-                {posterImage && posterImage !== mainImage && (
+                {/* Постер */}
+                {hasPoster && (
                     <Image
                         src={posterImage}
                         alt=""
                         aria-hidden="true"
                         fill
+                        unoptimized
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-poster"
                     />
@@ -146,18 +175,20 @@ export function ProductCard({
         </article>
     );
 
-    return product.slug ? (
+    if (!product.slug) {
+        return content;
+    }
+
+    return (
         <Link
             href={`/products/${product.slug}`}
             className="product-card-link"
+            onClick={handleClick}
         >
             {content}
         </Link>
-    ) : (
-        content
     );
 }
-
 
 export function CatalogProductSections() {
     const {

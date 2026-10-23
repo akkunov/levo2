@@ -295,7 +295,7 @@
     display: block;
     position: relative;
     overflow: hidden;
-    background:rgb(250, 250, 250);
+    background: rgb(250, 250, 250);
     aspect-ratio: 1 / 1.1;
 }
 
@@ -309,19 +309,20 @@
             transform 700ms cubic-bezier(.2, .7, .2, 1);
 }
 
-/* Основное фото видно по умолчанию */
+/* Основное изображение */
 .product-image .product-image-main {
     opacity: 1;
     transform: scale(1);
 }
 
-/* Постер изначально скрыт */
+/* Постер скрыт по умолчанию */
 .product-image .product-image-poster {
     opacity: 0;
     transform: scale(1.025);
+    pointer-events: none;
 }
 
-/* Меняем изображения только на устройствах с hover */
+/* ПК и устройства с мышью */
 @media (hover: hover) and (pointer: fine) {
     .product-card:hover .product-image-main {
         opacity: 0;
@@ -334,11 +335,24 @@
     }
 }
 
+/* Мобильное переключение по нажатию */
+.product-card.is-poster-visible .product-image-main {
+    opacity: 0;
+    transform: scale(1.025);
+}
+
+.product-card.is-poster-visible .product-image-poster {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Уменьшение анимации по настройкам устройства */
 @media (prefers-reduced-motion: reduce) {
     .product-image img {
         transition: none;
     }
 }
+
 .product-tag {
     position: absolute;
     top: 15px;
