@@ -14,6 +14,7 @@ import {StoreProduct} from "@/lib/api/products";
 import { useFeaturedProducts } from '@/hooks/use-featured-products';
 import {useNewArrivals} from "@/hooks/use-new-arrivals";
 import { formatPrice } from '@/lib/format';
+import { useCart } from '@/components/cart/cart-context';
 
 
 type ProductSpecificationsProps = {
@@ -376,9 +377,17 @@ export default function NewArrivals() {
 
 export function AddToCart({product}: { product: StoreProduct }) {
     const [added, setAdded] = useState(false);
+    const { addToCart } = useCart();
     return (
-        <button className={`button button-dark add-cart ${added ? 'is-added' : ''}`} onClick={() => setAdded(true)}>
-            {added ? <><Check size={17} /> Добавлено в список</> : <>Добавить в корзину <ArrowRight size={17} /></>}
+        <button
+            type="button"
+            className={`button button-dark add-cart ${added ? 'is-added' : ''}`}
+            onClick={() => {
+                addToCart(product);
+                setAdded(true);
+            }}
+        >
+            {added ? <><Check size={17} /> Добавлено в корзину</> : <>Добавить в корзину <ArrowRight size={17} /></>}
         </button>
     );
 }

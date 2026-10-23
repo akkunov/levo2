@@ -5,6 +5,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useCatalogs} from "@/hooks/use-catalogs";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { useCart } from "@/components/cart/cart-context";
 
 const NAV_ITEMS = [
     { href: "/catalogs", label: "Каталог" },
@@ -16,7 +17,7 @@ export function Header() {
     const pathname = usePathname();
     const isHomePage = pathname === '/';
     const [menuOpen, setMenuOpen] = useState(false);
-    const [cartCount] = useState(0);
+    const { itemCount: cartCount } = useCart();
     const [isScrolled, setIsScrolled] = useState(false);
     const { data: catalogs = [] } = useCatalogs();
 
@@ -125,8 +126,8 @@ export function Header() {
             <ThemeToggle />
             <Link
                 className="icon-button bag-link"
-                href="/catalogs"
-                aria-label="Корзина"
+                href="/cart"
+                aria-label={cartCount > 0 ? `Корзина, товаров: ${cartCount}` : "Корзина"}
             >
                 <span className="bag-icon" aria-hidden="true" />
                 <span className="bag-count">{cartCount}</span>
