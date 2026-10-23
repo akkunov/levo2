@@ -16,7 +16,7 @@ const CONTACT_LINKS = [
 type FooterCatalog = { id: number; slug: string; name: string };
 
 async function getFooterCatalogs(): Promise<FooterCatalog[]> {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\\/+$/, '');
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '');
     if (!baseUrl) return [];
     try {
         const response = await fetch(`${baseUrl}/catalogs`, { next: { revalidate: 300 } });
