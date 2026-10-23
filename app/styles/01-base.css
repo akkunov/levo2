@@ -16,6 +16,15 @@
     --radius-lg: 20px;
     --shadow-card: 0 10px 35px rgba(25, 26, 24, .07);
     --content-max: 1440px;
+    --gutter-desktop: 56px;
+    --gutter-mobile: 20px;
+    --font-body: 'Lexend Deca', sans-serif;
+    --font-display: 'Manrope', sans-serif;
+    --text-xs: 11px;
+    --text-sm: 13px;
+    --text-base: 15px;
+    --text-lg: 20px;
+    --text-xl: 28px;
     --control-height: 44px;
     --space-1: 4px;
     --space-2: 8px;
@@ -52,7 +61,7 @@ body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Lexend Deca", sans-serif;
+    font-family: var(--font-body);
     font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
 }
@@ -93,7 +102,7 @@ img {
 }
 
 .wordmark {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-display);
     font-size: 29px;
     letter-spacing: -2px;
     font-weight: 700;
@@ -168,9 +177,9 @@ img {
 
 @media (max-width: 768px) {
     .section-wrap, .page-shell {
-        width: 90vw;
-        max-width: 1440px;
-        margin: 0 20px;
+        width: calc(100% - var(--gutter-mobile) - var(--gutter-mobile));
+        max-width: var(--content-max);
+        margin: 0 var(--gutter-mobile);
     }
 }
 
