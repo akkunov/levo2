@@ -94,7 +94,7 @@ export function ProductCard({
 
 }: ProductCardProps) {
 
-    const [showPoster, setShowPoster] = useState(false);
+    const showPoster = activePosterId === product.id;
 
     // Основное изображение товара
 
