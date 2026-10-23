@@ -36,7 +36,7 @@ export function useAuth() {
             queryClient.setQueryData(AUTH_KEY, result.user);
 
             router.replace(
-                result.user.role === 'ADMIN' ? '/admin' : '/',
+                result.user.role === 'ADMIN' ? '/admin' : result.user.role === 'MANAGER' ? '/admin/products' : '/',
             );
         },
     });
