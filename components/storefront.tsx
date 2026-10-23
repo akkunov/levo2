@@ -80,16 +80,17 @@ export function ProductSpecifications({
 // import type { StoreProduct } from '@/types/product';
 // import { formatPrice } from '@/lib/format-price';
 
-type ProductCardProps = {
+interface ProductCardProps {
     product: StoreProduct;
     index?: number;
-};
+    onActivate?: (id: number) => void;
+}
 
 export function ProductCard({
 
     product,
-
     index = 0,
+    onActivate?: (id: number) => void;
 
 }: ProductCardProps) {
 
@@ -114,14 +115,10 @@ export function ProductCard({
     // Переключаем изображение при первом касании
 
     const handleTouchStart = () => {
-
-        if (hasPoster) {
-
-            setShowPoster(true);
-
-        }
-
-    };
+    if (hasPoster) {
+        onActivate?.(product.id);
+    }
+};
 
     const content = (
 
@@ -334,6 +331,7 @@ export function CatalogProductSections() {
 }
 
 export function ProductGrid({items,}: { items?: StoreProduct[]; }) {
+    const [activePosterId, setActivePosterId] = useState<number | null>(null);
     const {
         data: featuredProducts = [],
         isPending,
@@ -358,10 +356,12 @@ export function ProductGrid({items,}: { items?: StoreProduct[]; }) {
         <div className="product-grid">
             {productsToShow.map((product, index) => (
                 <ProductCard
-                    key={product.id}
-                    product={product}
-                    index={index}
-                />
+    key={product.id}
+    product={product}
+    index={index}
+    activePosterId={activePosterId}
+    onActivate={setActivePosterId}
+/>
             ))}
         </div>
     );
