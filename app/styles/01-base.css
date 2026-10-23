@@ -49,6 +49,37 @@
     --pf-danger: var(--danger);
     --pf-danger-soft: color-mix(in srgb, var(--danger) 12%, var(--surface));
     --pf-danger-border: color-mix(in srgb, var(--danger) 32%, var(--line));
+    --footer-blue: #0D2B54;
+    --footer-blue-light: #1a4b8b;
+    --footer-text: #ffffff;
+    --footer-muted: rgba(255, 255, 255, 0.66);
+    --footer-border: rgba(255, 255, 255, 0.17);
+    --accent-blue: #123B73;
+}
+
+/* Shared theme tokens: components should consume these instead of hard-coded surfaces. */
+:root[data-theme='dark'] {
+    color-scheme: dark;
+    --ink: #f1f2ee;
+    --muted: #a6aaa3;
+    --paper: #111311;
+    --surface: #191c19;
+    --surface-muted: #202420;
+    --surface-elevated: #242824;
+    --white: #fff;
+    --line: #343a34;
+    --line-strong: #4a514a;
+    --accent: #66765f;
+    --accent-strong: #9ab3d8;
+    --shadow-card: 0 12px 38px rgba(0, 0, 0, .24);
+    --secondory:#1C1C1C;
+    --bg-card-wrapper: rgb(28, 28, 28);
+    --footer-blue: #111820;
+    --footer-blue-light: #243B53;
+    --footer-text: #F5F5F5;
+    --footer-muted: rgba(245, 245, 245, 0.62);
+    --footer-border: rgba(245, 245, 245, 0.12);
+    --accent-blue: #0B1F38;
 }
 
 * {
@@ -380,25 +411,6 @@ img {
     }
 }
 
-
-/* Shared theme tokens: components should consume these instead of hard-coded surfaces. */
-:root[data-theme='dark'] {
-    color-scheme: dark;
-    --ink: #f1f2ee;
-    --muted: #a6aaa3;
-    --paper: #111311;
-    --surface: #191c19;
-    --surface-muted: #202420;
-    --surface-elevated: #242824;
-    --white: #fff;
-    --line: #343a34;
-    --line-strong: #4a514a;
-    --accent: #66765f;
-    --accent-strong: #9ab3d8;
-    --shadow-card: 0 12px 38px rgba(0, 0, 0, .24);
-    --secondory:#1C1C1C;
-    --bg-card-wrapper: rgb(28, 28, 28);
-}
 
 body {
     background: var(--paper);

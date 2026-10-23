@@ -1,9 +1,4 @@
 .footer {
-    --footer-blue: #0D2B54;
-    --footer-blue-light: #1a4b8b;
-    --footer-text: #ffffff;
-    --footer-muted: rgba(255, 255, 255, 0.66);
-    --footer-border: rgba(255, 255, 255, 0.17);
 
     width: 100%;
     background: var(--footer-blue);
@@ -19,12 +14,6 @@
 
 
 .footer {
-    --footer-blue: #0D2B54;
-    --footer-blue-light: #1a4b8b;
-    --footer-text: #ffffff;
-    --footer-muted: rgba(255, 255, 255, 0.66);
-    --footer-border: rgba(255, 255, 255, 0.17);
-
     position: relative;
     isolation: isolate;
     overflow: hidden;
