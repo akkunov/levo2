@@ -75,41 +75,75 @@ export function ProductSpecifications({
     );
 }
 
-export function ProductCard({product, index = 0,}: { product: StoreProduct; index?: number; }) {
+
+export function ProductCard({
+                                product,
+                                index = 0,
+                            }: {
+    product: StoreProduct;
+    index?: number;
+}) {
+    const mainImage =
+        product.images?.[0]?.url || product.image;
+    console.log(mainImage);
+
+    const posterImage = product.image;
 
     const content = (
-        <>
-            <article
-                className="product-card"
-                style={{ animationDelay: `${index * 70}ms` }}
-            >
-                <div className="product-image">
-                    <Image src={product.image} alt={product.name} fill />
+        <article
+            className="product-card"
+            style={{ animationDelay: `${index * 70}ms` }}
+        >
+            <div className="product-image">
+                {/* Основное фото товара */}
+                <Image
+                    src={mainImage}
+                    alt={product.images?.[0]?.alt || product.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="product-image-main"
+                />
 
-                    {product.tag && (
-                        <span className="product-tag">{product.tag}</span>
-                    )}
+                {/* Постер при наведении */}
+                {posterImage && posterImage !== mainImage && (
+                    <Image
+                        src={posterImage}
+                        alt=""
+                        aria-hidden="true"
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        className="product-image-poster"
+                    />
+                )}
 
-                    <span className="product-arrow">
-            <ArrowDownRight size={18} />
-          </span>
-                </div>
+                {product.tag && (
+                    <span className="product-tag">
+                        {product.tag}
+                    </span>
+                )}
 
-                <div className="product-meta">
-                    <span>{product.category}</span>
-                    <span>{product.id}</span>
-                </div>
+                <span className="product-arrow">
+                    <ArrowDownRight size={18} />
+                </span>
+            </div>
 
-                <span className="product-title">{product.name}</span>
+            <div className="product-meta">
+                <span>{product.category}</span>
+                <span>{product.id}</span>
+            </div>
 
-                <div className="price-line">
-                    <strong>{formatPrice(product.price)}</strong>
-                    {product.oldPrice != null && (
-                        <del>{formatPrice(product.oldPrice)}</del>
-                    )}
-                </div>
-            </article>
-        </>
+            <span className="product-title">
+                {product.name}
+            </span>
+
+            <div className="price-line">
+                <strong>{formatPrice(product.price)}</strong>
+
+                {product.oldPrice != null && (
+                    <del>{formatPrice(product.oldPrice)}</del>
+                )}
+            </div>
+        </article>
     );
 
     return product.slug ? (
@@ -123,6 +157,7 @@ export function ProductCard({product, index = 0,}: { product: StoreProduct; inde
         content
     );
 }
+
 
 export function CatalogProductSections() {
     const {

@@ -1,4 +1,4 @@
-import {CatalogProduct} from "@/types";
+import {CatalogProduct, ProductImage} from "@/types";
 import { apiFetch } from './client';
 import { fetchCatalogProducts as fetchCatalogProductsBySlug } from './catalogs';
 
@@ -19,7 +19,7 @@ export interface ApiProduct {
     specs: string[];
     catalogId?: number | null;
     catalog?: { name: string; slug: string } | null;
-    images?: { url: string; alt?: string | null }[];
+    images?: ProductImage[];
 }
 
 export interface StoreProduct {
@@ -28,6 +28,7 @@ export interface StoreProduct {
     slug: string | null;
     category: string;
     image: string;
+    images: ProductImage[];
     price: number;
     oldPrice: number | null;
     tag: string | null;
@@ -50,7 +51,6 @@ function mapProduct(product: ApiProduct): StoreProduct {
         category: product.catalog?.name ?? 'Бытовая техника',
         image:
             product.image ??
-            product.images?.[0]?.url ??
             '/images/product-placeholder.png',
         price: Number(product.price ?? 0),
         oldPrice:
@@ -58,6 +58,7 @@ function mapProduct(product: ApiProduct): StoreProduct {
         tag: product.tag,
         description: product.description,
         specs: product.specs ?? [],
+        images: product.images ?? []
     };
 }
 
