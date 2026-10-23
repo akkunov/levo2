@@ -85,112 +85,69 @@ type ProductCardProps = {
     index?: number;
 };
 
-export function ProductCard({
-                                product,
-                                index = 0,
-                            }: ProductCardProps) {
-    const [showPoster, setShowPoster] = useState(false);
+export function ProductCard({ product }: ProductCardProps) {
 
-    const mainImage =
-        product.images?.[0]?.url || product.image;
+  const mainImage = product.images?.[0] || product.image;
 
-    const posterImage = product.image;
+  const posterImage = product.image || mainImage;
 
-    const hasPoster =
-        Boolean(posterImage) &&
-        posterImage !== mainImage;
+  if (!mainImage) {
 
-    const handleClick = (
-        event: React.MouseEvent<HTMLAnchorElement>
-    ) => {
-        // На устройствах с мышью переход работает сразу.
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            return;
-        }
+    return null;
 
-        // Первое нажатие на мобильном — показать постер.
-        if (hasPoster && !showPoster) {
-            event.preventDefault();
-            setShowPoster(true);
-        }
-        // Второе нажатие — обычный переход по ссылке.
-    };
+  }
 
-    const content = (
-        <article
-            className={`product-card${showPoster ? ' is-poster-visible' : ''}`}
-            style={{ animationDelay: `${index * 70}ms` }}
-        >
-            <div className="product-image">
-                {/* Основное фото */}
-                <Image
-                    src={mainImage}
-                    alt={product.images?.[0]?.alt || product.name}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="product-image-main"
-                />
+  return (
 
-                {/* Постер */}
-                {hasPoster && (
-                    <Image
-                        src={posterImage}
-                        alt=""
-                        aria-hidden="true"
-                        fill
-                        unoptimized
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="product-image-poster"
-                    />
-                )}
+    <article className="product-card">
 
-                {product.tag && (
-                    <span className="product-tag">
-                        {product.tag}
-                    </span>
-                )}
+      <div className="product-card__media">
 
-                <span className="product-arrow">
-                    <ArrowDownRight size={18} />
-                </span>
-            </div>
+        <Image
 
-            <div className="product-meta">
-                <span>{product.category}</span>
-                <span>{product.id}</span>
-            </div>
+          src={mainImage}
 
-            <span className="product-title">
-                {product.name}
-            </span>
+          alt={product.title}
 
-            <div className="price-line">
-                <strong>{formatPrice(product.price)}</strong>
+          fill
 
-                {product.oldPrice != null && (
-                    <del>{formatPrice(product.oldPrice)}</del>
-                )}
-            </div>
-        </article>
-    );
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
 
-    if (!product.slug) {
-        return content;
-    }
+          className="product-card__image product-card__image--main"
 
-    return (
-        <Link
-            href={`/products/${product.slug}`}
-            className="product-card-link"
-            onClick={handleClick}
-        >
-            {content}
-        </Link>
-    );
+        />
+
+        {posterImage && posterImage !== mainImage && (
+
+          <Image
+
+            src={posterImage}
+
+            alt=""
+
+            aria-hidden="true"
+
+            fill
+
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+
+            className="product-card__image product-card__image--poster"
+
+          />
+
+        )}
+
+      </div>
+
+      <h3>{product.title}</h3>
+
+    </article>
+
+  );
+
 }
 
-export function CatalogProductSections() {
+export function CatalogProductSections() 
     const {
         data: newArrivals = [],
         isPending: newPending,
