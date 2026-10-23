@@ -4,7 +4,17 @@ import Image from 'next/image';
 import {ArrowDownRight, Mail, MapPin, Phone} from 'lucide-react';
 import {Breadcrumbs} from '@/components/storefront';
 
-export const metadata: Metadata = {title: 'Контакты'};
+export const metadata: Metadata = {
+    title: 'Контакты LEVO',
+    description: 'Свяжитесь с LEVO Кыргызстан: консультация по бытовой технике, наличию, покупке и сервису.',
+    alternates: { canonical: '/contacts' },
+    openGraph: {
+        type: 'website',
+        title: 'Контакты LEVO',
+        description: 'Контакты и помощь с выбором бытовой техники LEVO в Кыргызстане.',
+        url: '/contacts',
+    },
+};
 export default function ContactsPage() {
     return <div className="page-shell contacts-page"><Breadcrumbs items={[{label: 'Контакты'}]}/>
         <div className="page-heading"><span className="eyebrow">LEVO / CONTACT</span><h1>Давайте<br/><em>будем на
