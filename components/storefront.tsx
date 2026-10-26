@@ -318,7 +318,6 @@ export function ProductGrid({items,}: { items?: StoreProduct[]; }) {
 export function CatalogSummary() {
     const { data: catalogs = [] } = useCatalogs();
     const { data: products = [] } = useFeaturedProducts();
-    console.log(catalogs);
 
     const parentCategories = catalogs.filter(
         (category) =>
