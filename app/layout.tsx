@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     icons: {
         icon: '/logo.svg',
     },
+    verification:{
+        yandex: '80a46febe04233b0',
+    },
+
 };
 
 export const viewport = {
