@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {contacts} from "@/lib/site";
 
 const COMPANY_LINKS = [
     { label: 'О компании', href: '/about' },
@@ -8,9 +9,9 @@ const COMPANY_LINKS = [
 ];
 
 const CONTACT_LINKS = [
-    { label: 'WhatsApp', href: 'https://wa.me/' },
-    { label: 'Instagram', href: 'https://www.instagram.com/' },
-    { label: 'Gmail', href: 'https://www.instagram.com/' },
+    { label: 'WhatsApp', href: contacts.whatsapp},
+    { label: 'Instagram', href: contacts.instagram },
+    { label: 'Gmail', href: contacts.email},
 ];
 
 type FooterCatalog = { id: number; slug: string; name: string };
@@ -107,14 +108,14 @@ export async function Footer() {
                         <h3>Связаться с нами</h3>
 
                         <a
-                            href="tel:+996"
+                            href={`tel:${contacts.phone}`}
                             className="footer-contact-value"
                         >
-                            +996
+                            {contacts.phone}
                         </a>
 
                         <p className="footer-muted">
-                            Бишкек, Кыргызстан
+                            Ош, Кыргызстан
                         </p>
 
                         <div className="footer-socials">
@@ -127,7 +128,6 @@ export async function Footer() {
                                     className="footer-social-link"
                                 >
                                     {link.label}
-                                    <span aria-hidden="true">↗</span>
                                 </a>
                             ))}
                         </div>

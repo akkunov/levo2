@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {ArrowDownRight, Mail, MapPin, Phone} from 'lucide-react';
 import {Breadcrumbs} from '@/components/storefront';
+import {contacts} from "@/lib/site";
 
 export const metadata: Metadata = {
     title: 'Контакты LEVO',
@@ -20,10 +21,12 @@ export default function ContactsPage() {
         <div className="page-heading"><span className="eyebrow">LEVO / CONTACT</span><h1>Давайте<br/><em>будем на
             связи.</em></h1><p>Поможем с выбором техники, ответим на вопросы о наличии и покупке.</p></div>
         <div className="contacts-layout">
-            <div className="contacts-main"><span className="eyebrow">МЫ ГОТОВЫ ПОМОЧЬ</span><a className="contact-line"
-                                                                                               href="tel:+996000000000"><span><Phone/><small>Телефон</small><strong>Укажите номер LEVO</strong></span><ArrowDownRight/></a><a
-                className="contact-line"
-                href="mailto:hello@levo.kg"><span><Mail/><small>Электронная почта</small><strong>hello@levo.kg</strong></span><ArrowDownRight/></a>
+            <div className="contacts-main"><span className="eyebrow">МЫ ГОТОВЫ ПОМОЧЬ</span>
+                <a className="contact-line" href={`tel:${contacts.phone}`}>
+                    <span><Phone/><small>Телефон</small><strong>{contacts.phone}
+                    </strong></span><ArrowDownRight/>
+                </a><a className="contact-line"
+                href={`mailto:${contacts.email}`}><span><Mail/><small>Электронная почта</small><strong>{contacts.email}</strong></span><ArrowDownRight/></a>
                 <div className="contact-line"><span><MapPin/><small>Шоурум / магазин</small><strong>Уточните актуальный адрес</strong></span><ArrowDownRight/>
                 </div>
                 <p className="contact-note">

@@ -16,6 +16,7 @@ import {
 
 import './services.css';
 import {YMAP_MAP_KEY} from "@/config";
+import {contacts} from "@/lib/site";
 
 interface Contact {
     city: string;
@@ -675,7 +676,7 @@ export default function servicesPage() {
                 </span>
                             </div>
 
-                            <a href="tel:0505896306" className="services-text-link">
+                            <a href={`tel:${contacts.phone}`} className="services-text-link">
                                 Связаться с LEVO
                                 <ArrowRight size={16} strokeWidth={1.5}/>
                             </a>
@@ -698,7 +699,7 @@ export default function servicesPage() {
                             </h2>
                         </div>
 
-                        <a href="tel:+996551069004" className="services-cta-link">
+                        <a href={`tel:${contacts.phone}`} className="services-cta-link">
                             Позвонить нам
                             <ArrowRight size={18} strokeWidth={1.5}/>
                         </a>

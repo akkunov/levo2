@@ -355,7 +355,7 @@
 
 /* Дополнительный постер */
 .proudct-image-poster{
-    object-fit:cover
+    object-fit: contain;
 }
 .product-image .product-image-poster {
     opacity: 0;
@@ -384,6 +384,8 @@
         transform: translate(2px, -2px);
     }
 }
+
+
 
 /* ========================================
    МОБИЛЬНЫЕ: КАСАНИЕ
@@ -848,7 +850,7 @@
     }
 
     .product-image {
-        aspect-ratio: .82;
+        aspect-ratio: 1;
     }
 
     .product-tag {

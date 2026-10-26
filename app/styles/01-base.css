@@ -6,7 +6,7 @@
     --surface: #ffffff;
     --surface-muted: #f7f7f4;
     --surface-elevated: #ffffff;
-    --secondory:#f6f4f4;
+    --secondory: #f6f4f4;
     --bg-card-wrapper: rgb(250, 250, 250);
     --white: #fff;
     --line: #deded7;
@@ -178,7 +178,7 @@ img {
 
 .button-dark {
     background: var(--ink);
-    color: white;
+    color: var(--surface);
 }
 
 .button-dark:hover {

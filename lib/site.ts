@@ -3,8 +3,8 @@ export const siteConfig = {
     url: 'https://levo.kg',
     description:
         'Бытовая техника LEVO в Кыргызстане. Продуманный дизайн, технологии и комфорт на каждый день.',
-    email: 'hello@levo.kg',
-    phone: '+996 000 000 000',
+    email: 'levo.market.help@gmail.com',
+    phone: '+996 776 666 878',
     defaultTitle: 'LEVO — техника для жизни',
 } as const;
 
@@ -13,3 +13,11 @@ export const defaultMetadata = {
     description: siteConfig.description,
 };
 
+export const contacts = {
+    email : "levo.market.help@gmail.com",
+    phone: "+996 776 666 878",
+    instagram: "https://www.instagram.com/levo_kg/",
+    facebook: "https://www.instagram.com/levo_kg/",
+    telegram: "https://t.me/levo_kg",
+    whatsapp: "https://wa.me/996776666878",
+}

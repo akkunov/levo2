@@ -75,54 +75,27 @@ export function ProductSpecifications({
     );
 }
 
-// Оставь импорт StoreProduct и formatPrice из своих файлов проекта.
-// Например:
-// import type { StoreProduct } from '@/types/product';
-// import { formatPrice } from '@/lib/format-price';
-
 interface ProductCardProps {
-
     product: StoreProduct;
-
     index?: number;
-
     activePosterId: number | null;
-
     onActivate: (id: number) => void;
-
 }
 
 export function ProductCard({
-
     product,
-
     index = 0,
-
     activePosterId,
-
     onActivate,
-
 }: ProductCardProps) {
-
     const showPoster = activePosterId === product.id;
-
-    // Основное изображение товара
-
     const mainImage = product.images?.[0]?.url || product.image;
-
-    // Постер
-
     const posterImage = product.image;
 
     const hasPoster =
-
         Boolean(mainImage) &&
-
         Boolean(posterImage) &&
-
         mainImage !== posterImage;
-
-    // Переключаем изображение при первом касании
 
     const handleTouchStart = () => {
     if (hasPoster) {
@@ -133,60 +106,37 @@ export function ProductCard({
     const content = (
 
         <article
-
             className={`product-card${
-
                 showPoster ? ' is-poster-visible' : ''
-
             }`}
-
             style={{
-
                 animationDelay: `${index * 70}ms`,
-
             }}
-
         >
-
             <div className="product-image">
-
                 {mainImage && (
-
                     <Image
-
                         src={mainImage}
-
                         alt={
-
                             product.images?.[0]?.alt ||
-
                             product.name
-
                         }
-
                         fill
                         unoptimized
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-main"
-
                     />
 
                 )}
-
                 {hasPoster && (
-
                     <Image
-
                         src={posterImage}
-
                         alt=""
-
                         aria-hidden="true"
                         fill
                         unoptimized
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-poster"
-
                     />
 
                 )}
