@@ -25,6 +25,7 @@ export default function HomePage() {
                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90"
                alt="Светлая современная кухня с лаконичной техникой"
                  fill
+                 priority
                  sizes="100vw"/>
             <div className="hero-gradient"/>
             <div className="hero-kicker"><span>LEVO / HOME COLLECTION</span><span>DESIGNED FOR LIVING</span></div>

@@ -29,6 +29,7 @@ export default function ProductHero({
                     sizes="100vw"
                     fetchPriority="high"
                     aria-hidden="true"
+                    priority
                 />
                 <div className="product-hero-shade" aria-hidden="true" />
                 <div className="product-hero-content">
