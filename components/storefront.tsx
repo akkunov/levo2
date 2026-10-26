@@ -297,28 +297,20 @@ export function ProductGrid({items,}: { items?: StoreProduct[]; }) {
 
     const productsToShow = items ?? featuredProducts;
 
-    if (!items && isPending) {
-        return <p>Загрузка товаров...</p>;
-    }
-
-    if (!items && isError) {
-        return <p>Не удалось загрузить товары. Попробуйте позже.</p>;
-    }
-
-    if (productsToShow.length === 0) {
-        return <p>Пока нет товаров для отображения.</p>;
-    }
+    if (!items && isPending) return <p>Загрузка товаров...</p>;
+    if (!items && isError) return <p>Не удалось загрузить товары. Попробуйте позже.</p>;
+    if (productsToShow.length === 0) return <p>Пока нет товаров для отображения.</p>;
 
     return (
         <div className="product-grid">
             {productsToShow.map((product, index) => (
                 <ProductCard
-    key={product.id}
-    product={product}
-    index={index}
-    activePosterId={activePosterId}
-    onActivate={setActivePosterId}
-/>
+                    key={product.id}
+                    product={product}
+                    index={index}
+                    activePosterId={activePosterId}
+                    onActivate={setActivePosterId}
+                />
             ))}
         </div>
     );
@@ -326,6 +318,7 @@ export function ProductGrid({items,}: { items?: StoreProduct[]; }) {
 export function CatalogSummary() {
     const { data: catalogs = [] } = useCatalogs();
     const { data: products = [] } = useFeaturedProducts();
+    console.log(catalogs);
 
     const parentCategories = catalogs.filter(
         (category) =>
