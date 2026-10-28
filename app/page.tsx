@@ -38,8 +38,6 @@ export default function HomePage() {
                 size={16}/></a><span className="hero-counter">01 <i/> 04</span></section>
         <section className="intro section-wrap" id="collections">
             <div className="section-label"><span>01 / КОЛЛЕКЦИИ</span><span>ПРОСТРАНСТВО ВАШЕГО ВЫБОРА</span></div>
-            <div className="intro-heading"><h2>Технологии,<br/>которые <em>вписываются.</em></h2><p>Не просто техника.
-                Часть пространства, привычек и моментов, из которых складывается дом.</p></div>
             <CategoryTiles/>
             <div className="section-end"><span>Найдите свою коллекцию</span><Link className="text-link"
                                                                                   href="/catalogs">Все

@@ -315,15 +315,11 @@ export function CatalogSummary() {
     const { data: catalogs = [] } = useCatalogs();
     const { data: products = [] } = useFeaturedProducts();
 
-    const parentCategories = catalogs.filter(
-        (category) =>
-            category.slug === 'built-in-appliances' &&
-            category.parentId == null,
-    );
+    const parentCategories = catalogs.length
 
     return (
         <div className="catalog-summary">
-            <span>{parentCategories.length} категорий</span>
+            <span>{parentCategories} категорий</span>
             <span>{products.length} популярных товаров</span>
         </div>
     );
