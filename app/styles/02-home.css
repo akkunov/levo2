@@ -416,10 +416,10 @@
     top: 15px;
     left: 15px;
 
-    background: #f8f7f3e8;
+    background: var(--accent);
     padding: 8px 10px;
 
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.04em;
 }
 
@@ -540,17 +540,6 @@
         transition: none;
     }
 }
-
-
-.product-tag {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #f8f7f3e8;
-    padding: 8px 10px;
-    font-size: 9px;
-}
-
 .product-arrow {
     position: absolute;
     right: 14px;

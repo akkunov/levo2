@@ -144,9 +144,7 @@ export function ProductCard({
                 {product.tag && (
 
                     <span className="product-tag">
-
                         {product.tag}
-
                     </span>
 
                 )}
@@ -168,9 +166,7 @@ export function ProductCard({
             </div>
 
             <span className="product-title">
-
                 {product.name}
-
             </span>
 
             <div className="price-line">
