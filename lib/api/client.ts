@@ -1,5 +1,4 @@
-
-import type { ApiError } from '@/types';
+import type {ApiError} from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -30,8 +29,13 @@ export async function apiFetch<T>(
     }
 
     const headers = new Headers(init.headers);
+    const isFormData = init.body instanceof FormData;
 
-    if (init.body && !headers.has('Content-Type')) {
+    if (isFormData) {
+        // Браузер самостоятельно добавит multipart/form-data
+        // вместе с необходимым boundary.
+        headers.delete('Content-Type');
+    } else if (init.body && !headers.has('Content-Type')) {
         headers.set('Content-Type', 'application/json');
     }
 

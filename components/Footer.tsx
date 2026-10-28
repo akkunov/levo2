@@ -6,6 +6,7 @@ const COMPANY_LINKS = [
     { label: 'Доставка и оплата', href: '/delivery' },
     { label: 'Гарантия', href: '/warranty' },
     { label: 'Контакты', href: '/contacts' },
+    { label: 'Сервисные центры', href: '/services' },
 ];
 
 const CONTACT_LINKS = [
@@ -33,10 +34,6 @@ export async function Footer() {
 
     return (
         <footer className="footer">
-            <div className="footer-decorations" aria-hidden="true">
-                <span className="footer-decoration footer-decoration-left" />
-                <span className="footer-decoration footer-decoration-right" />
-            </div>
             <div className="footer-container">
                 {/* Каталог */}
                 <section className="footer-catalog">

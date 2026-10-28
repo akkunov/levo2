@@ -26,7 +26,7 @@ export function uploadProductPoster(
 ): Promise<ProductPosterUploadResult> {
     const formData = new FormData();
     formData.append('file', file);
-
+    console.log(formData);
     return apiFetch<ProductPosterUploadResult>(
         `/admin/products/${productId}/poster`,
         {
