@@ -4,14 +4,12 @@
     background: #383d36;
     color: #fff;
 }
-
 .hero-home {
     height: min(760px, calc(100svh - 78px));
     min-height: 610px;
     position: relative;
     overflow: hidden;
 }
-
 .hero-home .hero-image {
     display: block;
     width: 100%;
@@ -19,13 +17,10 @@
     object-fit: cover;
     transform: translateY(0) scale(1.02);
     transition: transform 700ms ease-in-out;
-    transition: transform 700ms ease-in-out;
 }
-
 .site-header.is-scrolled ~ main .hero-home .hero-image {
     transform: translateY(14px) scale(1.05);
 }
-
 .hero-image, .editorial-banner > img {
     position: absolute;
     inset: 0;
@@ -35,13 +30,11 @@
     object-position: center 56%;
     animation: heroReveal 1.2s ease both;
 }
-
 .hero-gradient {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, rgba(13, 17, 14, .57), rgba(13, 17, 14, .14) 58%, rgba(13, 17, 14, .03)), linear-gradient(0deg, rgba(13, 17, 14, .25), transparent 45%);
 }
-
 .hero-kicker {
     position: absolute;
     left: 56px;
@@ -53,7 +46,6 @@
     letter-spacing: 1.8px;
     color: #ffffffd9;
 }
-
 .hero-copy {
     position: absolute;
     left: max(56px, calc((100% - 1328px) / 2));
@@ -62,7 +54,6 @@
     max-width: 740px;
     animation: copyReveal .9s .15s both;
 }
-
 .hero h1, .page-heading h1, .category-hero h1, .not-found h1 {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(56px, 7.1vw, 104px);
@@ -71,21 +62,17 @@
     font-weight: 400;
     margin: 24px 0;
 }
-
 .hero h1 em, .intro h2 em, .section-heading-row h2 em, .editorial-content h2 em, .page-heading h1 em, .category-hero h1 em, .closing-cta h2 em, .not-found h1 em {
     font-weight: 300;
     font-style: normal;
     color: #cbd4c3;
 }
-
-
 .hero-description {
     font-size: 14px;
     line-height: 1.8;
     color: #ffffffd6;
     margin: 25px 0 30px;
 }
-
 .hero-scroll {
     position: absolute;
     left: 56px;
@@ -96,11 +83,9 @@
     font-size: 10px;
     color: #ffffffc9;
 }
-
 .hero-scroll svg {
     animation: floatY 1.8s infinite;
 }
-
 .hero-counter {
     position: absolute;
     right: 56px;
@@ -110,19 +95,16 @@
     align-items: center;
     gap: 12px;
 }
-
 .hero-counter i {
     display: inline-block;
     width: 45px;
     height: 1px;
     background: #ffffff8a;
 }
-
 .intro {
     padding-top: 116px;
     padding-bottom: 112px;
 }
-
 .section-label {
     display: flex;
     justify-content: space-between;
@@ -133,7 +115,6 @@
     letter-spacing: 1.3px;
     color: #70726b;
 }
-
 .intro-heading {
     display: flex;
     align-items: flex-end;
@@ -141,7 +122,6 @@
     padding: 38px 0 48px;
     gap: 35px;
 }
-
 .intro h2, .section-heading-row h2, .editorial-content h2, .closing-cta h2 {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(42px, 5.4vw, 74px);
@@ -150,11 +130,9 @@
     letter-spacing: -.065em;
     margin: 0;
 }
-
 .intro h2 em, .section-heading-row h2 em {
     color: #7e8278;
 }
-
 .intro-heading > p {
     font-size: 13px;
     line-height: 1.8;
@@ -162,13 +140,11 @@
     max-width: 330px;
     margin: 0 3% 6px 0;
 }
-
 .category-grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 12px;
 }
-
 .category-tile {
     grid-column: span 4;
     position: relative;
@@ -178,15 +154,12 @@
     color: white;
     isolation: isolate;
 }
-
 .category-tile.tile-1, .category-tile.tile-4 {
     grid-column: span 7;
 }
-
 .category-tile.tile-2, .category-tile.tile-5 {
     grid-column: span 5;
 }
-
 .category-tile img {
     position: absolute;
     inset: 0;
@@ -196,18 +169,15 @@
     transition: transform .8s cubic-bezier(.2, .7, .2, 1);
     z-index: -2;
 }
-
 .category-tile:hover img {
     transform: scale(1.055);
 }
-
 .tile-shade {
     position: absolute;
     inset: 0;
     background: linear-gradient(0deg, rgba(9, 12, 10, .65), transparent 62%), linear-gradient(90deg, rgba(0, 0, 0, .13), transparent);
     z-index: -1;
 }
-
 .tile-index {
     position: absolute;
     top: 20px;
@@ -216,7 +186,6 @@
     letter-spacing: 1px;
     color: #ffffffbd;
 }
-
 .tile-copy {
     position: absolute;
     left: 24px;
@@ -226,20 +195,17 @@
     flex-direction: column;
     align-items: flex-start;
 }
-
 .tile-copy small {
     font-size: 10px;
     color: #ffffffbd;
     margin-bottom: 10px;
 }
-
 .tile-copy strong {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(22px, 2.4vw, 34px);
     font-weight: 400;
     letter-spacing: -1.2px;
 }
-
 .tile-link {
     display: flex;
     align-items: center;
@@ -249,7 +215,6 @@
     padding-bottom: 5px;
     border-bottom: 1px solid #ffffff8a;
 }
-
 .section-end {
     display: flex;
     justify-content: space-between;
@@ -258,12 +223,10 @@
     font-size: 10px;
     color: var(--muted);
 }
-
 .featured-section {
     background: var(--secondory);
     padding: 90px 0 108px;
 }
-
 .section-heading-row {
     display: flex;
     align-items: flex-end;
@@ -271,62 +234,27 @@
     gap: 24px;
     margin: 35px 0 38px;
 }
-
 .section-heading-row h2 {
     font-size: clamp(38px, 4.5vw, 62px);
 }
-
 .section-heading-row > .text-link {
     margin-bottom: 7px;
 }
-
-
-
-
-
-/* Основное изображение */
-
-
-/* Постер скрыт по умолчанию */
-
-
-
-
-
-
-/* Мобильное переключение по нажатию */
-
-
-
-
-/* Уменьшение анимации по настройкам устройства */
-
-/* ========================================
-   СЕТКА ТОВАРОВ
-======================================== */
-
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 36px 14px;
 }
-
 .product-card-link {
     display: block;
     min-width: 0;
     color: inherit;
     text-decoration: none;
 }
-
 .product-card {
     min-width: 0;
     animation: copyReveal 0.5s both;
 }
-
-/* ========================================
-   ИЗОБРАЖЕНИЯ
-======================================== */
-
 .product-image {
     display: block;
     position: relative;
@@ -334,7 +262,6 @@
     background: rgb(250, 250, 250);
     aspect-ratio: 1 / 1.1;
 }
-
 .product-image img {
     width: 100%;
     height: 100%;
@@ -345,16 +272,11 @@
         opacity 400ms ease,
         transform 700ms cubic-bezier(.2, .7, .2, 1);
 }
-
-/* Основная фотография */
-
 .product-image .product-image-main {
     opacity: 1;
     transform: scale(1);
 }
-
-/* Дополнительный постер */
-.proudct-image-poster{
+.product-image-poster{
     object-fit: contain;
 }
 .product-image .product-image-poster {
@@ -362,11 +284,6 @@
     transform: scale(1.025);
     pointer-events: none;
 }
-
-/* ========================================
-   ПК: НАВЕДЕНИЕ МЫШЬЮ
-======================================== */
-/* На мобильном активный постер показываем целиком */
 
 @media (hover: hover) and (pointer: fine) {
     .product-card:hover .product-image-main {
@@ -385,31 +302,18 @@
     }
 }
 
-
-
-/* ========================================
-   МОБИЛЬНЫЕ: КАСАНИЕ
-======================================== */
-
 .product-card.is-poster-visible .product-image-main {
     opacity: 0;
     transform: scale(1.025);
 }
-
 .product-card.is-poster-visible .product-image-poster {
     opacity: 1;
     transform: scale(1);
 }
-
 .product-card.is-poster-visible .product-arrow {
     background: var(--accent);
     transform: translate(2px, -2px);
 }
-
-/* ========================================
-   МЕТКА ТОВАРА
-======================================== */
-
 .product-tag {
     position: absolute;
     z-index: 2;
@@ -422,11 +326,13 @@
     font-size: 10px;
     letter-spacing: 0.04em;
 }
-
-/* ========================================
-   СТРЕЛКА
-======================================== */
-
+.product-title {
+    display: block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    letter-spacing: -.5px;
+    margin-top: 9px;
+}
 .product-arrow {
     position: absolute;
     z-index: 2;
@@ -445,30 +351,14 @@
         background 200ms ease,
         transform 200ms ease;
 }
-
-/* ========================================
-   ИНФОРМАЦИЯ О ТОВАРЕ
-======================================== */
-
 .product-meta {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-
     margin-top: 14px;
-
     color: var(--muted, #777);
     font-size: 10px;
 }
-
-.product-title {
-    display: block;
-    margin-top: 8px;
-
-    font-size: 14px;
-    line-height: 1.45;
-}
-
 .price-line {
     display: flex;
     align-items: baseline;
@@ -477,20 +367,23 @@
 
     margin-top: 10px;
 }
-
 .price-line strong {
     font-size: 14px;
     font-weight: 600;
 }
-
 .price-line del {
     color: var(--muted, #777);
     font-size: 12px;
 }
-
-/* ========================================
-   МОБИЛЬНАЯ СЕТКА
-======================================== */
+.product-card:hover .product-arrow {
+    background: var(--accent);
+    transform: translate(2px, -2px);
+}
+.price-line del, .detail-price del {
+    font-size: 11px;
+    color: #898b83;
+    font-weight: 400;
+}
 
 @media (max-width: 700px) {
     .product-grid {
@@ -530,62 +423,11 @@
     }
 }
 
-/* ========================================
-   УМЕНЬШЕНИЕ АНИМАЦИИ
-======================================== */
-
 @media (prefers-reduced-motion: reduce) {
     .product-image img,
     .product-arrow {
         transition: none;
     }
-}
-.product-arrow {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    background: #f7f6f2;
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    transition: background .2s, transform .2s;
-}
-
-.product-card:hover .product-arrow {
-    background: var(--accent);
-    transform: translate(2px, -2px);
-}
-
-.product-meta {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 17px;
-    color: #777970;
-    font-size: 9px;
-}
-
-.product-title {
-    display: block;
-    font-family: 'Manrope', sans-serif;
-    font-size: 18px;
-    letter-spacing: -.5px;
-    margin-top: 9px;
-}
-
-.price-line {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 12px;
-}
-
-.price-line del, .detail-price del {
-    font-size: 11px;
-    color: #898b83;
-    font-weight: 400;
 }
 
 .editorial-banner {
@@ -595,29 +437,24 @@
     background: #3b4039;
     color: #fff;
 }
-
 .editorial-banner > img {
     object-position: center 58%;
 }
-
 .editorial-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, #10130fbb, transparent 80%);
 }
-
 .editorial-content {
     position: absolute;
     left: max(56px, calc((100% - 1328px) / 2));
     top: 50%;
     transform: translateY(-50%);
 }
-
 .editorial-content h2 {
     font-size: clamp(52px, 6vw, 82px);
     margin: 26px 0 35px;
 }
-
 .service-strip {
     padding-top: 85px;
     padding-bottom: 94px;
@@ -625,17 +462,14 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
 }
-
 .service-strip > div {
     border-top: 1px solid var(--line);
     padding-top: 19px;
 }
-
 .service-number {
     font-size: 10px;
     color: #85877f;
 }
-
 .service-strip h3 {
     font-family: 'Manrope', sans-serif;
     font-weight: 500;
@@ -643,7 +477,6 @@
     letter-spacing: -.6px;
     margin: 34px 0 12px;
 }
-
 .service-strip p {
     font-size: 12px;
     line-height: 1.8;
@@ -651,18 +484,15 @@
     max-width: 280px;
     margin: 0;
 }
-
 .closing-cta {
     background: var(--accent-blue);
     color: white;
     text-align: center;
     padding: 100px 20px 110px;
 }
-
 .closing-cta .eyebrow {
     color: #b9bcb3;
 }
-
 .closing-cta h2 {
     font-size: clamp(52px, 6.5vw, 88px);
     margin: 26px 0 32px;
@@ -687,7 +517,6 @@
         right: 28px;
     }
 }
-
 @media (max-width: 700px) {
     .hero-home {
         height: calc(88svh - 66px);
