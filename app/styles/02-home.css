@@ -260,14 +260,13 @@
     position: relative;
     overflow: hidden;
     background: rgb(250, 250, 250);
-    aspect-ratio: 1 / 1.1;
+    aspect-ratio: 1 / 1;
 }
 .product-image img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     mix-blend-mode: multiply;
-
     transition:
         opacity 400ms ease,
         transform 700ms cubic-bezier(.2, .7, .2, 1);
@@ -277,7 +276,7 @@
     transform: scale(1);
 }
 .product-image-poster{
-    object-fit: contain;
+    object-fit: cover;
 }
 .product-image .product-image-poster {
     opacity: 0;

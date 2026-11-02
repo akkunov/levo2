@@ -126,7 +126,6 @@ export function ProductCard({
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-main"
                     />
-
                 )}
                 {hasPoster && (
                     <Image
@@ -136,82 +135,47 @@ export function ProductCard({
                         fill
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-poster"
+                        style={{objectFit: 'cover'}}
                     />
-
                 )}
-
                 {product.tag && (
-
                     <span className="product-tag">
                         {product.tag}
                     </span>
-
                 )}
-
                 <span className="product-arrow">
-
                     <ArrowDownRight size={18} />
-
                 </span>
-
             </div>
-
             <div className="product-meta">
-
                 <span>{product.category}</span>
-
                 <span>{product.id}</span>
-
             </div>
-
             <span className="product-title">
                 {product.name}
             </span>
-
             <div className="price-line">
-
                 <strong>{formatPrice(product.price)}</strong>
-
                 {product.oldPrice != null && (
-
                     <del>{formatPrice(product.oldPrice)}</del>
-
                 )}
-
             </div>
-
         </article>
-
     );
-
     if (!product.slug) {
-
         return (
-
             <div onTouchStart={handleTouchStart}>
-
                 {content}
-
             </div>
-
         );
-
     }
-
     return (
-
         <Link
-
             href={`/products/${product.slug}`}
-
             className="product-card-link"
-
             onTouchStart={handleTouchStart}
-
         >
-
             {content}
-
         </Link>
 
     );
