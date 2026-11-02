@@ -15,7 +15,7 @@ const milestones = [
 
 const stats = [
     {value: '10+', label: 'лет на рынке'},
-    {value: '100 00+', label: 'довольных клиентов'},
+    {value: '10 000+', label: 'довольных клиентов'},
     {value: '50+', label: 'сервисных центров'},
     {value: '6', label: 'категорий техники'},
 ];
