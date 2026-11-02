@@ -59,8 +59,6 @@ export default function Page() {
                     className="about-milestone-dot" aria-hidden="true"/>
                     <time>{item.year}</time>
                     <h3>{item.title}</h3><p>{item.description}</p></div>)}
-                <p className="about-timeline-disclaimer">Даты и события приведены как пример оформления. Укажите
-                    фактическую историю бренда перед публикацией.</p>
             </Reveal>
         </section>
         <section className="statement-section" >
