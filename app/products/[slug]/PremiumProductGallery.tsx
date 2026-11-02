@@ -59,6 +59,7 @@ export default function PremiumProductGallery({
                     priority={activeIndex === 0}
                     draggable={false}
                     style={{ objectFit: 'contain' }}
+                    unoptimized
                 />
 
                 <span className="premium-gallery-counter">
