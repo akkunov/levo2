@@ -488,6 +488,7 @@
     color: white;
     text-align: center;
     padding: 100px 20px 110px;
+    background-position: center;
 }
 .closing-cta .eyebrow {
     color: #b9bcb3;
