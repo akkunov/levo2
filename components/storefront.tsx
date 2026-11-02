@@ -15,6 +15,7 @@ import { useFeaturedProducts } from '@/hooks/use-featured-products';
 import {useNewArrivals} from "@/hooks/use-new-arrivals";
 import { formatPrice } from '@/lib/format';
 import { useCart } from '@/components/cart/cart-context';
+import { GridSkeleton } from '@/components/ui/CatalogSkeleton';
 
 
 type ProductSpecificationsProps = {
@@ -122,7 +123,6 @@ export function ProductCard({
                             product.name
                         }
                         fill
-                        unoptimized
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-main"
                     />
@@ -134,7 +134,6 @@ export function ProductCard({
                         alt=""
                         aria-hidden="true"
                         fill
-                        unoptimized
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-poster"
                     />
@@ -257,7 +256,7 @@ export function CatalogProductSections() {
                 </div>
 
                 {newPending ? (
-                    <p>Загружаем новинки...</p>
+                    <GridSkeleton count={4} variant="product" />
                 ) : newError ? (
                     <p>Не удалось загрузить новинки.</p>
                 ) : (
@@ -272,7 +271,7 @@ export function CatalogProductSections() {
                 </div>
 
                 {featuredPending ? (
-                    <p>Загружаем товары...</p>
+                    <GridSkeleton count={8} variant="product" />
                 ) : featuredError ? (
                     <p>Не удалось загрузить товары.</p>
                 ) : (
@@ -333,7 +332,31 @@ export function CategoryTiles() {
     } = useCatalogs();
 
     if (isPending) {
-        return <p>Загрузка категорий...</p>;
+        return (
+            <section
+                className="category-showcase"
+                role="status"
+                aria-label="Загрузка категорий"
+            >
+                <div className="category-showcase-heading">
+                    <div>
+          <span className="eyebrow">
+            КОЛЛЕКЦИИ LEVO
+          </span>
+                        <h2>
+                            Техника для
+                            <br />
+                            <em>вашего пространства.</em>
+                        </h2>
+                    </div>
+                </div>
+
+                <GridSkeleton
+                    count={6}
+                    variant="category"
+                />
+            </section>
+        );
     }
 
     if (isError) {

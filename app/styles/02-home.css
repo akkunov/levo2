@@ -485,7 +485,7 @@
     margin: 0;
 }
 .closing-cta {
-    background: var(--accent-blue);
+    background: url("../../public/images/about/hero.webp");
     color: white;
     text-align: center;
     padding: 100px 20px 110px;

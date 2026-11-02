@@ -2,9 +2,7 @@ import Link from 'next/link';
 import {contacts} from "@/lib/site";
 
 const COMPANY_LINKS = [
-    { label: 'О компании', href: '/about' },
-    { label: 'Доставка и оплата', href: '/delivery' },
-    { label: 'Гарантия', href: '/warranty' },
+    { label: 'О нас', href: '/about' },
     { label: 'Контакты', href: '/contacts' },
     { label: 'Сервисные центры', href: '/services' },
 ];
@@ -135,14 +133,6 @@ export async function Footer() {
                     <span>
                         © {new Date().getFullYear()} LEVO. Все права защищены.
                     </span>
-
-                    <Link
-                        href="/privacy"
-                        className="footer-bottom-link"
-                    >
-                        Политика конфиденциальности
-                    </Link>
-
                     <Link href="/" className="footer-back-to-top">
                         Наверх ↑
                     </Link>

@@ -7,6 +7,10 @@ import { Breadcrumbs, ProductGrid } from '@/components/storefront';
 import { useCatalogProducts } from '@/hooks/use-catalog-products';
 import {useCatalog} from "@/hooks/use-catalogs";
 import {mapCatalogProduct, StoreProduct} from "@/lib/api/products";
+import {
+    CategoryPageSkeleton,
+    GridSkeleton,
+} from '@/components/ui/CatalogSkeleton';
 
 export default function CategoryPageClient({
                                                slug,
@@ -25,7 +29,9 @@ export default function CategoryPageClient({
         isError: productsError,
     } = useCatalogProducts(slug);
 
-    if (categoryPending) return <div className="page-shell">Загрузка категории...</div>;
+    if (categoryPending) {
+        return <CategoryPageSkeleton />;
+    }
 
     if (categoryError || !category) {
         return <div className="page-shell">Категория не найдена.</div>;
@@ -92,18 +98,23 @@ export default function CategoryPageClient({
               : `${products?.total ?? 0} товаров`}
         </span>
             </div>
-
             {productsError ? (
-                <p>Не удалось загрузить товары.</p>
+                <div className="empty-category" role="alert">
+                    <h2>Не удалось загрузить товары.</h2>
+                    <p>Попробуйте обновить страницу.</p>
+                </div>
             ) : productsPending ? (
-                <p>Загрузка товаров...</p>
+                <div role="status" aria-label="Загрузка товаров">
+                    <GridSkeleton count={8} variant="product" />
+                </div>
             ) : items.length > 0 ? (
                 <ProductGrid items={items} />
             ) : children.length === 0 ? (
                 <div className="empty-category">
                     <h2>Коллекция скоро появится.</h2>
                     <p>
-                        Свяжитесь с нами — поможем уточнить наличие нужной модели.
+                        Свяжитесь с нами — поможем уточнить
+                        наличие нужной модели.
                     </p>
                 </div>
             ) : null}

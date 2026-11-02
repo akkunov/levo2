@@ -73,8 +73,11 @@
     justify-content: space-between;
     gap: 25px;
     margin-top: 100px;
-    background: var(--surface-muted);
-    padding: 40px;
+    background: url("../../public/images/about/detail.webp");
+    background-size: cover;
+    padding: 70px;
+    color: #ffffff;
+    border-radius: 10px;
 }
 
 .catalog-help h2 {

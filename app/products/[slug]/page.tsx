@@ -9,10 +9,9 @@ import {
 
 import {
     fetchProductBySlug,
-    fetchCatalogProducts,
     mapCatalogProduct,
 } from '@/lib/api/products';
-import type { StoreProduct } from '@/lib/api/products';
+import { Suspense } from 'react';
 
 import {
     Breadcrumbs,
@@ -24,6 +23,7 @@ import ProductHero from './ProductHero';
 
 import './product-premium.css';
 import { formatPrice } from '@/lib/format';
+import RelatedProducts from "@/app/products/[slug]/RelatedProducts";
 
 type PageProps = {
     params: Promise<{ slug: string }>;
@@ -71,18 +71,6 @@ export default async function ProductPage({ params }: PageProps) {
 
     const storeProduct = mapCatalogProduct(product);
 
-    let related: StoreProduct[] = [];
-    if (product.catalog?.slug) {
-        try {
-            const response = await fetchCatalogProducts(product.catalog.slug, 1, 8);
-            related = response.items
-                .filter((item) => item.id !== product.id)
-                .slice(0, 4)
-                .map(mapCatalogProduct);
-        } catch {
-            related = [];
-        }
-    }
 
     return (
         <div className="premium-product-page">
@@ -175,19 +163,33 @@ export default async function ProductPage({ params }: PageProps) {
                     )}
                 </section>
 
-                {related.length > 0 && (
-                    <section className="premium-related">
-                        <div className="premium-related-heading">
-                            <div>
-                                <span className="eyebrow">03 / ВЫБОР LEVO</span>
-                                <h2>Возможно,<br /><em>вам подойдёт.</em></h2>
-                            </div>
-                            <Link href={`/catalogs/${categorySlug}`} className="text-link">
-                                Смотреть всю категорию <ArrowUpRight size={18} />
-                            </Link>
-                        </div>
-                        <ProductGrid items={related} />
-                    </section>
+                {product.catalog?.slug && (
+                    <Suspense
+                        fallback={
+                            <section
+                                className="premium-related"
+                                aria-label="Загрузка похожих товаров"
+                            >
+                                <div className="premium-related-heading">
+                                    <h2>Возможно, вам подойдёт.</h2>
+                                </div>
+
+                                <div className="related-loading-grid">
+                                    {Array.from({ length: 4 }).map((_, i) => (
+                                        <div
+                                            className="product-skeleton related-loading-card"
+                                            key={i}
+                                        />
+                                    ))}
+                                </div>
+                            </section>
+                        }
+                    >
+                        <RelatedProducts
+                            catalogSlug={product.catalog.slug}
+                            productId={product.id}
+                        />
+                    </Suspense>
                 )}
             </div>
         </div>

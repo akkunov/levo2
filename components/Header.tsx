@@ -11,6 +11,7 @@ const NAV_ITEMS = [
     { href: "/catalogs", label: "Каталог" },
     { href: "/contacts", label: "Контакты" },
     { href: "/services", label: "Сервисные центры" },
+    { href: "/about", label: "О нас" },
 ] as const;
 
 export function Header() {

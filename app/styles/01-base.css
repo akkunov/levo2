@@ -55,6 +55,7 @@
     --footer-muted: rgba(255, 255, 255, 0.66);
     --footer-border: rgba(255, 255, 255, 0.17);
     --accent-blue: #123B73;
+    --border : #777872;
 }
 
 /* Shared theme tokens: components should consume these instead of hard-coded surfaces. */

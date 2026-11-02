@@ -1,0 +1,657 @@
+.about-hero {
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    color: white
+}
+
+.about-hero .container {
+    padding-block: 70px
+}
+
+.about-hero h1 {
+    font-size: clamp(44px, 5.3vw, 75px);
+    margin: 15px 0
+}
+
+.about-hero p {
+    max-width: 450px;
+    color: #dadcd8
+}
+
+.about-hero .btn {
+    margin-top: 16px
+}
+
+.icon-strip {
+    display: grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap: 25px;
+    padding-block: 35px;
+    border-bottom: 1px solid var(--muted)
+}
+
+.icon-strip > div {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 13px
+}
+
+.icon-strip svg {
+    width: 26px;
+    height: 26px
+}
+
+.about-two {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap: 70px;
+    align-items: center
+}
+
+.about-photo img {
+    width: 100%;
+    height: 425px;
+    object-fit: cover;
+    border-radius: 12px
+}
+
+.about-copy p {
+    color: var(--muted)
+}
+
+.statement-section {
+    padding: 85px 0;
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+}
+.statement-section h2 {
+    margin: 20px 0 0;
+    font-size: clamp(34px, 4vw, 60px)
+}
+
+.value-grid {
+    display: grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap: 15px
+}
+
+.value-card svg {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 35px
+}
+
+.value-card h3 {
+    font-size: 20px
+}
+
+.value-card p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 0
+}
+
+.about-feature {
+    min-height: 430px;
+    display: flex;
+    align-items: center
+}
+
+.about-feature .container {
+    display: flex;
+    justify-content: flex-end
+}
+
+.about-feature .container > div {
+    max-width: 435px
+}
+
+.about-feature h2 {
+    margin: 15px 0;
+    color: #fff;
+}
+
+.about-feature p {
+    color: #fff
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap: 70px;
+    align-items: center
+}
+
+.contact-lines {
+    margin: 45px 0
+}
+
+.contact-lines > div {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+    padding: 15px 0
+}
+
+.contact-lines small {
+    color: var(--muted)
+}
+
+.contact-image img {
+    height: 550px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px
+}
+
+.map-placeholder {
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 13px;
+    min-height: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px
+}
+
+.map-placeholder p {
+    color: var(--muted);
+    max-width: 350px
+}
+
+.service-layout {
+    display: grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap: 30px;
+    margin-top: 45px
+}
+
+.service-list h2 {
+    font-size: 24px
+}
+
+.service-card {
+    display: flex;
+    gap: 20px;
+    margin-top: 22px
+}
+
+.service-card svg {
+    flex-shrink: 0
+}
+
+.service-card p {
+    color: var(--muted);
+    font-size: 14px
+}
+
+.map-large {
+    min-height: 490px
+}
+
+.full-post-grid {
+    margin-top: 50px
+}
+
+.article {
+    max-width: 950px
+}
+
+.article h1 {
+    max-width: 900px
+}
+
+.article-cover {
+    width: 100%;
+    height: 470px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 45px 0
+}
+
+.article-body {
+    max-width: 690px;
+    margin: auto
+}
+
+.article-body h2 {
+    margin: 35px 0 15px
+}
+
+.article-body p {
+    color: var(--muted)
+}
+
+.ranking-list {
+    margin-top: 45px
+}
+
+.ranking-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0
+}
+
+.ranking-row img {
+    width: 100px;
+    height: 78px;
+    object-fit: contain;
+    background: #f3f3f1;
+    border-radius: 9px
+}
+
+.ranking-row > div {
+    flex: 1
+}
+
+.ranking-row h3 {
+    margin: 0 0 8px
+}
+
+.ranking-row small {
+    color: var(--muted)
+}
+
+.ranking-row b {
+    margin-left: auto
+}
+
+.rank-no {
+    font-size: 26px;
+    color: var(--muted)
+}
+
+.legal {
+    max-width: 900px
+}
+
+.legal h2 {
+    font-size: 25px;
+    margin-top: 55px
+}
+
+.legal p {
+    color: var(--muted)
+}
+
+.not-found {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    color: #fff
+}
+
+.big-404 {
+    font-size: clamp(120px, 19vw, 260px);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -.09em
+}
+
+.not-found h1 {
+    font-size: 39px
+}
+
+.not-found p {
+    color: #ccc
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--surface) var(--surface));
+    background-size: 220% 100%;
+    animation: pulse 1.4s infinite;
+    border-radius: 9px
+}
+
+.skeleton-heading {
+    height: 70px;
+    width: 45%;
+    margin-bottom: 45px
+}
+
+.skeleton-grid {
+    display: grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap: 15px
+}
+
+.skeleton-product {
+    height: 335px
+}
+
+@keyframes pulse {
+    to {
+        background-position-x: -220%
+    }
+}
+
+@media (max-width: 700px) {
+
+    .about-hero {
+        min-height: 610px;
+        background-position: 62% center
+    }
+
+    .about-two {
+        grid-template-columns:1fr;
+        gap: 30px
+    }
+
+    .about-photo img {
+        height: 300px
+    }
+
+    .icon-strip {
+        grid-template-columns:repeat(2, 1fr);
+        gap: 15px
+    }
+
+    .icon-strip > div {
+        font-size: 11px
+    }
+
+    .value-grid {
+        grid-template-columns:repeat(2, 1fr)
+    }
+
+    .value-card {
+        padding: 18px
+    }
+
+    .value-card h3 {
+        font-size: 17px
+    }
+
+    .value-card p {
+        font-size: 12px
+    }
+
+    .about-feature {
+        background-position: 45% center
+    }
+
+    .about-feature .container {
+        justify-content: start
+    }
+
+    .contact-grid, .service-layout {
+        grid-template-columns:1fr
+    }
+
+    .contact-image img {
+        height: 340px
+    }
+
+    .map-large {
+        min-height: 320px
+    }
+
+    .article-cover {
+        height: 290px
+    }
+
+    .ranking-row {
+        gap: 12px
+    }
+
+    .ranking-row img {
+        width: 70px;
+        height: 65px
+    }
+
+    .ranking-row h3 {
+        font-size: 14px
+    }
+
+    .ranking-row b {
+        font-size: 12px
+    }
+
+    .rank-no {
+        font-size: 19px
+    }
+
+    .skeleton-grid {
+        grid-template-columns:repeat(2, 1fr)
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important
+    }
+}
+
+/* LEVO About — statistics and brand journey */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0
+}
+
+.about-stats-section {
+    padding-top: 14px;
+    padding-bottom: 30px
+}
+
+.about-stats-grid {
+    display: grid;
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 31px 12px
+}
+
+.about-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 7px;
+    padding: 6px 14px;
+    border-right: 1px solid var(--border)
+}
+
+.about-stat:last-child {
+    border-right: 0
+}
+
+.about-stat strong {
+    font-size: clamp(25px, 3vw, 42px);
+    font-weight: 500;
+    letter-spacing: -.055em;
+    line-height: 1.15;
+    color: var(--ink)
+}
+
+.about-stat span {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+.about-demo-note, .about-timeline-disclaimer {
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--muted);
+    opacity: .85
+}
+
+.about-demo-note {
+    margin: 10px 0 0
+}
+
+.about-history {
+    display: grid;
+    grid-template-columns:minmax(230px, .72fr) minmax(0, 1.6fr);
+    gap: clamp(32px, 6vw, 100px);
+    align-items: start
+}
+
+.about-history-intro h2 {
+    font-size: clamp(34px, 4vw, 62px);
+    margin: 18px 0 20px;
+    line-height: 1.08;
+    letter-spacing: -.05em
+}
+
+.about-history-intro p {
+    max-width: 380px;
+    color: var(--muted);
+    line-height: 1.8
+}
+
+.about-timeline {
+    display: grid;
+    grid-template-columns:repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    position: relative;
+    padding-top: 28px
+}
+
+.about-timeline:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    right: 8px;
+    height: 1px;
+    background: var(--border)
+}
+
+.about-milestone {
+    position: relative;
+    min-width: 0
+}
+
+.about-milestone-dot {
+    position: absolute;
+    top: -23px;
+    left: 0;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 4px var(--surface);
+}
+
+.about-milestone time {
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 600
+}
+
+.about-milestone h3 {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 14px 0 8px
+}
+
+.about-milestone p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.65;
+    margin: 0
+}
+
+.about-timeline-disclaimer {
+    grid-column: 1/-1;
+    margin-top: 6px
+}
+
+@media (max-width: 850px) {
+    .about-history {
+        grid-template-columns:1fr;
+        gap: 35px
+    }
+
+    .about-timeline {
+        gap: 14px
+    }
+}
+
+@media (max-width: 700px) {
+    .about-stats-grid {
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+        padding: 16px 8px
+    }
+
+    .about-stat {
+        padding: 18px 8px
+    }
+
+    .about-stat:nth-child(2) {
+        border-right: 0
+    }
+
+    .about-stat:nth-child(-n+2) {
+        border-bottom: 1px solid var(--border)
+    }
+
+    .about-stat strong {
+        font-size: 29px
+    }
+
+    .about-stat span {
+        font-size: 11px
+    }
+
+    .about-history {
+        gap: 35px
+    }
+
+    .about-timeline {
+        grid-template-columns:1fr;
+        gap: 24px;
+        padding-top: 0;
+        padding-left: 32px
+    }
+
+    .about-timeline:before {
+        left: 5px;
+        right: auto;
+        top: 8px;
+        bottom: 35px;
+        height: auto;
+        width: 1px
+    }
+
+    .about-milestone-dot {
+        top: 5px;
+        left: -31px
+    }
+
+    .about-milestone {
+        padding-bottom: 2px
+    }
+
+    .about-milestone h3 {
+        margin: 6px 0
+    }
+
+    .about-timeline-disclaimer {
+        grid-column: 1
+    }
+}
