@@ -102,8 +102,9 @@ export default function PremiumProductGallery({
                                 alt="" fill 
                                 sizes="96px" 
                                 loading="lazy" 
-                                style={{ objectFit: "contain" }}
-                                />
+                                style={{ objectFit: "contain"}}
+                                unoptimized
+                            />
                         </button>
                     ))}
                 </div>

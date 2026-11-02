@@ -30,6 +30,7 @@ export default function ProductHero({
                     fetchPriority="high"
                     aria-hidden="true"
                     priority
+                    unoptimized
                 />
                 <div className="product-hero-shade" aria-hidden="true" />
                 <div className="product-hero-content">
