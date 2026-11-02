@@ -344,7 +344,7 @@
     display: grid;
     place-items: center;
 
-    background: #f7f6f2;
+    background: var(--accent);
 
     transition:
         background 200ms ease,
