@@ -125,6 +125,7 @@ export function ProductCard({
                         fill
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-main"
+                        unoptimized
                     />
                 )}
                 {hasPoster && (
@@ -136,6 +137,7 @@ export function ProductCard({
                         sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="product-image-poster"
                         style={{objectFit: 'cover'}}
+                        unoptimized
                     />
                 )}
                 {product.tag && (
