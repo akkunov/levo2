@@ -25,42 +25,106 @@ import './product-premium.css';
 import { formatPrice } from '@/lib/format';
 import RelatedProducts from "@/app/products/[slug]/RelatedProducts";
 
+import {
+    JsonLd,
+    createBreadcrumbs,
+} from '@/lib/seo/json-ld';
+
+import { createProductSchema } from '@/lib/seo/product-schema';
+import { siteConfig } from '@/lib/site';
+
+
 type PageProps = {
     params: Promise<{ slug: string }>;
 };
 
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+                                           params,
+                                       }: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const product = await fetchProductBySlug(slug);
 
     if (!product) {
-        return { title: 'Товар не найден', robots: { index: false, follow: false } };
+        return {
+            title: 'Товар не найден',
+            robots: { index: false, follow: false },
+        };
     }
 
-    const description = product.description?.trim() ||
-        `Характеристики, фотографии и цена ${product.title} в каталоге LEVO Кыргызстан.`;
-    const canonical = `/products/${encodeURIComponent(slug)}`;
+    const title = `${product.title} — купить в Кыргызстане`;
+
+    const description = product.subtitle?.trim() ||
+        product.description?.trim().slice(0, 170) ||
+        `Купить ${product.title} LEVO в Кыргызстане. ` +
+        `Характеристики, фотографии и цена в сомах.`;
+
+    const canonical =
+        `/products/${encodeURIComponent(slug)}`;
 
     return {
-        title: product.title,
+        title: { absolute: title },
         description,
-        alternates: { canonical },
+
+        alternates: {
+            canonical,
+        },
+
         openGraph: {
             type: 'website',
-            title: product.title,
+            title,
             description,
             url: canonical,
-            images: product.image ? [{ url: product.image, alt: product.title }] : undefined,
+            images: product.image
+                ? [
+                    {
+                        url: product.image,
+                        alt: product.title,
+                    },
+                ]
+                : undefined,
+        },
+
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
         },
     };
 }
+
+
 
 export default async function ProductPage({ params }: PageProps) {
     const { slug } = await params;
     const product = await fetchProductBySlug(slug);
 
     if (!product) notFound();
+    const productUrl =
+        `${siteConfig.url}/products/${encodeURIComponent(slug)}`;
+
+    const productSchema = createProductSchema(product);
+
+    const breadcrumbSchema = createBreadcrumbs([
+        {
+            name: 'Главная',
+            url: siteConfig.url,
+        },
+        {
+            name: 'Каталог',
+            url: `${siteConfig.url}/catalogs`,
+        },
+        {
+            name: product.catalog?.name ?? 'Бытовая техника',
+            url: product.catalog?.slug
+                ? `${siteConfig.url}/catalogs/${encodeURIComponent(product.catalog.slug)}`
+                : `${siteConfig.url}/catalogs`,
+        },
+        {
+            name: product.title,
+            url: productUrl,
+        },
+    ]);
 
     const categoryName = product.catalog?.name ?? 'Бытовая техника';
     const categorySlug = product.catalog?.slug ?? 'built-in-appliances';
@@ -74,6 +138,7 @@ export default async function ProductPage({ params }: PageProps) {
 
     return (
         <div className="premium-product-page">
+            <JsonLd data={[productSchema, breadcrumbSchema]} />
             <ProductHero
                 title={product.title}
                 categoryName={categoryName}
