@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         description: siteConfig.description,
     },
     icons: {
-        icon: '/blackLogo.svg',
+        icon: '/icon.svg',
     },
     verification:{
         yandex: '80a46febe04233b0',
