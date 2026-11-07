@@ -19,5 +19,5 @@ export const contacts = {
     instagram: "https://www.instagram.com/levo_kg/",
     facebook: "https://www.instagram.com/levo_kg/",
     telegram: "https://t.me/levo_kg",
-    whatsapp: "https://wa.me/996776666878",
+    whatsapp: "https://wa.me/996777797951",
 }
