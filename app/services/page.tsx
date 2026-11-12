@@ -1,6 +1,6 @@
 'use client';
 
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
     ArrowDownRight,
     ArrowRight,
@@ -187,7 +187,7 @@ function loadYandexMaps(apiKey: string): Promise<YandexMapsApi> {
 }
 
 
-export default function servicesPage() {
+export default function ServicesPage() {
     const mapRef = useRef<HTMLDivElement>(null);
     const mapInstance = useRef<YandexMap | null>(null);
     const mapApi = useRef<YandexMapsApi | null>(null);
@@ -200,10 +200,12 @@ export default function servicesPage() {
     const cityDropdownRef = useRef<HTMLDivElement>(null);
 
 
-    const filteredservices =
-        selectedCity === ALL_CITIES
+    const filteredServices = useMemo(
+        () => selectedCity === ALL_CITIES
             ? services
-            : services.filter((contact) => contact.city === selectedCity);
+            : services.filter((contact) => contact.city === selectedCity),
+        [selectedCity],
+    );
 
     const renderMarkers = useCallback((list: Contact[]) => {
         const map = mapInstance.current;
@@ -336,7 +338,7 @@ export default function servicesPage() {
             return;
         }
 
-        renderMarkers(filteredservices);
+        renderMarkers(filteredServices);
 
         if (selectedCity === ALL_CITIES) {
             mapInstance.current.setCenter(MAP_CENTER, 8);
@@ -350,7 +352,7 @@ export default function servicesPage() {
         if (selectedContact) {
             mapInstance.current.setCenter(selectedContact.coords, 12);
         }
-    }, [selectedCity, mapReady, renderMarkers]);
+    }, [selectedCity, mapReady, renderMarkers, filteredServices]);
 
     const selectCity = (city: string) => {
         setSelectedCity(city);
