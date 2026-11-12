@@ -63,6 +63,20 @@ declare global {
 
 const ALL_CITIES = 'Все';
 
+// Yandex Maps balloonContent is interpreted as HTML, not escaped React text.
+// Encode contact values before interpolating them into popup markup.
+const HTML_ENTITIES: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+};
+
+function escapeHtml(value: string): string {
+    return value.replace(/[&<>"']/g, (char) => HTML_ENTITIES[char]);
+}
+
 const MAP_CENTER: [number, number] = [40.7, 72.8];
 
 const services: Contact[] = [
@@ -223,17 +237,17 @@ export default function ServicesPage() {
                 {
                     balloonContent: `
             <div style="padding: 10px; font-family: Arial, sans-serif;">
-                <strong>${contact.city}</strong>
-            <p style="margin-top: 8px;">${contact.address}</p>
+                <strong>${escapeHtml(contact.city)}</strong>
+            <p style="margin-top: 8px;">${escapeHtml(contact.address)}</p>
             ${contact.phones
                         .map(
                             (phone) =>
-                                `<p style="margin-top: 5px;">${phone}</p>`,
+                                `<p style="margin-top: 5px;">${escapeHtml(phone)}</p>`,
                         )
                         .join('')}
                 </div>
                 `,
-                    hintContent: contact.city,
+                    hintContent: escapeHtml(contact.city),
                 },
                 {
                     preset: 'islands#blackDotIcon',
