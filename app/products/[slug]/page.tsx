@@ -13,11 +13,8 @@ import {
 } from '@/lib/api/products';
 import { Suspense } from 'react';
 
-import {
-    Breadcrumbs,
-    ProductGrid,
-    ProductSpecifications,
-} from '@/components/storefront';
+import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
+import { ProductSpecifications } from '@/components/storefront/ProductSpecifications';
 import PremiumProductGallery from './PremiumProductGallery';
 import ProductHero from './ProductHero';
 
