@@ -201,7 +201,7 @@ export function CategoryTiles() {
                             <Image
                                 src={
                                     category.image ??
-                                    '/images/catalog-placeholder.jpg'
+                                    '/noPoster.jpg'
                                 }
                                 alt={category.name}
                                 fill
