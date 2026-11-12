@@ -219,12 +219,12 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .product-card:hover .product-image-main {
+    .product-card.has-poster-image:hover .product-image-main {
         opacity: 0;
         transform: scale(1.025);
     }
 
-    .product-card:hover .product-image-poster {
+    .product-card.has-poster-image:hover .product-image-poster {
         opacity: 1;
         transform: scale(1);
     }
@@ -235,11 +235,11 @@
     }
 }
 
-.product-card.is-poster-visible .product-image-main {
+.product-card.is-poster-visible.has-poster-image .product-image-main {
     opacity: 0;
     transform: scale(1.025);
 }
-.product-card.is-poster-visible .product-image-poster {
+.product-card.is-poster-visible.has-poster-image .product-image-poster {
     opacity: 1;
     transform: scale(1);
 }
