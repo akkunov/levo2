@@ -6,9 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import {
-    Breadcrumbs,
     ProductGrid,
 } from '@/components/storefront';
+import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
 
 import {
     fetchCatalogBySlug,
