@@ -1,18 +1,156 @@
-.footer {
-
-    width: 100%;
-    background: var(--footer-blue);
-    color: var(--footer-text);
+/* Existing legacy footer rules: consolidated from base; prune after screenshot comparison. */
+.footer-catalog {
+    padding-bottom: 56px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+}
+.footer-section-title {
+    margin: 0 0 30px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+}
+.footer-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 32px;
+}
+.footer-catalog-grid a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    transition: opacity 200ms ease;
+}
+.footer-catalog-grid a span {
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: opacity 200ms ease, transform 200ms ease;
+}
+.footer-catalog-grid a:hover {
+    opacity: 0.72;
+}
+.footer-catalog-grid a:hover span {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+.footer-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: clamp(36px, 7vw, 110px);
+    padding-bottom: 72px;
+}
+.footer-brand-logo {
+    width: 69px;
+    height: 20px;
+    display: block;
+    background: url("/levo-logo.svg") left center / contain no-repeat;
+}
+.footer-brand p {
+    margin: 24px 0 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.82);
+}
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+.footer-column h2 {
+    margin: 0 0 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+.footer-column a {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    transition: opacity 200ms ease;
+}
+.footer-column a:hover {
+    opacity: 0.65;
+}
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+}
+.footer-bottom a {
+    color: #fff;
+    text-decoration: none;
 }
 
-.footer *,
-.footer *::before,
-.footer *::after {
-    box-sizing: border-box;
-    position: relative;
+
+@media (max-width: 900px) {
+    .footer-catalog-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0 24px;
+    }
+}
+@media (max-width: 600px) {
+    .footer-catalog {
+        padding-bottom: 36px;
+        margin-bottom: 36px;
+    }
+
+    .footer-catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 18px;
+    }
+
+    .footer-catalog-grid a {
+        font-size: 12px;
+        padding: 13px 0;
+    }
+
+    .footer-catalog-grid a span {
+        opacity: 1;
+        transform: none;
+    }
+
+    .footer-main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 36px 24px;
+        padding-bottom: 44px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .footer-catalog-grid a,
+    .footer-catalog-grid a span,
+    .footer-column a {
+        transition: none;
+    }
 }
 
-
+/* Current footer design */
 .footer {
     position: relative;
     isolation: isolate;
