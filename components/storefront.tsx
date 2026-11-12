@@ -98,11 +98,10 @@ export function ProductGrid({items,}: { items?: StoreProduct[]; }) {
 
     return (
         <div className="product-grid">
-            {productsToShow.map((product, index) => (
+            {productsToShow.map((product) => (
                 <ProductCard
                     key={product.id}
                     product={product}
-                    index={index}
                     activePosterId={activePosterId}
                     onActivate={setActivePosterId}
                 />
