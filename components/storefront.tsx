@@ -2,10 +2,9 @@
 import Link from 'next/link';
 import {useState} from 'react';
 import {
-    ArrowDownRight,
     ArrowRight,
     ArrowUpRight,
-    Check, ChevronDown,
+    Check,
     Sparkles
 } from 'lucide-react';
 import { useCatalogs } from '@/hooks/use-catalogs';
@@ -13,176 +12,11 @@ import Image from "next/image";
 import {StoreProduct} from "@/lib/api/products";
 import { useFeaturedProducts } from '@/hooks/use-featured-products';
 import {useNewArrivals} from "@/hooks/use-new-arrivals";
-import { formatPrice } from '@/lib/format';
 import { useCart } from '@/components/cart/cart-context';
 import { GridSkeleton } from '@/components/ui/CatalogSkeleton';
+import { ProductCard } from '@/components/storefront/ProductCard';
 
 
-type ProductSpecificationsProps = {
-    specs: string[];
-};
-
-export function ProductSpecifications({
-                                                  specs,
-                                              }: ProductSpecificationsProps) {
-    const [expanded, setExpanded] = useState(false);
-
-    const visibleSpecs = expanded ? specs : specs.slice(0, 6);
-    const hasMore = specs.length > 6;
-
-    return (
-        <div className="premium-specifications-content">
-            <div className="premium-specifications-heading">
-                <h3>Характеристики</h3>
-                <span>{specs.length} параметров</span>
-            </div>
-
-            {specs.length > 0 ? (
-                <>
-                    <div className="premium-spec-list">
-                        {visibleSpecs.map((spec, index) => (
-                            <div
-                                className="premium-spec-row"
-                                key={`${spec}-${index}`}
-                            >
-                                <span>{spec}</span>
-                                <Check size={17} strokeWidth={1.5} />
-                            </div>
-                        ))}
-                    </div>
-
-                    {hasMore && (
-                        <button
-                            type="button"
-                            className="premium-spec-toggle"
-                            onClick={() => setExpanded((current) => !current)}
-                            aria-expanded={expanded}
-                        >
-                            {expanded ? 'Скрыть' : 'Посмотреть все характеристики'}
-                            <ChevronDown
-                                size={17}
-                                className={expanded ? 'is-rotated' : ''}
-                            />
-                        </button>
-                    )}
-                </>
-            ) : (
-                <p className="premium-empty-specs">
-                    Характеристики уточняются. Свяжитесь с нами, чтобы узнать
-                    подробности о модели.
-                </p>
-            )}
-        </div>
-    );
-}
-
-interface ProductCardProps {
-    product: StoreProduct;
-    index?: number;
-    activePosterId: number | null;
-    onActivate: (id: number) => void;
-}
-
-export function ProductCard({
-    product,
-    index = 0,
-    activePosterId,
-    onActivate,
-}: ProductCardProps) {
-    const showPoster = activePosterId === product.id;
-    const mainImage = product.images?.[0]?.url || product.image;
-    const posterImage = product.image;
-
-    const hasPoster =
-        Boolean(mainImage) &&
-        Boolean(posterImage) &&
-        mainImage !== posterImage;
-
-    const handleTouchStart = () => {
-    if (hasPoster) {
-        onActivate?.(product.id);
-    }
-};
-
-    const content = (
-
-        <article
-            className={`product-card${
-                showPoster ? ' is-poster-visible' : ''
-            }`}
-            style={{
-                animationDelay: `${index * 70}ms`,
-            }}
-        >
-            <div className="product-image">
-                {mainImage && (
-                    <Image
-                        src={mainImage}
-                        alt={
-                            product.images?.[0]?.alt ||
-                            product.name
-                        }
-                        fill
-                        sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="product-image-main"
-                        unoptimized
-                    />
-                )}
-                {hasPoster && (
-                    <Image
-                        src={posterImage}
-                        alt=""
-                        aria-hidden="true"
-                        fill
-                        sizes="(max-width: 700px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="product-image-poster"
-                        style={{objectFit: 'cover'}}
-                        unoptimized
-                    />
-                )}
-                {product.tag && (
-                    <span className="product-tag">
-                        {product.tag}
-                    </span>
-                )}
-                <span className="product-arrow">
-                    <ArrowDownRight size={18} />
-                </span>
-            </div>
-            <div className="product-meta">
-                <span>{product.category}</span>
-                <span>{product.id}</span>
-            </div>
-            <span className="product-title">
-                {product.name}
-            </span>
-            <div className="price-line">
-                <strong>{formatPrice(product.price)}</strong>
-                {product.oldPrice != null && (
-                    <del>{formatPrice(product.oldPrice)}</del>
-                )}
-            </div>
-        </article>
-    );
-    if (!product.slug) {
-        return (
-            <div onTouchStart={handleTouchStart}>
-                {content}
-            </div>
-        );
-    }
-    return (
-        <Link
-            href={`/products/${product.slug}`}
-            className="product-card-link"
-            onTouchStart={handleTouchStart}
-        >
-            {content}
-        </Link>
-
-    );
-
-}
 export function CatalogProductSections() {
     const {
         data: newArrivals = [],
@@ -463,36 +297,5 @@ export function AddToCart({product}: { product: StoreProduct }) {
         >
             {added ? <><Check size={17} /> Добавлено в корзину</> : <>Добавить в корзину <ArrowRight size={17} /></>}
         </button>
-    );
-}
-export function Breadcrumbs({items}: { items: { label: string; href?: string }[] }) {
-    return (
-        <div className="breadcrumbs">
-            <Link href="/">Главная</Link>
-            {items.map((item, i) => (
-                <span key={i}>
-                    <span className="crumb-sep">/</span>
-                    {item.href ? <Link href={item.href}>{item.label}</Link> : <span>{item.label}</span>}
-                </span>
-            ))}
-        </div>
-    );
-}
-export function EditorialBanner() {
-    return (
-        <section className="editorial-banner">
-            <Image src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90" alt="Современный минималистичный интерьер" fill sizes="(max-width: 768px) 100vw, 100vw" loading="lazy" style={{ objectFit: "cover" }} />
-            <div className="editorial-overlay" />
-            <div className="editorial-content">
-                <span className="eyebrow light">LEVO / DESIGN NOTES 01</span>
-                <h2>
-                    Технологии,<br />
-                    которые не<br />
-                    <em>перетягивают</em><br />
-                    внимание.
-                </h2>
-                <Link className="text-link light-link" href="/catalogs/built-in-appliances">Открыть коллекцию <ArrowRight size={17} /></Link>
-            </div>
-        </section>
     );
 }
