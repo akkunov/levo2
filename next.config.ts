@@ -3,6 +3,8 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     reactStrictMode: true,
     images: {
+        // Use a smaller rendition for below-the-fold catalog photography.
+        qualities: [65, 75],
         remotePatterns: [
             {
                 protocol: 'https',
