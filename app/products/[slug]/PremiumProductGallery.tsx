@@ -20,7 +20,7 @@ export default function PremiumProductGallery({
     product,
     priceLabel,
 }: PremiumProductGalleryProps) {
-    const slides = images.length ? images : ['/images/product-placeholder.png'];
+    const slides = images.length ? images : ['/noPoster.jpg'];
     const [activeIndex, setActiveIndex] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);
 
