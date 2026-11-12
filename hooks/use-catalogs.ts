@@ -6,10 +6,11 @@ import {
     fetchCatalogBySlug,
 } from '@/lib/api/catalogs';
 
-export function useCatalogs() {
+export function useCatalogs(enabled = true) {
     return useQuery({
         queryKey: ['catalogs'],
         queryFn: fetchCatalogs,
+        enabled,
         staleTime: 5 * 60 * 1000,
         gcTime: 30 * 60 * 1000,
         refetchOnWindowFocus: false,
