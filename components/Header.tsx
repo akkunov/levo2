@@ -20,7 +20,9 @@ export function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const { itemCount: cartCount } = useCart();
     const [isScrolled, setIsScrolled] = useState(false);
-    const { data: catalogs = [] } = useCatalogs();
+    // Mobile catalog links are only visible after opening the menu.
+    // Avoid an unnecessary catalog API request on initial navigation.
+    const { data: catalogs = [] } = useCatalogs(menuOpen);
 
     useEffect(() => {
         setMenuOpen(false);
