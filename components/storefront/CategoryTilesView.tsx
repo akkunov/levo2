@@ -48,7 +48,7 @@ export function CategoryTilesView({ categories }: { categories: CatalogWithCount
                                 }
                                 alt={category.name}
                                 fill
-                                quality={65}
+                                quality={60}
                                 sizes={
                                     index === 0
                                         ? '(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 58vw'

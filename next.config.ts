@@ -4,7 +4,9 @@ const nextConfig: NextConfig = {
     reactStrictMode: true,
     images: {
         // Use a smaller rendition for below-the-fold catalog photography.
-        qualities: [65, 75],
+        // Match common card (~400 px) and editorial (~1335 px) display widths.
+        deviceSizes: [448, 512, 640, 750, 828, 1080, 1200, 1440, 1920, 2048, 3840],
+        qualities: [60, 65, 75],
         remotePatterns: [
             {
                 protocol: 'https',
