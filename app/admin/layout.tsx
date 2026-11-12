@@ -1,5 +1,9 @@
 'use client';
 
+import '../styles/05-admin.css';
+import '../styles/admin.css';
+import '../styles/product-form.css';
+
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { AdminSidebar } from '@/components/admin/admin-sidebar';
