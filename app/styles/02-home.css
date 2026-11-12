@@ -15,12 +15,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: translateY(0) scale(1.02);
-    transition: transform 700ms ease-in-out;
+    object-position: center 56%;
+    transform: none;
+    transition: none;
 }
-.site-header.is-scrolled ~ main .hero-home .hero-image {
-    transform: translateY(14px) scale(1.05);
-}
+/*.site-header.is-scrolled ~ main .hero-home .hero-image {*/
+/*    transform: translateY(14px) scale(1.05);*/
+/*}*/
 .hero-image, .editorial-banner > img {
     position: absolute;
     inset: 0;
