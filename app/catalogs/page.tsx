@@ -2,11 +2,11 @@ import type {Metadata} from 'next';
 import Link from 'next/link';
 import {ArrowRight} from 'lucide-react';
 import {
-    Breadcrumbs,
     CatalogProductSections,
     CatalogSummary,
     CategoryTiles,
 } from '@/components/storefront';
+import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
 
 export const metadata: Metadata = {
     title: 'Каталог бытовой техники',
