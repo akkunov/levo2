@@ -9,7 +9,6 @@ import { fetchHomeCatalogs, fetchHomeFeaturedProducts } from '@/lib/api/home-ser
 import { ProductGrid } from '@/components/storefront/ProductGrid';
 import { EditorialBanner } from '@/components/storefront/EditorialBanner';
 import Image from 'next/image';
-import heroImage from '@/public/images/home/hero.webp';
 import { siteConfig } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -39,13 +38,11 @@ export default function HomePage() {
     return <>
         <section className="hero hero-home">
           <Image className="hero-image"
-               src={heroImage}
+               src="/images/home/hero.webp"
                alt="Светлая современная кухня с лаконичной техникой"
                fill
                priority
-               placeholder="blur"
-               sizes="100vw"
-               quality={70}/>
+               sizes="100vw" />
             <div className="hero-gradient"/>
             <div className="hero-kicker"><span>LEVO / HOME COLLECTION</span><span>DESIGNED FOR LIVING</span></div>
             <div className="hero-copy"><p className="eyebrow light">ТЕХНИКА ДЛЯ СОВРЕМЕННОГО ПРОСТРАНСТВА</p><h1>Больше,
