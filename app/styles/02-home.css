@@ -28,6 +28,9 @@
     height: 100%;
     object-fit: cover;
     object-position: center 56%;
+}
+/* The above-the-fold hero image must be visible immediately for LCP. */
+.editorial-banner > img {
     animation: heroReveal 1.2s ease both;
 }
 .hero-gradient {
@@ -253,7 +256,6 @@
 }
 .product-card {
     min-width: 0;
-    animation: copyReveal 0.5s both;
 }
 .product-image {
     display: block;
