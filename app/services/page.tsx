@@ -553,12 +553,12 @@ export default function ServicesPage() {
               </span>
 
                             <span>
-                {filteredservices.length} из {services.length}
+                {filteredServices.length} из {services.length}
               </span>
                         </div>
 
                         <div className="services-grid">
-                            {filteredservices.map((contact, index) => (
+                            {filteredServices.map((contact, index) => (
                                 <article
                                     key={contact.city}
                                     className="services-card"
