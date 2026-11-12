@@ -5,7 +5,7 @@ import type { TouchEvent } from 'react';
 import { ArrowLeft, ArrowRight, Image as ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import type { StoreProduct } from '@/lib/api/products';
-import { AddToCart } from '@/components/storefront';
+import { AddToCart } from '@/components/storefront/AddToCart';
 
 type PremiumProductGalleryProps = {
     images: string[];
