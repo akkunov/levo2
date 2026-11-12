@@ -23,9 +23,9 @@ jobs:
         run: npm ci
       - name: Typecheck
         run: npx tsc --noEmit
+      - name: CSS inventory
+        run: npm run audit:css
       - name: ESLint
         run: npm run lint
       - name: Production build
         run: npm run build
-      - name: CSS inventory
-        run: npm run audit:css
