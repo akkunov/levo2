@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {ArrowDown, ArrowRight, MoveUpRight} from 'lucide-react';
-import {CategoryTiles, EditorialBanner, ProductGrid} from '@/components/storefront';
+import {CategoryTiles, ProductGrid} from '@/components/storefront';
+import { EditorialBanner } from '@/components/storefront/EditorialBanner';
 import Image from 'next/image';
 import { siteConfig } from '@/lib/site';
 
