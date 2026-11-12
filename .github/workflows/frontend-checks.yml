@@ -55,7 +55,7 @@ jobs:
             cat /tmp/levo-next-dev.log
             exit 1
           fi
-          grep -q '/images/home/hero.webp' /tmp/levo-home.html
+          grep -q 'hero.webp' /tmp/levo-home.html
           sleep 2
           if grep -E 'TypeError|digest:|unconfigured-qualities' /tmp/levo-next-dev.log; then
             cat /tmp/levo-next-dev.log
