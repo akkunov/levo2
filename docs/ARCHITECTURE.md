@@ -3,8 +3,7 @@
 ## Текущие границы проекта
 
 - `app/` — маршруты, metadata и server-side data loading.
-- `components/storefront/` — небольшие компоненты витрины; серверные компоненты по умолчанию, клиентские только при необходимости.
-- `components/storefront.tsx` — временный legacy-модуль для оставшихся интерактивных секций. Постепенно переносить его части в `components/storefront/`, не разрывая текущие импорты.
+- `components/storefront/` — декомпозированные компоненты витрины: `ProductCard`, `ProductGrid`, `ProductSpecifications`, `AddToCart`, `CategoryTiles`, `CatalogSummary`, `CatalogProductSections`, `Breadcrumbs`, `EditorialBanner`. Компоненты с интерактивностью имеют `use client`; остальные не расширяют клиентскую границу.
 - `components/admin/`, `components/cart/`, `components/theme/` — функциональные домены.
 - `hooks/` — клиентские React Query hooks и UI-состояние.
 - `lib/api/` — HTTP-запросы к отдельному NestJS API. Не смешивать fetch, преобразование API DTO и визуализацию.
@@ -13,9 +12,10 @@
 
 ## Организация стилей
 
-- `app/styles/01-base.css` — reset, глобальные design tokens, базовая типографика и действительно общие компоненты.
+- `app/styles/00-tokens.css` — переменные светлой и тёмной темы, цветовая палитра, размеры, отступы.
+- `app/styles/01-base.css` — глобальный reset, типографика, базовые контролы и общие accessible utilities.
 - `app/styles/01-header.css` и `app/styles/footer.css` — общие шапка/подвал.
-- `app/styles/02-home.css`, `03-catalog.css`, `04-product.css` — исторические стили витрины. Они пока остаются глобальными, поскольку селекторы пересекаются с общими компонентами. Переносить после проверки скриншотов и CSS coverage.
+- `app/styles/02-home.css`, `03-catalog.css`, `04-product.css` — исторические стили витрины. Они пока остаются глобальными, поскольку селекторы пересекаются с общими компонентами. Переносить только после проверки скриншотов и CSS Coverage.
 - `app/styles/05-admin.css`, `admin.css`, `product-form.css` — импортируются в `app/admin/layout.tsx`.
 - `app/styles/cart.css` — импортируется на странице корзины.
 - `app/styles/about.css` — импортируется на странице «О нас».
@@ -37,7 +37,7 @@
 1. **Performance baseline** — сохранить Lighthouse trace и Network waterfall для `/`, `/catalogs`, `/products/[slug]`; зафиксировать LCP element, TTFB, переданные КБ, блокирующие CSS, JS.
 2. **Images** — протестировать оптимизацию Next Image на реальных R2 URL, правильный `sizes` и отсутствие лишней загрузки hover poster. Затем ограничить `remotePatterns` только известными HTTPS CDN.
 3. **CSS** — запустить `npm run audit:css`, вручную подтвердить неиспользуемые селекторы; убрать старые дубли `footer` из base только после сравнения свойств и responsive-проверки.
-4. **Components** — разделить legacy storefront на `categories/`, `products/`, `shared/` с едиными entry points; не делать гигантский barrel, затягивающий клиентский код.
+4. **Components** — базовое разбиение `components/storefront.tsx` уже сделано. Следующий шаг: по мере необходимости сгруппировать компоненты по `categories/`, `products/`, `shared/`, без гигантских barrel-импортов.
 5. **Data** — начальный контент главной страницы получать на сервере и передавать клиенту в качестве initial data там, где оправдано; серверные fetch использовать с осознанной политикой cache/revalidate.
 6. **Security** — отдельно проаудировать localStorage JWT, XSS и RBAC API; переносить авторизацию на cookies только вместе с NestJS backend.
 7. **Checks** — добавить полноценную ESLint 9 конфигурацию, CI и route smoke tests после фиксации текущего baseline.
