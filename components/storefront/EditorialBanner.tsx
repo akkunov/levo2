@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+const HERO_IMAGE = '/images/home/hero.webp';
 
 export function EditorialBanner() {
     return (
         <section className="editorial-banner">
-            <Image src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90" alt="Современный минималистичный интерьер" fill sizes="(max-width: 768px) 100vw, 100vw" loading="lazy" style={{ objectFit: "cover" }} />
+            <Image src={HERO_IMAGE} alt="Современный минималистичный интерьер" fill sizes="(max-width: 768px) 100vw, 100vw" loading="lazy" style={{ objectFit: "cover" }} />
             <div className="editorial-overlay" />
             <div className="editorial-content">
                 <span className="eyebrow light">LEVO / DESIGN NOTES 01</span>

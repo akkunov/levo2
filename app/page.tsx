@@ -1,51 +1,57 @@
-import type { Metadata } from 'next';
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import {ArrowDown, ArrowRight, MoveUpRight} from 'lucide-react';
-import { Suspense } from 'react';
-import { CategoryTiles } from '@/components/storefront/CategoryTiles';
-import { CategoryTilesView } from '@/components/storefront/CategoryTilesView';
-import { GridSkeleton } from '@/components/ui/CatalogSkeleton';
-import { fetchHomeCatalogs, fetchHomeFeaturedProducts } from '@/lib/api/home-server';
-import { ProductGrid } from '@/components/storefront/ProductGrid';
-import { EditorialBanner } from '@/components/storefront/EditorialBanner';
+import {Suspense} from 'react';
+import {CategoryTiles} from '@/components/storefront/CategoryTiles';
+import {CategoryTilesView} from '@/components/storefront/CategoryTilesView';
+import {GridSkeleton} from '@/components/ui/CatalogSkeleton';
+import {fetchHomeCatalogs, fetchHomeFeaturedProducts} from '@/lib/api/home-server';
+import {ProductGrid} from '@/components/storefront/ProductGrid';
+import {EditorialBanner} from '@/components/storefront/EditorialBanner';
 import Image from 'next/image';
-import heroImage from '@/public/images/home/hero.webp';
-import { siteConfig } from '@/lib/site';
+const HERO_IMAGE = '/images/home/hero.webp';
+import {siteConfig} from '@/lib/site';
 
 export const metadata: Metadata = {
     title: siteConfig.defaultTitle,
     description: siteConfig.description,
-    alternates: { canonical: '/' },
+    alternates: {canonical: '/'},
     openGraph: {
         type: 'website',
         title: siteConfig.defaultTitle,
         description: siteConfig.description,
         url: '/',
-        images: [{ url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90', alt: 'LEVO — техника для современного дома' }],
+        images: [
+            {
+                url: '/images/og-image.jpg',
+                width: 1200,
+                height: 630,
+                alt: 'LEVO — бытовая техника для современного дома',
+            },
+        ],
     },
 };
 
 async function HomeCategories() {
     const catalogs = await fetchHomeCatalogs();
-    return catalogs ? <CategoryTilesView categories={catalogs} /> : <CategoryTiles />;
+    return catalogs ? <CategoryTilesView categories={catalogs}/> : <CategoryTiles/>;
 }
 
 async function HomeFeaturedProducts() {
     const products = await fetchHomeFeaturedProducts();
-    return <ProductGrid items={products ?? undefined} />;
+    return <ProductGrid items={products ?? undefined}/>;
 }
 
 export default function HomePage() {
     return <>
         <section className="hero hero-home">
-          <Image className="hero-image"
-               src={heroImage}
-               alt="Светлая современная кухня с лаконичной техникой"
-               fill
-               priority
-               placeholder="blur"
-               sizes="100vw"
-               quality={70}/>
+            <Image
+                src={HERO_IMAGE}
+                alt="Светлая современная кухня с лаконичной техникой"
+                fill
+                priority
+                sizes="100vw"
+            />
             <div className="hero-gradient"/>
             <div className="hero-kicker"><span>LEVO / HOME COLLECTION</span><span>DESIGNED FOR LIVING</span></div>
             <div className="hero-copy"><p className="eyebrow light">ТЕХНИКА ДЛЯ СОВРЕМЕННОГО ПРОСТРАНСТВА</p><h1>Больше,
@@ -57,8 +63,8 @@ export default function HomePage() {
                 size={16}/></a><span className="hero-counter">01 <i/> 04</span></section>
         <section className="intro section-wrap" id="collections">
             <div className="section-label"><span>01 / КОЛЛЕКЦИИ</span><span>ПРОСТРАНСТВО ВАШЕГО ВЫБОРА</span></div>
-            <Suspense fallback={<GridSkeleton count={6} variant="category" />}>
-                <HomeCategories />
+            <Suspense fallback={<GridSkeleton count={6} variant="category"/>}>
+                <HomeCategories/>
             </Suspense>
             <div className="section-end"><span>Найдите свою коллекцию</span><Link className="text-link"
                                                                                   href="/catalogs">Все
@@ -69,8 +75,8 @@ export default function HomePage() {
                 <div className="section-label"><span>02 / ВЫБОР LEVO</span><span>ПОДОБРАНО ДЛЯ ВАС</span></div>
                 <div className="section-heading-row"><h2>Вещи, которые<br/><em>работают на вас.</em></h2><Link
                     className="text-link" href="/catalogs">Смотреть все <ArrowRight size={17}/></Link></div>
-                <Suspense fallback={<GridSkeleton count={3} variant="product" />}>
-                    <HomeFeaturedProducts />
+                <Suspense fallback={<GridSkeleton count={3} variant="product"/>}>
+                    <HomeFeaturedProducts/>
                 </Suspense></div>
         </section>
         <EditorialBanner/>
