@@ -10,7 +10,7 @@ import { mapCatalogProduct } from '@/lib/api/products';
 const REVALIDATE_SECONDS = 300;
 
 async function fetchPublic<T>(path: string): Promise<T | null> {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\\/+$/, '');
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, '');
     if (!baseUrl) return null;
 
     try {
