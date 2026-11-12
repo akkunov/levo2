@@ -1,3 +1,4 @@
+import '../styles/about.css';
 import type {Metadata} from 'next';
 import Link from 'next/link';
 import {ArrowRight, Diamond, ShieldCheck, Leaf, Layers3, HeartHandshake} from 'lucide-react';
