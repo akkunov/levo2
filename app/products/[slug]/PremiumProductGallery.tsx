@@ -5,7 +5,7 @@ import type { TouchEvent } from 'react';
 import { ArrowLeft, ArrowRight, Image as ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import type { StoreProduct } from '@/lib/api/products';
-import { AddToCart } from '@/components/storefront';
+import { AddToCart } from '@/components/storefront/AddToCart';
 
 type PremiumProductGalleryProps = {
     images: string[];
@@ -20,7 +20,7 @@ export default function PremiumProductGallery({
     product,
     priceLabel,
 }: PremiumProductGalleryProps) {
-    const slides = images.length ? images : ['/images/product-placeholder.png'];
+    const slides = images.length ? images : ['/noPoster.jpg'];
     const [activeIndex, setActiveIndex] = useState(0);
     const [touchStart, setTouchStart] = useState<number | null>(null);
 
@@ -59,7 +59,6 @@ export default function PremiumProductGallery({
                     priority={activeIndex === 0}
                     draggable={false}
                     style={{ objectFit: 'contain' }}
-                    unoptimized
                 />
 
                 <span className="premium-gallery-counter">
@@ -104,7 +103,6 @@ export default function PremiumProductGallery({
                                 sizes="96px" 
                                 loading="lazy" 
                                 style={{ objectFit: "contain"}}
-                                unoptimized
                             />
                         </button>
                     ))}

@@ -1,5 +1,7 @@
 'use client';
 
+import '../styles/cart.css';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react';

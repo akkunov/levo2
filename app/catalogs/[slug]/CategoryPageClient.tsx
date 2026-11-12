@@ -3,7 +3,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Breadcrumbs, ProductGrid } from '@/components/storefront';
+import { ProductGrid } from '@/components/storefront/ProductGrid';
+import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
 import { useCatalogProducts } from '@/hooks/use-catalog-products';
 import {useCatalog} from "@/hooks/use-catalogs";
 import {mapCatalogProduct, StoreProduct} from "@/lib/api/products";

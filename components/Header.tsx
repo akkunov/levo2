@@ -102,7 +102,6 @@ export function Header() {
         <nav
             id="main-navigation"
             className={`main-nav ${menuOpen ? 'is-open' : ''}`}
-            aria-hidden={!menuOpen}
         >
             <div className="mobile-catalog">
                 {catalogs.map((catalog) => (

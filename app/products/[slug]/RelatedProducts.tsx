@@ -7,7 +7,7 @@ import {
     mapCatalogProduct,
 } from '@/lib/api/products';
 
-import { ProductGrid } from '@/components/storefront';
+import { ProductGrid } from '@/components/storefront/ProductGrid';
 
 type Props = {
     catalogSlug: string;

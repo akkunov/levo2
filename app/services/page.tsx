@@ -1,6 +1,6 @@
 'use client';
 
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
     ArrowDownRight,
     ArrowRight,
@@ -62,6 +62,20 @@ declare global {
 }
 
 const ALL_CITIES = 'Все';
+
+// Yandex Maps balloonContent is interpreted as HTML, not escaped React text.
+// Encode contact values before interpolating them into popup markup.
+const HTML_ENTITIES: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+};
+
+function escapeHtml(value: string): string {
+    return value.replace(/[&<>"']/g, (char) => HTML_ENTITIES[char]);
+}
 
 const MAP_CENTER: [number, number] = [40.7, 72.8];
 
@@ -187,7 +201,7 @@ function loadYandexMaps(apiKey: string): Promise<YandexMapsApi> {
 }
 
 
-export default function servicesPage() {
+export default function ServicesPage() {
     const mapRef = useRef<HTMLDivElement>(null);
     const mapInstance = useRef<YandexMap | null>(null);
     const mapApi = useRef<YandexMapsApi | null>(null);
@@ -200,10 +214,12 @@ export default function servicesPage() {
     const cityDropdownRef = useRef<HTMLDivElement>(null);
 
 
-    const filteredservices =
-        selectedCity === ALL_CITIES
+    const filteredServices = useMemo(
+        () => selectedCity === ALL_CITIES
             ? services
-            : services.filter((contact) => contact.city === selectedCity);
+            : services.filter((contact) => contact.city === selectedCity),
+        [selectedCity],
+    );
 
     const renderMarkers = useCallback((list: Contact[]) => {
         const map = mapInstance.current;
@@ -221,17 +237,17 @@ export default function servicesPage() {
                 {
                     balloonContent: `
             <div style="padding: 10px; font-family: Arial, sans-serif;">
-                <strong>${contact.city}</strong>
-            <p style="margin-top: 8px;">${contact.address}</p>
+                <strong>${escapeHtml(contact.city)}</strong>
+            <p style="margin-top: 8px;">${escapeHtml(contact.address)}</p>
             ${contact.phones
                         .map(
                             (phone) =>
-                                `<p style="margin-top: 5px;">${phone}</p>`,
+                                `<p style="margin-top: 5px;">${escapeHtml(phone)}</p>`,
                         )
                         .join('')}
                 </div>
                 `,
-                    hintContent: contact.city,
+                    hintContent: escapeHtml(contact.city),
                 },
                 {
                     preset: 'islands#blackDotIcon',
@@ -336,7 +352,7 @@ export default function servicesPage() {
             return;
         }
 
-        renderMarkers(filteredservices);
+        renderMarkers(filteredServices);
 
         if (selectedCity === ALL_CITIES) {
             mapInstance.current.setCenter(MAP_CENTER, 8);
@@ -350,7 +366,7 @@ export default function servicesPage() {
         if (selectedContact) {
             mapInstance.current.setCenter(selectedContact.coords, 12);
         }
-    }, [selectedCity, mapReady, renderMarkers]);
+    }, [selectedCity, mapReady, renderMarkers, filteredServices]);
 
     const selectCity = (city: string) => {
         setSelectedCity(city);
@@ -551,12 +567,12 @@ export default function servicesPage() {
               </span>
 
                             <span>
-                {filteredservices.length} из {services.length}
+                {filteredServices.length} из {services.length}
               </span>
                         </div>
 
                         <div className="services-grid">
-                            {filteredservices.map((contact, index) => (
+                            {filteredServices.map((contact, index) => (
                                 <article
                                     key={contact.city}
                                     className="services-card"

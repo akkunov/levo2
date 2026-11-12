@@ -51,7 +51,7 @@ function mapProduct(product: ApiProduct): StoreProduct {
         category: product.catalog?.name ?? 'Бытовая техника',
         image:
             product.image ??
-            '/images/product-placeholder.png',
+            '/noPoster.jpg',
         price: Number(product.price ?? 0),
         oldPrice:
             product.oldPrice != null ? Number(product.oldPrice) : null,

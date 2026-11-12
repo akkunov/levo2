@@ -25,6 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
+            url: `${siteConfig.url}/about`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
             url: `${siteConfig.url}/contacts`,
             lastModified: now,
             changeFrequency: 'monthly',
@@ -38,13 +44,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    let catalogs;
+    // API may be unavailable during CI, preview builds or temporary outages.
+    // Serve at least the static public pages instead of failing the build.
+    if (!process.env.NEXT_PUBLIC_API_URL) {
+        console.warn('[sitemap] NEXT_PUBLIC_API_URL is unset; using static routes only.');
+        return staticRoutes;
+    }
 
+    let catalogs;
     try {
         catalogs = await fetchCatalogs();
     } catch (error) {
-        console.error('[sitemap] Failed to fetch catalogs:', error);
-        throw error;
+        console.error('[sitemap] Failed to fetch catalogs; using static routes only:', error);
+        return staticRoutes;
     }
 
     const validCatalogs = catalogs.filter(

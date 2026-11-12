@@ -1,5 +1,7 @@
+import '../styles/about.css';
 import type {Metadata} from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import {ArrowRight, Diamond, ShieldCheck, Leaf, Layers3, HeartHandshake} from 'lucide-react';
 import {Reveal} from '@/components/Ui';
 
@@ -37,8 +39,9 @@ export default function Page() {
             <div><Layers3/> Продуманные решения</div>
             <div><Leaf/> Комфорт в доме</div>
         </div>
-        <section id="mission" className="page-shell section about-two"><Reveal className="about-photo"><img
-            src="/images/about/detail.webp" alt="Детали современной бытовой техники"/></Reveal><Reveal className="about-copy"><span
+        <section id="mission" className="page-shell section about-two"><Reveal className="about-photo"><Image
+            src="/images/about/detail.webp" alt="Детали современной бытовой техники"
+            width={1000} height={650} sizes="(max-width: 700px) 100vw, 50vw" /></Reveal><Reveal className="about-copy"><span
             className="eyebrow">НАША МИССИЯ</span><h2>Технологии для<br/>лучшей жизни.</h2><p>Мы верим, что бытовая
             техника должна не просто выполнять задачи, а делать повседневную жизнь удобнее и приятнее.</p><p>В основе
             концепции LEVO — сочетание функциональности, современного дизайна и внимания к деталям.</p></Reveal>

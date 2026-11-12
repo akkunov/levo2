@@ -8,7 +8,6 @@ import {
     Trash2,
     Search,
     X,
-    ChevronRight,
     Folder,
 } from 'lucide-react';
 

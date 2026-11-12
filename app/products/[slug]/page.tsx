@@ -13,11 +13,8 @@ import {
 } from '@/lib/api/products';
 import { Suspense } from 'react';
 
-import {
-    Breadcrumbs,
-    ProductGrid,
-    ProductSpecifications,
-} from '@/components/storefront';
+import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
+import { ProductSpecifications } from '@/components/storefront/ProductSpecifications';
 import PremiumProductGallery from './PremiumProductGallery';
 import ProductHero from './ProductHero';
 
@@ -131,7 +128,7 @@ export default async function ProductPage({ params }: PageProps) {
     const images = [...(product.images ?? []).map((image) => image.url),
     ].filter((image): image is string => Boolean(image));
     const uniqueImages = [...new Set(images)];
-    const heroImage = product.image ?? product.images?.[0]?.url ?? '/images/product-placeholder.png';
+    const heroImage = product.image ?? product.images?.[0]?.url ?? '/noPoster.jpg';
 
     const storeProduct = mapCatalogProduct(product);
 
@@ -161,7 +158,7 @@ export default async function ProductPage({ params }: PageProps) {
                     <div className="premium-product-gallery-wrap">
                         <div className="premium-detail-label"><span>LEVO / DETAILS</span><span>01—03</span></div>
                         <PremiumProductGallery
-                            images={uniqueImages.length > 0 ? uniqueImages : ['/images/product-placeholder.png']}
+                            images={uniqueImages.length > 0 ? uniqueImages : ['/noPoster.jpg']}
                             name={product.title}
                             product={storeProduct}
                             priceLabel={formatPrice(product.price)}

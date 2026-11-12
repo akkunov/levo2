@@ -101,12 +101,13 @@ export default function ProductForm({ productId }: ProductFormProps) {
         setSlugManuallyEdited(true);
     }, [product]);
 
-    const catalogs = catalogsQuery.data ?? [];
+    const catalogs = catalogsQuery.data;
 
     const catalogOptions = useMemo(() => {
-        const byId = new Map(catalogs.map((item) => [item.id, item]));
+        const availableCatalogs = catalogs ?? [];
+        const byId = new Map(availableCatalogs.map((item) => [item.id, item]));
 
-        return [...catalogs].sort((a, b) => {
+        return [...availableCatalogs].sort((a, b) => {
             const aParent = a.parentId ?? 0;
             const bParent = b.parentId ?? 0;
 
@@ -442,7 +443,7 @@ export default function ProductForm({ productId }: ProductFormProps) {
                         <button
                             type="submit"
                             className="admin-button admin-button-primary"
-                            disabled={isSaving || catalogs.length === 0}
+                            disabled={isSaving || (catalogs?.length ?? 0) === 0}
                         >
                             {isSaving
                                 ? 'Сохранение...'

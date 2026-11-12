@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import {ArrowDownRight, Mail, MapPin, Phone} from 'lucide-react';
-import {Breadcrumbs} from '@/components/storefront';
+import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
 import {contacts} from "@/lib/site";
 
 export const metadata: Metadata = {
