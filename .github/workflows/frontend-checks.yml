@@ -36,3 +36,28 @@ jobs:
         run: npm run lint
       - name: Production build
         run: npm run build
+      - name: Development home smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run dev -- --hostname 127.0.0.1 > /tmp/levo-next-dev.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in {1..60}; do
+            if curl --fail --silent --show-error http://127.0.0.1:3000/ -o /tmp/levo-home.html 2>/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+          if [ "$ready" -ne 1 ]; then
+            cat /tmp/levo-next-dev.log
+            exit 1
+          fi
+          grep -q '/images/home/hero.webp' /tmp/levo-home.html
+          sleep 2
+          if grep -E 'TypeError|digest:|unconfigured-qualities' /tmp/levo-next-dev.log; then
+            cat /tmp/levo-next-dev.log
+            exit 1
+          fi
