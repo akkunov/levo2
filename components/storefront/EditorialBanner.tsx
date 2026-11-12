@@ -6,7 +6,7 @@ const HERO_IMAGE = '/images/home/hero.webp';
 export function EditorialBanner() {
     return (
         <section className="editorial-banner">
-            <Image src={HERO_IMAGE} alt="Современный минималистичный интерьер" fill sizes="(max-width: 768px) 100vw, 100vw" loading="lazy" style={{ objectFit: "cover" }} />
+            <Image src={HERO_IMAGE} alt="Современный минималистичный интерьер" fill sizes="(max-width: 1440px) 100vw, 1440px" loading="lazy" style={{ objectFit: "cover" }} />
             <div className="editorial-overlay" />
             <div className="editorial-content">
                 <span className="eyebrow light">LEVO / DESIGN NOTES 01</span>
