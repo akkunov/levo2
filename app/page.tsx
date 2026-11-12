@@ -46,6 +46,7 @@ export default function HomePage() {
     return <>
         <section className="hero hero-home">
             <Image
+                className="hero-image"
                 src={HERO_IMAGE}
                 alt="Светлая современная кухня с лаконичной техникой"
                 fill
