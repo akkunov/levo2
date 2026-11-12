@@ -5,13 +5,11 @@ import {
     fetchCatalogs,
     fetchCatalogBySlug,
 } from '@/lib/api/catalogs';
-import type { CatalogWithCount } from '@/types/catalog';
 
-export function useCatalogs(initialData?: CatalogWithCount[]) {
+export function useCatalogs() {
     return useQuery({
         queryKey: ['catalogs'],
         queryFn: fetchCatalogs,
-        initialData,
         staleTime: 5 * 60 * 1000,
         gcTime: 30 * 60 * 1000,
         refetchOnWindowFocus: false,
