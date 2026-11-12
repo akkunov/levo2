@@ -20,7 +20,7 @@
 | `app/admin/` | Admin/manager pages and client-side routing |
 | `app/services/` | Service centers and client-loaded Yandex Maps |
 | `app/layout.tsx`, `app/providers.tsx` | Global layout, providers, shared chrome |
-| `components/storefront.tsx` | Public catalog, product cards, grids |
+| `components/storefront/` | Focused public catalog, product cards, grids, navigation, and shopping UI |
 | `components/Header.tsx`, `components/Footer.tsx` | Global navigation and footer |
 | `components/admin/`, `components/cart/`, `components/theme/` | Admin, shopping cart, themes |
 | `hooks/` | TanStack Query hooks |
@@ -50,7 +50,7 @@ The supplied 2026-11-12 mobile baseline was: **CrUX LCP 5.8 s, FCP 4.8 s, TTFB 0
 
 - Identify the **actual** LCP element and its request chain by route; home, category and product pages can differ.
 - Review `app/page.tsx`: the hero uses an externally hosted Unsplash image. Validate network timing and test a properly optimized, first-party image if warranted. Preserve the design.
-- Review `components/storefront.tsx`, `app/products/[slug]/ProductHero.tsx`, and `PremiumProductGallery.tsx`: `unoptimized` currently bypasses Next image optimization for several product/hero images. Do not remove it blindly: verify allowed CDN hosts, output `srcset`, format, size, image fidelity and CDN behavior.
+- Product-card and gallery image optimization has been enabled in the refactor branch. Verify CDN hosts, generated `srcset`, format, image fidelity and transferred bytes before merging.
 - Set responsive `sizes` for every `Image` using `fill`. Reserve `priority` (Next.js **15**) for the verified above-the-fold LCP image and avoid blindly prioritizing many offscreen images; use `loading="lazy"` for offscreen media. Do not use deprecated/Next.js 16-only migration advice as if it applied to this repository.
 - Pre-compress source assets; use AVIF/WebP when effective; retain meaningful `alt`, set stable aspect ratios and avoid layout shifts.
 - Ensure product cards do not unnecessarily download two full-resolution images before user interaction. Preserve desktop hover/mobile touch behavior and test it.
@@ -90,7 +90,7 @@ The supplied 2026-11-12 mobile baseline was: **CrUX LCP 5.8 s, FCP 4.8 s, TTFB 0
 
 ## 7. Accessibility and design
 
-- Preserve visual identity, CSS tokens from `app/styles/01-base.css`, responsive breakpoints, light/dark themes and content in Russian.
+- Preserve visual identity, CSS tokens from `app/styles/00-tokens.css`, responsive breakpoints, light/dark themes and content in Russian.
 - Use semantic interactive elements, meaningful focus indicators, labels, keyboard support, good text contrast and minimum-touch-target considerations.
 - Review `components/Header.tsx` for desktop navigation accessibility: `aria-hidden={!menuOpen}` can mark a visible desktop nav as hidden to assistive technology.
 - Honor reduced-motion preferences and avoid disabling accessibility to improve synthetic Lighthouse scores.
@@ -122,7 +122,7 @@ Every code-review outcome must contain:
 1. Verify image optimization / LCP chain in home and product routes (`unoptimized`, hero URLs and first-paint behavior).
 2. Reduce permissive `images.remotePatterns`; ensure legitimate CDN sources remain functional.
 3. Audit persistent JWT handling, admin access and API enforcement in the separate backend.
-4. Confirm that placeholder paths used in category/product routes exist in `public/` (not present in repository tree at review time).
+4. Check that the unified `/noPoster.jpg` placeholder and all product/category image URLs load correctly.
 5. Audit client-fetched above-the-fold content and route-level CSS/JS impact.
-6. Address desktop menu `aria-hidden`, contrast and motion warnings.
-7. Create baseline tests, CI checks and a documented measurement process before broad refactoring.
+6. Verify desktop menu accessibility and compare mobile motion/contrast after refactoring.
+7. Maintain GitHub Actions checks for TypeScript, ESLint, build, and CSS inventory. Add route smoke tests and comparable Lighthouse measurements before release.
