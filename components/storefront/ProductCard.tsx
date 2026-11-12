@@ -8,14 +8,12 @@ import { formatPrice } from '@/lib/format';
 
 interface ProductCardProps {
     product: StoreProduct;
-    index?: number;
     activePosterId: number | null;
     onActivate: (id: number) => void;
 }
 
 export function ProductCard({
     product,
-    index = 0,
     activePosterId,
     onActivate,
 }: ProductCardProps) {
@@ -40,9 +38,6 @@ export function ProductCard({
             className={`product-card${
                 showPoster ? ' is-poster-visible' : ''
             }`}
-            style={{
-                animationDelay: `${index * 70}ms`,
-            }}
         >
             <div className="product-image">
                 {mainImage && (
