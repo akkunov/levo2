@@ -172,68 +172,11 @@
         justify-content: start
     }
 
-    .contact-grid, .service-layout {
-        grid-template-columns:1fr
-    }
 
-    .contact-image img {
-        height: 340px
-    }
-
-    .map-large {
-        min-height: 320px
-    }
-
-    .article-cover {
-        height: 290px
-    }
-
-    .ranking-row {
-        gap: 12px
-    }
-
-    .ranking-row img {
-        width: 70px;
-        height: 65px
-    }
-
-    .ranking-row h3 {
-        font-size: 14px
-    }
-
-    .ranking-row b {
-        font-size: 12px
-    }
-
-    .rank-no {
-        font-size: 19px
-    }
-
-    .skeleton-grid {
-        grid-template-columns:repeat(2, 1fr)
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important
-    }
 }
 
 /* LEVO About — statistics and brand journey */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0
-}
+
 
 .about-stats-section {
     padding-top: 14px;
@@ -274,17 +217,6 @@
 .about-stat span {
     font-size: 13px;
     color: var(--muted)
-}
-
-.about-demo-note, .about-timeline-disclaimer {
-    font-size: 11px;
-    line-height: 1.6;
-    color: var(--muted);
-    opacity: .85
-}
-
-.about-demo-note {
-    margin: 10px 0 0
 }
 
 .about-history {
@@ -359,11 +291,6 @@
     font-size: 12px;
     line-height: 1.65;
     margin: 0
-}
-
-.about-timeline-disclaimer {
-    grid-column: 1/-1;
-    margin-top: 6px
 }
 
 @media (max-width: 850px) {
