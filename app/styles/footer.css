@@ -4,14 +4,7 @@
     margin-bottom: 48px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.24);
 }
-.footer-section-title {
-    margin: 0 0 30px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
-}
+
 .footer-catalog-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -47,12 +40,7 @@
     gap: clamp(36px, 7vw, 110px);
     padding-bottom: 72px;
 }
-.footer-brand-logo {
-    width: 69px;
-    height: 20px;
-    display: block;
-    background: url("/levo-logo.svg") left center / contain no-repeat;
-}
+
 .footer-brand p {
     margin: 24px 0 0;
     font-size: 14px;
@@ -160,55 +148,6 @@
     color: var(--footer-text);
 }
 
-/* Декоративные логотипы по краям */
-.footer .footer-decorations {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.footer .footer-decoration {
-    position: absolute;
-    top: 50%;
-    bottom: 0;
-    width: clamp(180px, 28vw, 460px);
-    opacity: .8;
-    background-color: #ffffff;
-
-    -webkit-mask-image: url("/logo.svg");
-    mask-image: url("/logo.svg");
-
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-
-    -webkit-mask-size: auto 20%;
-    mask-size: auto 20%;
-}
-
-.footer .footer-decoration-left {
-    left: 5%;
-
-    -webkit-mask-position: left center;
-    mask-position: left center;
-
-    transform: rotate(-90deg);
-    transform-origin: left center;
-}
-
-.footer .footer-decoration-right {
-    right: 5%;
-
-    -webkit-mask-position: right center;
-    mask-position: right center;
-
-    transform: rotate(90deg);
-    transform-origin: right center;
-}
-
-
-
 /* Основной контент всегда поверх декора */
 .footer .footer-container {
     position: relative;
@@ -217,15 +156,6 @@
     width: min(100% - 64px, 1440px);
     margin-inline: auto;
 }
-
-/* На мобильных уменьшаем выразительность декора */
-@media (max-width: 600px) {
-    .footer .footer-decoration {
-        width: 35vw;
-        opacity: 0.045;
-    }
-}
-
 
 .footer-container {
     width: min(100% - 64px, 1440px);
@@ -280,8 +210,7 @@
             opacity 180ms ease;
 }
 
-.footer-link:hover,
-.footer-bottom-link:hover {
+.footer-link:hover {
     color: var(--footer-text);
 }
 
@@ -400,11 +329,7 @@
     font-size: 12px;
 }
 
-.footer-bottom-link {
-    color: var(--footer-muted);
-    text-decoration: none;
-    transition: color 180ms ease;
-}
+
 
 .footer-back-to-top {
     color: var(--footer-text);
