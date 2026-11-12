@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { useCatalogs } from '@/hooks/use-catalogs';
 import { GridSkeleton } from '@/components/ui/CatalogSkeleton';
+import type { CatalogWithCount } from '@/types/catalog';
 
-export function CategoryTiles() {
+export function CategoryTiles({ initialCategories }: { initialCategories?: CatalogWithCount[] }) {
     const {
         data: categories = [],
         isPending,
         isError,
-    } = useCatalogs();
+    } = useCatalogs(initialCategories);
 
     if (isPending) {
         return (
