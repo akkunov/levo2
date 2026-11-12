@@ -443,7 +443,7 @@ export default function ProductForm({ productId }: ProductFormProps) {
                         <button
                             type="submit"
                             className="admin-button admin-button-primary"
-                            disabled={isSaving || catalogs.length === 0}
+                            disabled={isSaving || (catalogs?.length ?? 0) === 0}
                         >
                             {isSaving
                                 ? 'Сохранение...'
