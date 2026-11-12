@@ -1,0 +1,39 @@
+name: Import optimized hero asset (one-time)
+on:
+  push:
+    branches: [perf/home-hero-lcp-20261112]
+    paths:
+      - '.github/workflows/import-hero-once.yml'
+permissions:
+  contents: write
+jobs:
+  import-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and validate optimized image
+        shell: bash
+        env:
+          SOURCE_URL: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?fit=crop&w=1920&q=68&fm=webp'
+        run: |
+          set -euo pipefail
+          mkdir -p public/images/home
+          curl --fail --location --retry 3 --max-time 60 --silent --show-error \
+            --header 'Accept: image/webp' \
+            "$SOURCE_URL" -o public/images/home/hero.webp
+          mime=$(file --brief --mime-type public/images/home/hero.webp)
+          size=$(wc -c < public/images/home/hero.webp)
+          echo "MIME: $mime; Bytes: $size"
+          test "$mime" = "image/webp"
+          test "$size" -gt 10000
+          test "$size" -lt 550000
+      - name: Commit same image to public
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/home/hero.webp
+          git commit -m "perf(home): store optimized hero image locally"
+          git push origin HEAD:refs/heads/perf/home-hero-lcp-20261112
