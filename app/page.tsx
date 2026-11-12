@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {ArrowDown, ArrowRight, MoveUpRight} from 'lucide-react';
+import { Suspense } from 'react';
 import { CategoryTiles } from '@/components/storefront/CategoryTiles';
+import { CategoryTilesView } from '@/components/storefront/CategoryTilesView';
+import { GridSkeleton } from '@/components/ui/CatalogSkeleton';
+import { fetchHomeCatalogs, fetchHomeFeaturedProducts } from '@/lib/api/home-server';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
 import { EditorialBanner } from '@/components/storefront/EditorialBanner';
 import Image from 'next/image';
@@ -19,6 +23,16 @@ export const metadata: Metadata = {
         images: [{ url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90', alt: 'LEVO — техника для современного дома' }],
     },
 };
+
+async function HomeCategories() {
+    const catalogs = await fetchHomeCatalogs();
+    return catalogs ? <CategoryTilesView categories={catalogs} /> : <CategoryTiles />;
+}
+
+async function HomeFeaturedProducts() {
+    const products = await fetchHomeFeaturedProducts();
+    return <ProductGrid items={products ?? undefined} />;
+}
 
 export default function HomePage() {
     return <>
@@ -40,7 +54,9 @@ export default function HomePage() {
                 size={16}/></a><span className="hero-counter">01 <i/> 04</span></section>
         <section className="intro section-wrap" id="collections">
             <div className="section-label"><span>01 / КОЛЛЕКЦИИ</span><span>ПРОСТРАНСТВО ВАШЕГО ВЫБОРА</span></div>
-            <CategoryTiles/>
+            <Suspense fallback={<GridSkeleton count={6} variant="category" />}>
+                <HomeCategories />
+            </Suspense>
             <div className="section-end"><span>Найдите свою коллекцию</span><Link className="text-link"
                                                                                   href="/catalogs">Все
                 категории <ArrowRight size={17}/></Link></div>
@@ -50,7 +66,9 @@ export default function HomePage() {
                 <div className="section-label"><span>02 / ВЫБОР LEVO</span><span>ПОДОБРАНО ДЛЯ ВАС</span></div>
                 <div className="section-heading-row"><h2>Вещи, которые<br/><em>работают на вас.</em></h2><Link
                     className="text-link" href="/catalogs">Смотреть все <ArrowRight size={17}/></Link></div>
-                <ProductGrid/></div>
+                <Suspense fallback={<GridSkeleton count={3} variant="product" />}>
+                    <HomeFeaturedProducts />
+                </Suspense></div>
         </section>
         <EditorialBanner/>
         <section className="service-strip section-wrap">
