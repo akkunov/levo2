@@ -1,4 +1,4 @@
-# LEVO KG — интернет-магазин и панель управления
+# LEVO KG — интернет-магазин и панель управленияs
 
 Frontend на **Next.js 15 App Router**, React 19, TypeScript и TanStack Query. Данные магазина и админки запрашиваются у отдельного NestJS API через `NEXT_PUBLIC_API_URL`.
 
