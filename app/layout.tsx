@@ -7,6 +7,7 @@ import {siteConfig} from '@/lib/site';
 import {Providers} from '@/app/providers';
 import {ThemeProvider} from '@/components/theme/theme-provider';
 import {PageViewTracker} from '@/components/analytics/page-view-tracker';
+import {CatalogScrollProvider} from '@/components/navigation/CatalogScrollProvider';
 
 const OG_IMAGE = '/images/og-image.jpg';
 
@@ -76,12 +77,14 @@ export default function RootLayout({
         <html lang="ru" data-scroll-behavior="smooth">
         <body>
         <Providers>
+            <CatalogScrollProvider>
             <ThemeProvider>
                 <PageViewTracker/>
                 <Header/>
                 <main>{children}</main>
                 <Footer/>
             </ThemeProvider>
+            </CatalogScrollProvider>
         </Providers>
         </body>
         </html>
