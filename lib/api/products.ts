@@ -1,5 +1,6 @@
 import {CatalogProduct, ProductImage} from "@/types";
 import { apiFetch } from './client';
+import { normalizeProductImages } from '@/lib/images';
 import { fetchCatalogProducts as fetchCatalogProductsBySlug } from './catalogs';
 
 export { fetchCatalogProductsBySlug as fetchCatalogProducts };
@@ -44,21 +45,20 @@ interface ProductsResponse {
 }
 
 function mapProduct(product: ApiProduct): StoreProduct {
+    const normalized = normalizeProductImages(product);
     return {
         id: product.id,
         name: product.title,
         slug: product.slug,
         category: product.catalog?.name ?? 'Бытовая техника',
-        image:
-            product.image ??
-            '/noPoster.jpg',
+        image: normalized.image ?? '/noPoster.jpg',
         price: Number(product.price ?? 0),
         oldPrice:
             product.oldPrice != null ? Number(product.oldPrice) : null,
         tag: product.tag,
         description: product.description,
         specs: product.specs ?? [],
-        images: product.images ?? []
+        images: normalized.images ?? []
     };
 }
 
@@ -77,9 +77,9 @@ export async function fetchProductBySlug(
     slug: string,
 ): Promise<CatalogProduct | null> {
     try {
-        return await apiFetch<CatalogProduct>(
+        return normalizeProductImages(await apiFetch<CatalogProduct>(
             `/products/${encodeURIComponent(slug)}`,
-        );
+        ));
     } catch {
         return null;
     }
