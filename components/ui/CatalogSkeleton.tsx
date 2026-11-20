@@ -76,7 +76,7 @@ export function CategoryHeroSkeleton() {
 
 export function CategoryPageSkeleton() {
     return (
-        <main
+        <div
             className="page-shell levo-category-loading"
             role="status"
             aria-label="Загрузка категории"
@@ -96,6 +96,6 @@ export function CategoryPageSkeleton() {
             <span className="sr-only">
         Загружаем категорию и товары
       </span>
-        </main>
+        </div>
     );
 }
