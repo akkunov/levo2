@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import { ProductGrid } from '@/components/storefront/ProductGrid';
 import { Breadcrumbs } from '@/components/storefront/Breadcrumbs';
+import { CatalogContentReady } from '@/components/navigation/CatalogScrollProvider';
 
 import {
     fetchCatalogBySlug,
@@ -149,6 +150,7 @@ export default async function CategoryPage({
     return (
         <div className="page-shell">
             <JsonLd data={[breadcrumbs, productList]} />
+            <CatalogContentReady />
 
             <Breadcrumbs
                 items={[
