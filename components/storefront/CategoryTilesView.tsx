@@ -1,3 +1,4 @@
+import { bypassVercelImageOptimizer } from '@/lib/images';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
@@ -47,6 +48,7 @@ export function CategoryTilesView({ categories }: { categories: CatalogWithCount
                                     '/noPoster.jpg'
                                 }
                                 alt={category.name}
+                                unoptimized={bypassVercelImageOptimizer(category.image)}
                                 fill
                                 quality={60}
                                 sizes={
