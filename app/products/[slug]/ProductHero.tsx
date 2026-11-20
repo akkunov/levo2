@@ -1,3 +1,4 @@
+import { bypassVercelImageOptimizer } from '@/lib/images';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { formatPrice } from '@/lib/format';
@@ -24,6 +25,7 @@ export default function ProductHero({
                 <Image
                     className="product-hero-image"
                     src={image}
+                    unoptimized={bypassVercelImageOptimizer(image)}
                     alt=""
                     fill
                     sizes="100vw"

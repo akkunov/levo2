@@ -1,5 +1,7 @@
 
 'use client';
+import { bypassVercelImageOptimizer } from '@/lib/images';
+
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -53,7 +55,7 @@ export default function CategoryPageClient({
             />
 
             <section className="category-hero">
-                {category.image && <Image src={category.image} alt={category.name} fill sizes="(max-width: 768px) 100vw, 100vw" style={{ objectFit: "cover" }} />}
+                {category.image && <Image src={category.image} unoptimized={bypassVercelImageOptimizer(category.image)} alt={category.name} fill sizes="(max-width: 768px) 100vw, 100vw" style={{ objectFit: "cover" }} />}
                 <div className="category-hero-shade" />
                 <div className="category-hero-copy">
                     <span className="eyebrow light">LEVO / COLLECTION</span>
@@ -79,7 +81,7 @@ export default function CategoryPageClient({
                                 key={child.id}
                                 href={`/catalogs/${child.slug}`}
                             >
-                                {child.image && <Image src={child.image} alt={child.name} fill sizes="(max-width: 768px) 50vw, 240px" style={{ objectFit: "cover" }} />}
+                                {child.image && <Image src={child.image} unoptimized={bypassVercelImageOptimizer(child.image)} alt={child.name} fill sizes="(max-width: 768px) 50vw, 240px" style={{ objectFit: "cover" }} />}
                                 <span className="tile-shade" />
                                 <span className="tile-copy">
                   <strong>{child.name}</strong>

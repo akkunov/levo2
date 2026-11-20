@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 import { ArrowDownRight } from 'lucide-react';
 import type { StoreProduct } from '@/lib/api/products';
 import { formatPrice } from '@/lib/format';
+import { bypassVercelImageOptimizer } from '@/lib/images';
 
 interface ProductCardProps {
     product: StoreProduct;
@@ -18,9 +18,6 @@ export function ProductCard({
     activePosterId,
     onActivate,
 }: ProductCardProps) {
-    // Do not mount an alternative product photo until the visitor requests it.
-    const [posterRequested, setPosterRequested] = useState(false);
-    const [loadedPosterUrl, setLoadedPosterUrl] = useState<string | null>(null);
     const showPoster = activePosterId === product.id;
     const mainImage = product.images?.[0]?.url || product.image;
     const posterImage = product.image;
@@ -30,27 +27,20 @@ export function ProductCard({
         Boolean(posterImage) &&
         mainImage !== posterImage;
 
-    const posterReady = hasPoster && loadedPosterUrl === posterImage;
-
-    const requestPoster = () => {
-        if (hasPoster) setPosterRequested(true);
-    };
-
     const handleTouchStart = () => {
-        if (!hasPoster) return;
-        requestPoster();
-        onActivate(product.id);
+        if (hasPoster) onActivate(product.id);
     };
 
     const content = (
 
         <article
-            className={`product-card${posterReady ? ' has-poster-image' : ''}${showPoster ? ' is-poster-visible' : ''}`}
+            className={`product-card${showPoster ? ' is-poster-visible' : ''}`}
         >
             <div className="product-image">
                 {mainImage && (
                     <Image
                         src={mainImage}
+                        unoptimized={bypassVercelImageOptimizer(mainImage)}
                         alt={
                             product.images?.[0]?.alt ||
                             product.name
@@ -60,16 +50,14 @@ export function ProductCard({
                         className="product-image-main"
                     />
                 )}
-                {hasPoster && posterRequested && (
+                {hasPoster && (
                     <Image
                         src={posterImage}
+                        unoptimized={bypassVercelImageOptimizer(posterImage)}
                         alt=""
                         aria-hidden="true"
                         fill
                         sizes="(max-width: 700px) calc(50vw - 16px), (max-width: 1440px) 33vw, 460px"
-                        quality={60}
-                        loading="eager"
-                        onLoad={() => setLoadedPosterUrl(posterImage)}
                         className="product-image-poster"
                         style={{objectFit: 'cover'}}
                     />
@@ -100,7 +88,7 @@ export function ProductCard({
     );
     if (!product.slug) {
         return (
-            <div onMouseEnter={requestPoster} onFocus={requestPoster} onTouchStart={handleTouchStart}>
+            <div onTouchStart={handleTouchStart}>
                 {content}
             </div>
         );
@@ -109,8 +97,6 @@ export function ProductCard({
         <Link
             href={`/products/${product.slug}`}
             className="product-card-link"
-            onMouseEnter={requestPoster}
-            onFocus={requestPoster}
             onTouchStart={handleTouchStart}
         >
             {content}
