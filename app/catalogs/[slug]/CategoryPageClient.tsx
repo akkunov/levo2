@@ -1,6 +1,7 @@
-import { bypassVercelImageOptimizer } from '@/lib/images';
 
 'use client';
+import { bypassVercelImageOptimizer } from '@/lib/images';
+
 
 import Link from 'next/link';
 import Image from 'next/image';
