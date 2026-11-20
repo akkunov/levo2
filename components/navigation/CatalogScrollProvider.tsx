@@ -67,6 +67,10 @@ export function CatalogScrollProvider({ children }: { children: ReactNode }) {
 
         pendingForwardCatalog.current = null;
         scrollToTopImmediately();
+        // Run after Next.js' own focus/scroll work for this streamed commit.
+        window.requestAnimationFrame(() => {
+            if (window.location.pathname === readyPath) scrollToTopImmediately();
+        });
     }, []);
 
     return (
