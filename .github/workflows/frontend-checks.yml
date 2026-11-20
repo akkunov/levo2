@@ -30,6 +30,8 @@ jobs:
         run: npm ci
       - name: Typecheck
         run: npx tsc --noEmit
+      - name: Regression test for nested R2 image URLs
+        run: node scripts/test-image-url-normalization.mjs
       - name: CSS inventory
         run: npm run audit:css
       - name: ESLint
