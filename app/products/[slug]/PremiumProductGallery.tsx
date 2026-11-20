@@ -1,5 +1,6 @@
-import { bypassVercelImageOptimizer } from '@/lib/images';
 'use client';
+import { bypassVercelImageOptimizer } from '@/lib/images';
+
 
 import { useCallback, useState } from 'react';
 import type { TouchEvent } from 'react';
