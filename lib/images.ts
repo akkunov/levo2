@@ -90,7 +90,7 @@ export function bypassVercelImageOptimizer(src: string | null | undefined): bool
 }
 
 /** Keeps API and SEO data pointing to original photos, not cached proxies. */
-export function normalizeCatalogImages<T extends { image: string | null; children?: T[] }>(
+export function normalizeCatalogImages<T extends import('@/types/catalog').Catalog>(
     catalog: T,
 ): T {
     return {
