@@ -1,3 +1,4 @@
+import { bypassVercelImageOptimizer } from '@/lib/images';
 
 import type { Metadata } from 'next';
 import { cache } from 'react';
@@ -165,6 +166,7 @@ export default async function CategoryPage({
                 {category.image && (
                     <Image
                         src={category.image}
+                        unoptimized={bypassVercelImageOptimizer(category.image)}
                         alt={name}
                         fill
                         sizes="100vw"
@@ -212,6 +214,7 @@ export default async function CategoryPage({
                                 {child.image && (
                                     <Image
                                         src={child.image}
+                                        unoptimized={bypassVercelImageOptimizer(child.image)}
                                         alt={child.name}
                                         fill
                                         sizes="(max-width: 768px) 50vw, 240px"
