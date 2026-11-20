@@ -1,5 +1,5 @@
 'use client';
-import { bypassVercelImageOptimizer } from '@/lib/images';
+import { bypassVercelImageOptimizer, normalizeImageUrl } from '@/lib/images';
 
 
 import '../styles/cart.css';
@@ -51,7 +51,7 @@ export default function CartPage() {
                                 <article className="cart-item" key={product.id}>
                                     <Link href={product.slug ? `/products/${product.slug}` : '/catalogs'} className="cart-item-image">
                                         <Image
-                                            src={product.image || '/images/product-placeholder.png'}
+                                            src={normalizeImageUrl(product.image || '/images/product-placeholder.png')}
                                             unoptimized={bypassVercelImageOptimizer(product.image)}
                                             alt={product.name}
                                             fill
