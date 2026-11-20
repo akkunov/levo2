@@ -1,5 +1,6 @@
 import { apiFetch } from './client';
 import type { ApiProduct } from './products';
+import { normalizeImageUrl, normalizeProductImages } from '@/lib/images';
 
 export interface CreateProductDto {
     title: string;
@@ -41,13 +42,19 @@ export function fetchAdminProducts(
 
     return apiFetch<AdminProductsResponse>(
         `/products?${params.toString()}`,
-    );
+    ).then((response) => ({
+        ...response,
+        items: response.items.map(normalizeProductImages),
+    }));
 }
 
 export function createProduct(dto: CreateProductDto) {
     return apiFetch<ApiProduct>('/products/admin', {
         method: 'POST',
-        body: JSON.stringify(dto),
+        body: JSON.stringify({
+            ...dto,
+            ...(dto.image ? { image: normalizeImageUrl(dto.image) } : {}),
+        }),
     });
 }
 
@@ -57,7 +64,10 @@ export function updateProduct(
 ) {
     return apiFetch<ApiProduct>(`/products/admin/${id}`, {
         method: 'PATCH',
-        body: JSON.stringify(dto),
+        body: JSON.stringify({
+            ...dto,
+            ...(dto.image ? { image: normalizeImageUrl(dto.image) } : {}),
+        }),
     });
 }
 
