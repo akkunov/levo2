@@ -1,3 +1,4 @@
+import { bypassVercelImageOptimizer } from '@/lib/images';
 'use client';
 
 import { useCallback, useState } from 'react';
@@ -53,6 +54,7 @@ export default function PremiumProductGallery({
                 <Image
                     key={slides[activeIndex]}
                     src={slides[activeIndex]}
+                    unoptimized={bypassVercelImageOptimizer(slides[activeIndex])}
                     alt={`${name} — фото ${activeIndex + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 55vw, 640px"
@@ -98,7 +100,8 @@ export default function PremiumProductGallery({
                             aria-pressed={index === activeIndex}
                         >
                             <Image 
-                                src={image} 
+                                src={image}
+                                unoptimized={bypassVercelImageOptimizer(image)}
                                 alt="" fill 
                                 sizes="96px" 
                                 loading="lazy" 
